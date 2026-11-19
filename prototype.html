@@ -168,20 +168,20 @@ lucide.createIcons({icons});\``);if(typeof c>"u")throw new Error("`createIcons()
 #kin-designs .kin-match-footer .kin-btn { min-height:46px; }
 #kin-designs .kin-match-footer .kin-later { min-height:44px; border:0; background:transparent; color:var(--kin-muted); }
 #kin-designs .kin-inbox { display:grid; grid-template-columns:minmax(0,1fr); gap:20px; }
-#kin-designs .kin-matches { border-block:1px solid var(--kin-line); margin-inline:-16px; padding:6px 16px; background:var(--kin-panel); }
+#kin-designs .kin-online { display:grid;gap:4px;padding:8px 0 10px;border-bottom:1px solid var(--kin-line); }
+#kin-designs .kin-online>p{padding:5px 0}
 #kin-designs .kin-inbox h2 { font-size:15px; letter-spacing:0; }
-#kin-designs .kin-match-list { display:flex; gap:2px; margin:4px -4px 0; padding:4px; overflow-x:auto; scrollbar-width:none; }
-#kin-designs .kin-match-contact { flex:0 0 44px; height:44px; position:relative; display:grid; place-items:center; border:0; background:none; padding:0; border-radius:50%; }
+#kin-designs .kin-online-list { display:flex;gap:5px;min-width:0;padding:4px;overflow-x:auto;scrollbar-width:none; }
+#kin-designs .kin-online-contact { flex:0 0 44px;height:44px;position:relative;display:grid;place-items:center;border:0;background:none;padding:0;border-radius:50%; }
 #kin-designs .kin-contact-avatar { --kin-avatar-tint:var(--kin-accent); position:relative; border-radius:50%; width:46px; height:46px; flex:0 0 auto; display:grid; place-items:center; font-size:17px; font-weight:500; color:var(--kin-ink); background:linear-gradient(145deg,color-mix(in srgb,var(--kin-avatar-tint) 33%,var(--kin-panel)),var(--kin-soft)); }
 #kin-designs .kin-contact-avatar[data-tone="warm"] { --kin-avatar-tint:light-dark(#bd6248,#e7a68a); }
 #kin-designs .kin-contact-avatar[data-tone="cool"] { --kin-avatar-tint:light-dark(#35629f,#81a8e1); }
 #kin-designs .kin-contact-avatar[data-tone="green"] { --kin-avatar-tint:light-dark(#38846c,#97c6b2); }
-#kin-designs .kin-match-contact .kin-contact-avatar { width:36px; height:36px; font-size:14px; }
-#kin-designs .kin-match-contact[data-unopened]::after { content:""; position:absolute; right:1px; top:2px; width:11px; height:11px; border:2px solid var(--kin-panel); box-shadow:0 0 0 1px var(--kin-accent); border-radius:50%; background:var(--kin-accent); }
+#kin-designs .kin-online-contact .kin-contact-avatar { width:40px;height:40px;font-size:14px; }
+#kin-designs .kin-online-contact::after { content:"";position:absolute;right:1px;bottom:1px;width:11px;height:11px;border:2px solid var(--kin-bg);border-radius:50%;background:light-dark(#16865e,#61d4a2); }
 #kin-designs .kin-contact-avatar.kin-contact-picture { background-image:var(--kin-avatar-sheet); background-size:300% 300%; background-position:var(--kin-avatar-pos); }
 #kin-designs .kin-contact-avatar.kin-contact-extra { background-image:var(--kin-extra-avatars); background-size:200% 200%; }
-#kin-designs .kin-liked-you { flex:0 0 auto; min-width:64px; min-height:44px; display:flex; align-items:center; justify-content:center; gap:4px; color:var(--kin-accent)!important; border:1px solid var(--kin-line); border-radius:30px; padding:3px 8px; background:var(--kin-soft); font-size:11px!important; }
-#kin-designs .kin-liked-you svg { width:15px; height:15px; flex:none; fill:currentColor; }
+
 #kin-designs .kin-avatar-link { padding:0; background:none; border:0; border-radius:50%; width:46px; height:46px; }
 #kin-designs .kin-recent h2 { padding:0 2px 8px; }
 #kin-designs .kin-thread { display:grid; grid-template-columns:46px minmax(0,1fr); align-items:center; gap:10px; padding:0 2px; border-bottom:1px solid var(--kin-line); }
@@ -192,7 +192,7 @@ lucide.createIcons({icons});\``);if(typeof c>"u")throw new Error("`createIcons()
 #kin-designs .kin-thread-meta { min-width:42px; display:grid; justify-items:end; gap:5px; align-self:start; padding-top:2px; font-size:11px; color:var(--kin-muted); }
 #kin-designs .kin-unread { min-width:20px; height:20px; padding:0 5px; display:grid; place-items:center; border-radius:20px; background:var(--kin-accent); color:var(--kin-on); }
 #kin-designs .kin-thread-row[data-unread] .kin-thread-name { font-weight:600; }
-#kin-designs .kin-thread-row:hover, #kin-designs .kin-match-contact:hover { background:var(--kin-soft); }
+#kin-designs .kin-thread-row:hover, #kin-designs .kin-online-contact:hover { background:var(--kin-soft); }
 #kin-designs .kin-profile { display:grid; grid-template-columns:minmax(0,1fr); gap:18px; overflow-wrap:anywhere; }
 #kin-designs .kin-mine-header h2 { overflow-wrap:anywhere; }
 #kin-designs .kin-mine-header .kin-btn { flex:none; }
@@ -352,10 +352,7 @@ body{background:radial-gradient(ellipse at 12% 5%,#fbdfca,transparent 51%),radia
 #kin-designs .kin-event-ticket h3{color:#fff5ec;font:600 21px/1.35 Georgia,"SimSun",serif;margin:2px 0}
 #kin-designs .kin-event-ticket p{color:#efd9d2;font-size:12px}
 #kin-designs .kin-event-ticket .kin-btn{min-height:32px;padding:4px 12px;color:#48252e;background:#ffdfcd;margin-top:6px}
-#kin-designs .kin-matches{padding:8px 16px;background:linear-gradient(110deg,var(--kin-soft),var(--kin-panel));border:0}
-#kin-designs .kin-match-list{align-items:center;gap:4px}
-#kin-designs .kin-match-contact .kin-contact-avatar{width:40px;height:40px;border:2px solid var(--kin-panel)}
-#kin-designs .kin-liked-you{background:linear-gradient(120deg,#503449,#933f55);border:0;color:#ffddd3!important}
+
 #kin-designs .kin-recent h2{margin-top:14px}
 #kin-designs .kin-match-portrait .kin-contact-avatar{width:100%;height:100%;border-radius:50%}
 #kin-designs .kin-match-portrait:first-child{background-image:var(--kin-profile-sheet);background-size:300% 300%;background-position:0 0}
@@ -429,6 +426,49 @@ body{background:radial-gradient(ellipse at 12% 5%,#fbdfca,transparent 51%),radia
 #kin-designs .kin-like-confirm p{margin:8px 0;font-size:13px}
 #kin-designs .kin-like-confirm>div{display:flex;gap:7px;margin-top:14px;justify-content:flex-end}
 #kin-designs .kin-incoming-empty{display:grid;gap:16px}
+#kin-designs .inc-pane{display:grid;gap:12px;padding-bottom:6px}
+#kin-designs .inc-tabs{display:flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--kin-line);border-radius:24px;background:color-mix(in srgb,var(--kin-soft) 78%,transparent);box-shadow:inset 0 1px 2px #3b203407}
+#kin-designs .inc-tabs button{flex:1;position:relative;display:flex;align-items:center;justify-content:center;gap:6px;border:0;min-height:40px;background:none;color:var(--kin-muted);border-radius:30px;font-weight:600;font-size:14px}
+#kin-designs .inc-tabs button[aria-pressed=true]{color:var(--kin-ink);background:var(--kin-panel);box-shadow:0 1px 5px #4c22341c}
+#kin-designs .inc-tabs b{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+#kin-designs .inc-tabs i{border-radius:20px;background:#a33549;color:white;font:600 10px/16px sans-serif;min-width:16px;text-align:center}
+#kin-designs .inc-pane>h3{font-family:inherit;font-weight:600;font-size:17px;line-height:1.3;letter-spacing:-.3px;margin:3px 0 0}
+#kin-designs .inc-stories{display:flex;overflow-x:auto;gap:12px;padding:2px;scrollbar-width:none}
+#kin-designs .inc-story{background:none;border:0;padding:0;min-width:53px;display:grid;justify-items:center;gap:4px;color:var(--kin-muted);font-size:11px}
+#kin-designs .inc-story-pic{display:grid;place-items:center;isolation:isolate;overflow:hidden;width:50px;height:50px;border-radius:50%;position:relative;border:2px solid var(--kin-panel);outline:1px solid var(--kin-accent);outline-offset:0}
+#kin-designs .inc-story-pic>.kin-contact-avatar{width:100%;height:100%;border-radius:50%}
+#kin-designs .inc-story-pic>svg{z-index:1;width:15px;height:15px;color:#fff}
+#kin-designs .inc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#kin-designs .inc-tile{position:relative;isolation:isolate;display:block;overflow:hidden;border-radius:20px;border:1px solid var(--kin-line);aspect-ratio:4/5;padding:0;min-width:0;background:var(--kin-soft);text-align:left}
+#kin-designs .inc-tile>.kin-contact-avatar,#kin-designs .inc-preview-photo>.kin-contact-avatar{position:absolute;left:50%;top:0;transform:translateX(-50%);height:100%;width:auto;aspect-ratio:1;border:0;border-radius:0}
+#kin-designs .inc-tile>.kin-portrait-avatar,#kin-designs .inc-preview-photo>.kin-portrait-avatar{left:0;transform:none;width:100%;aspect-ratio:auto;background-position:50% 32%}
+#kin-designs .inc-tile:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#251822da 0%,#271a231f 44%,transparent 65%)}
+#kin-designs .inc-tile-copy{position:absolute;z-index:2;bottom:11px;inset-inline:11px;display:grid;gap:2px;color:#fff}
+#kin-designs .inc-tile-copy strong{font:550 clamp(19px,4vw,25px)/1.1 Georgia,"Songti SC","SimSun",serif;letter-spacing:-.5px}
+#kin-designs .inc-tile-copy small{font-family:inherit;font-weight:550;font-size:11px;line-height:1.35;color:#fff1e8}
+#kin-designs .inc-super{position:absolute;z-index:2;left:8px;top:8px;padding:4px 7px;display:flex;align-items:center;gap:4px;background:#552c3dcb;color:white;border-radius:20px;font-size:10px}
+#kin-designs .inc-super svg{width:12px;height:12px}
+#kin-designs .inc-seal{position:absolute;z-index:2;display:grid;place-items:center;left:50%;top:41%;transform:translate(-50%,-50%);width:39px;height:39px;border:1px solid #fff6;border-radius:50%;color:white;background:#613b4736;backdrop-filter:blur(5px)}
+#kin-designs .inc-seal svg{width:18px;height:18px}
+#kin-designs .inc-frost{position:absolute;inset:0;background:radial-gradient(ellipse at 38% 28%,var(--fog-a) 5%,transparent 43%),radial-gradient(ellipse at 80% 67%,var(--fog-b) 4%,transparent 51%),linear-gradient(145deg,var(--fog-c),var(--fog-b),var(--fog-a));pointer-events:none}
+#kin-designs .inc-tone-0{--fog-a:#e8b3a3;--fog-b:#925c68;--fog-c:#c7b3a4}
+#kin-designs .inc-tone-1{--fog-a:#e5c5a5;--fog-b:#937562;--fog-c:#a49094}
+#kin-designs .inc-tone-2{--fog-a:#c5c8a7;--fog-b:#6d8072;--fog-c:#cbaea8}
+#kin-designs .inc-preview .inc-preview-photo{position:relative;isolation:isolate;overflow:hidden;border-radius:16px;width:100%;height:clamp(125px,22dvh,185px);margin:0 0 12px}
+#kin-designs .inc-preview .inc-preview-note{padding:8px 10px;border-left:2px solid var(--kin-accent);background:var(--kin-soft)}
+#kin-designs .vis-intro{border-radius:23px;background:linear-gradient(135deg,var(--kin-soft),var(--kin-panel));display:grid;gap:11px;justify-items:start;align-content:center;padding:22px 18px;color:var(--kin-ink)}
+#kin-designs .vis-intro i{display:grid;place-items:center;width:42px;height:42px;border-radius:15px;background:var(--kin-panel);color:var(--kin-accent)}
+#kin-designs .vis-intro p,#kin-designs .vis-note{color:var(--kin-muted);font-size:12px}
+#kin-designs .vis-head{display:flex;align-items:center;justify-content:space-between}
+#kin-designs .vis-head button{min-height:40px;border:0;background:transparent;font-size:12px;color:var(--kin-accent)}
+#kin-designs .vis-list{list-style:none;padding:0;margin:0}
+#kin-designs .vis-list li{display:flex;align-items:center;gap:10px;padding:11px 1px;border-bottom:1px solid var(--kin-line)}
+#kin-designs .vis-list .kin-contact-avatar{width:46px;height:46px}
+#kin-designs .vis-list small{margin-left:auto;color:var(--kin-muted)}
+#kin-designs .inc-frost.inc-tone-0{background:center 38% / cover no-repeat url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBUODAsLDBkSEw8VHhsgHx4bHR0hJTApISMtJB0dKjkqLTEzNjY2ICg7Pzo0PjA1NjP/2wBDAQkJCQwLDBgODhgzIh0iMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP/wAARCAB4AGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDrUIzUucCqiyYp/mcda4j0R8jcGqchGTzUkklVJJBjrTQDWbmmFuKheUVEZ6YiyWppNV/NHUGnCQHvTAkzSZpm7vQWoAdnn6U8LkVGpyamXke1AF7J9aQyECnumOe9V3yOlIYkkvvVSaQ+tSOTgj8qqyjNAitLNiqzXB9alljJJ9KqNESaZJMs5J61OktU1harUaECgZaVuPwpc/zqMZAo3CmMlDYqZZPeqe7jil8ygDqJFHNUphgHirLyjFUpXzUIZA3U03ZuFIWyalj5IzTYIiNsHHSozZZPT9K1EUEdBUwiGPSouXymL9jxnikMO0dK2HTANU58AdKaYmjOddvaoSccZ6VNMR2qqzHNaIgUmmlqaT3pCRTEbzz+9QSS1XaXionl96VhkxkwetSJNtNZr3AXvURvMd+KfLcXMdHFcirIuRg81yq6hjvzUo1IY61PsylM6KW5XHXFZ804PcVltqWe9Qtehu/WmoCcy3JJknmoGOelQibd1NOB4/8Ar1VhXHE/Q0zcaCaYTQBoO2BVKabA61Zm+UGse7lxnFOKuS2Nnusd6oyXeD1qtcTc1ReQmt4wMXI0TeH1oF8cdayjIeKN5q+VE8xrfbT609bs561jB+nNPSQjFLlGpHQw3Occ1djmBHWubinIrQguOKzlAuMjYL54zTScVXjk3Dr1qccn1rNo1TL9yRg1gXr8nmte6lzmsC8fJPNVBETZmTNkn0qsallPJqHr2rpRgw+lH40cYo9hmgQYooooAejEGrkMnIqj+FTRNg9aTQ0blvJkVpwjIzWHbSdOa14ZRxXPJHRFkdxISDzWNcvnIq9PJway5261cERNlR+9M6e1OJNNrYxAGjp3ooFABRnmij6mgAIqRG5qOnqcUAi/A2AK0opeKx4WxiryPwDWMkbwY6Y1mzHrRRVRIkVT1ooorQzCj8KKKACjNFFAB9aUcmiigEWIz0q2h9KKKykbQP/Z)}
+#kin-designs .inc-frost.inc-tone-1{background:center 38% / cover no-repeat url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBUODAsLDBkSEw8VHhsgHx4bHR0hJTApISMtJB0dKjkqLTEzNjY2ICg7Pzo0PjA1NjP/2wBDAQkJCQwLDBgODhgzIh0iMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP/wAARCAB4AGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDtGI5/nUDtjPagvxULv+dcJ0kbnnAqJjg05jnvURpki5waTNNLcHFRmQUwJwwFO3+lVPOFL5w45oAnJHOOfxqMnJppkpCaBC0059KM56Ckz1oA0y/vUTPzTS1MJ/GkMUtTCf8A69L9KafamBC7kVUkmx3q1KODWdOpNBSQNcc9qFuM9+QapOGyacgNMOU00lz3qcHPeqMQOKtJnAoJaJs80h596bnnNGeeKCS2TSZpucCkzSGPByadjj8KjDU9TmgaBo81Xkts9qvIKnSINUNm0FcwjZH0pVs8Y4rd+zDuKQwAdhS5jTlMcW+0dKUqF6ir8iADpVOTjmrTMJohzSZ5zQelNJNUZFrPejP5008UmTjmgY7NODioS+O9RmXHeiwrmhHLg1cilrB+1be9SLfAd6TgaxnY6ESAc5pkkgFYy6gMdaRr8H+Kp5Gauoi7NKCaoyNk1A92DUZmyetWo2OeUrkp68UmOaapz3qUITTILJUgdKhfgVdkX8KpT8ZpIbKssm3iqM1z154pbmTGayLifnrW0Y3M2y295yeai+3d81mPMSetQmU+1bKBPMbP285A3Upvye/FYvmnHWjzSe9HIg52bi3me9TpdZ781gLMQaninORzUuAcx0sE2cZNacJziubtbjJ61uW0wwKxlGxpFmnLIMVm3L8GpnlyDWfdScEc1EUNszLuTrWNO+WxWhdvWVKfm+tdcEYyZExpuTQfvUVoSGcUA8etBo7UAKD0qRG5B5qLjrSr0oA07aYgjBratp8Ac1zcLHjmtOGU1jNFxZ0LvxntVC4cjPSrMjHB9Kzrljg1jFFtmbctyaz3PJ9atXDdapsRnrXVFGTGdTR7+lFHeqEHajGaB1o7UAH4Uo65pO9H40ATRnmrsT4rPQ4qzG+KmSGjqZDxWXdN1zxRRXPA0ZlTn5jVUmiiulGTG85NGOmOlFFMAzR60UUAH60e3SiigBwPanhulFFDA//Z)}
+#kin-designs .inc-frost.inc-tone-2{background:center 38% / cover no-repeat url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBUODAsLDBkSEw8VHhsgHx4bHR0hJTApISMtJB0dKjkqLTEzNjY2ICg7Pzo0PjA1NjP/2wBDAQkJCQwLDBgODhgzIh0iMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP/wAARCAB4AGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDpelNPSpStRsMHNYkDScU3dimu+B6VVkuAKBpFnzBRvBNZzXfOM01brJ60FcpqBgTwaAapJcAkc1YV80BYmzz6Ume46UmeOtFAxQacDwKbxxRn/JoAvsBzxVeTpUxbioJM84pEIozvgGsq5mIrVuFzWRcxEk0mzeEbmfJcHPekS4JPWkkgOaRIGzSua+zNG3nJxmtOFuBWVBGRjrWpCDgfzqkzOUbFsE/hT1BIFRofwp4NMzJAOetLjtSBhj3oLUCJN/NBbjrUW4Uu6gSRHIMiqUsIOeDV5jnNQt161nI6qRmtbAnpSC1Gc4rQIH4UAD8qg6rFZIAMVZRcUox7U7GBVxOeoOHSlzg0zNKM1oc9h271NKWzxTR+NGM9KAsP3DFNMmPSonkxzmqstxjvxTsTYtNMADUDXCjvWbLe4zzVOS+680nG5tB2No3I9aBcLnrXPG/P96lW+96nkN+fQ6RZge9SLICK5+O+6c1diuwQOapRsYydzW3DtUi81Qjn3Y5q3E4amZssqmR7U8RU6LmpwPpSIbOduJcA81j3V3jvVq6l4PPFYF3NyeTWiRaQTXeSeaqPck9DVaWQ561EWOauxZZM59TSi4PrVTJoyaLDuaMdyfWrsN4Qev61hBiKmjlOetFhHUW91k9f1rXtp8kc1x9tOQRW7Zz5xUNCsdPFLxwasiUetZMEpKjmrAk75rMnlOYupOOtYV02Sea07qTg1jXDfnWqKRVfOabSnrzSc+1WMKKO3WjnpQAClU80nWjqRQBcgcg1uWb9K5+I81sWbHipYzpLd+Kt54rOtmyBV5SSKzY7HGzy5B5rNlbJ61LJJnvVZzk9a1RJH9OlA5+lHag0wD86DjNFAyaAD1/pR1/xo/GjvQBNGeRWpaNyKyE+taNq+COTSY0dJanIrRRht9ayLRuBzWpG3FZMtHnpcmmH6UUVsZiYo+lFFAAOvFFFFAC0mfxoooAcnWr1scEUUUmNG7aHoa1ovu4zRRWbLR//2Q==)}
+#kin-designs .inc-pane dialog{max-height:85dvh;overflow:auto}
 #kin-designs .kin-thread-row{min-height:70px}
 @media(max-width:355px){#kin-designs .kin-photo-verified{font-size:0;padding:7px}}
 #kin-designs .kin-nav .kin-rewards-pending::after{content:"待领";position:absolute;top:-7px;right:0;border:1px solid var(--kin-panel);border-radius:20px;background:var(--kin-accent);color:var(--kin-on);padding:0 4px;font-size:10px;font-weight:600;line-height:15px}
@@ -602,6 +642,14 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     {text:'是街角有一只猫的那家吗？',self:true},
     {text:'对！你平时更喜欢小说还是摄影集？'}
   ];
+  // Presence is independent of the chat's unread count and last activity.
+  const samplePresence={
+    leo:{online:true, visible:true}, miles:{online:true, visible:true},
+    owen:{online:true, visible:false}, rafael:{online:false, visible:true},
+    caleb:{online:true, visible:true}, sam:{online:true, visible:true},
+    andre:{online:false, visible:true}, ellis:{online:true, visible:true},
+    alex:{online:true, visible:true}, ethan:{online:true, visible:true}
+  };
   const starterChats = [
     ['andre','上周',[{text:'那家唱片店周日也开，我们可以听完新专辑再走。'}]],
     ['sam','上周',[{text:'刚看到你分享的路线，沿河的那一段好漂亮。'}]],
@@ -618,12 +666,13 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     noah:['最想和人一起做的事','带两杯冰咖啡，沿着河边慢慢走到书店。'],
     ethan:['我们一定合得来，如果…','你也会为了书里的一句话，错过一班地铁。']
   };
+  const visitorStore='kin.prototype.visitors.v1';
   const demos = Object.fromEntries(Object.keys(defs).map(k=>[k,{
     rewards:loadRewards(),rewardsView:false,creditedRewards:0,
     card:0, pending:null, activeChat:null, balance:280,
     profile:{...baseProfile},profileView:null,photoViewed:baseProfile.main,
     friendProfile:null,feedScope:'all',topic:'',composePost:false,nextPost:1,
-    revealedLikes:new Set(),
+    revealedLikes:new Set(['alex']),likesTab:'likes',...loadVisitors(),
     voiceCall:null,voiceScenario:'self',voiceSeen:new Set(),
     eventView:null,eventId:'coffee',events:[{id:'coffee',title:'周末约咖啡',area:'Brooklyn · Park Slope',place:'社区咖啡馆 · 一楼入口',time:Date.now()+3*86400000,capacity:4,owner:'Leo',status:'open'}],
     posts:seedPosts.map(post=>({...post})),
@@ -642,11 +691,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       '游戏可快速匹配。局后可用积分送花，双方互相喜欢后才开通私聊。'
     ]],
     ['喜欢规则',[
-      '普通喜欢按人解锁，同一个人重复查看无需再次付费。特别喜欢及附带留言免费查看。',
+      '新喜欢也列在全部喜欢里，同一人只计一次。普通喜欢每人 20 积分，解锁后可免费再看。特别喜欢及留言免费查看。',
+      '访客免费。开启互相可见后，可查看最近七天也开启此功能的访客；同一人只保留最近一次。关闭后清除自己的访客记录。',
       '回以喜欢即配对。配对免费，私聊中发送普通消息每条 1 积分。积分按需使用。'
     ]],
     ['信息规则',[
-      '“喜欢你”打开喜欢列表。点头像查看资料，点消息预览继续聊天。头像旁的小圈在首次打开私聊后消失。',
+      '上方显示允许展示在线状态的在线好友。点头像看资料，点最近聊天的消息预览进入会话。好友离线后，已有聊天记录仍然保留。',
       '读消息和使用 AI 建议免费。普通消息每条 1 积分，AI 建议可编辑，由你点击发送。',
       '向已配对对象赠送积分时，需确认数量，对方领取后可在站内消费。'
     ]],
@@ -908,35 +958,76 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
   }
   const incomingLikes=['alex','jules','dev'];
   const likeUnlockPrice=20;
+  const visitorDay=86400000;
+  function loadVisitors(){
+    try{
+      const data=JSON.parse(localStorage.getItem(visitorStore)||'null');
+      if(data?.enabled===true&&Number.isFinite(data.started)&&data.started>0)
+        return {visitorOptIn:true,visitorSeen:Number(data.seen)||0,visitorDemoAt:data.started};
+    }catch{}
+    return {visitorOptIn:false,visitorSeen:0,visitorDemoAt:0};
+  }
+  function saveVisitors(demo){
+    try{
+      if(demo.visitorOptIn)localStorage.setItem(visitorStore,JSON.stringify({enabled:true,started:demo.visitorDemoAt,seen:demo.visitorSeen}));
+      else localStorage.removeItem(visitorStore);
+    }catch{}
+  }
+  function setVisitorOptIn(demo,enabled){
+    if(demo.visitorOptIn===enabled)return;
+    demo.visitorOptIn=enabled;demo.visitorDemoAt=enabled?Date.now():0;demo.visitorSeen=0;
+    saveVisitors(demo);
+  }
+  function recentVisitors(demo,now){
+    if(!demo.visitorOptIn)return [];
+    // Fixture ages are relative to activation of the demo, independent of likes.
+    const examples=[['caleb',-1/360,true],['noah',0,true],['rafael',23,true],['owen',70,true],['noah',80,true],['miles',196,true],['sam',8,false]];
+    const seen=new Set();
+    return examples.map(([id,hours,allowed])=>({id,allowed,at:demo.visitorDemoAt-hours*3600000}))
+      .filter(v=>v.allowed&&v.at<=now&&v.at>now-7*visitorDay)
+      .sort((a,b)=>b.at-a.at)
+      .filter(v=>{if(seen.has(v.id))return false;seen.add(v.id);return true;});
+  }
+  function visitorPanel(demo,entries,now){
+    if(!demo.visitorOptIn)return `<section class="vis-intro"><i aria-hidden="true">${I('footprints')}</i><h3>谁来过你的资料页？</h3><p>开启后，你和同样开启的用户可以看到彼此最近 7 天的访问记录。访客功能免费。</p><button type="button" class="kin-btn kin-primary" data-action="visitor-enable">开启访客记录</button></section>`;
+    const today=new Date(now).setHours(0,0,0,0);
+    return `<div class="vis-head"><strong>最近 7 天</strong><button type="button" data-action="visitor-disable">关闭记录</button></div>
+      <p class="vis-note">以下为演示访客。实际访问从开启后开始记录。</p>
+      <ul class="vis-list">${entries.map(({id,at})=>`<li>${contactAvatar(people[id],id)}<strong>${people[id].name}</strong><small>${at>=today?'今天':at>=today-visitorDay?'昨天':'近 7 天'}</small></li>`).join('')}</ul>
+      ${entries.length?'':'<p class="kin-muted">最近 7 天暂无访客。</p>'}`;
+  }
   function likes(k){
-    const demo=demos[k];
-    const remaining=incomingLikes.filter(id=>!demo.chats.has(id));
-    const special=!demo.chats.has('ethan');
-    const count=remaining.length+Number(special);
-    if(!count)return '<section class="kin-incoming-empty"><h2>这些喜欢都已回应</h2><button type="button" class="kin-btn kin-primary" data-page="3">查看配对与聊天</button></section>';
-    return `<section class="kin-incoming">
-      <header class="kin-incoming-title"><h2>喜欢你的人</h2><span aria-label="${count} 人">${count}</span></header>
-      ${special?`<article class="kin-rose-card">
-        <figure><img src="${kinPhoto('ethan')}" alt="Ethan 的资料照片"><span>${I('sparkles')} 特别喜欢</span></figure>
-        <div class="kin-rose-copy"><h3>Ethan<span>, 27</span></h3><p class="kin-rose-place">${I('map-pin')} Brooklyn · 读书、咖啡</p>
-        <blockquote>“你也喜欢逛书店？最近在看什么？”</blockquote>
-        <button type="button" class="kin-btn kin-primary" data-person="ethan" data-action="match">${I('heart')} 我也喜欢</button></div>
-      </article>`:''}
-      ${remaining.length?`<div class="kin-incoming-section"><h3>普通喜欢</h3><span>最近收到</span></div>
-        <ul class="kin-incoming-list">${remaining.map(id=>{
-          const slot=incomingLikes.indexOf(id);
-          const unlocked=demo.revealedLikes.has(id);
-          const person=people[id];
-          return `<li>${unlocked?contactAvatar(person,id):`<span class="kin-sealed-like" aria-hidden="true">${I('mail')}</span>`}
-            <div><strong>${unlocked?person.name+'，'+person.age:'有人喜欢了你'}</strong>
-              <small>${unlocked?person.area+' · '+person.tags.join('、'):'身份待解锁'}</small></div>
-            <button type="button" class="kin-btn kin-small" data-action="${unlocked?'incoming-match':'unlock'}" data-slot="${slot}">${unlocked?'我也喜欢':I('lock-keyhole')+' 20 积分'}</button></li>`;
-        }).join('')}</ul>`:''}
+    const demo=demos[k], now=Date.now();
+    const remaining=['ethan',...incomingLikes].filter(id=>!demo.chats.has(id));
+    const visits=recentVisitors(demo,now),visiting=demo.likesTab==='visitors';
+    if(visiting&&demo.visitorOptIn&&visits.some(v=>v.at>demo.visitorSeen)){
+      demo.visitorSeen=now;saveVisitors(demo);
+    }
+    const unread=visits.filter(v=>v.at>demo.visitorSeen).length;
+    function renderLike(id,round){
+      const slot=incomingLikes.indexOf(id),special=id==='ethan',available=special||demo.revealedLikes.has(id);
+      const person=people[id];
+      const visual=available?contactAvatar(person,id):'<span aria-hidden="true" class="inc-frost inc-tone-'+slot+'"></span>';
+      const attributes=available?`data-action="like-preview" data-person="${id}"`:`data-action="unlock" data-slot="${slot}"`;
+      const name=available?person.name:'未解锁';
+      if(round)return `<button type="button" class="inc-story" ${attributes} aria-label="${available?'查看 '+name+' 的喜欢':'查看该条新喜欢的解锁信息'}"><span class="inc-story-pic">${visual}${available?'':I('lock-keyhole')}</span><span>${name}</span></button>`;
+      return `<button type="button" class="inc-tile ${available?'is-visible':'is-locked'}" ${attributes} aria-label="${available?'查看 '+name+' 的喜欢':'20 积分解锁这一人'}">${visual}
+        ${special?`<span class="inc-super">${I('sparkles')} 特别喜欢</span>`:''}
+        ${available?'':`<span class="inc-seal">${I('lock-keyhole')}</span>`}
+        <span class="inc-tile-copy"><strong>${available?name+', '+person.age:'有人喜欢你'}</strong><small>${available?person.area:(likeUnlockPrice+' 积分解锁')}</small></span></button>`;
+    }
+    return `<section class="inc-pane"><nav class="inc-tabs" aria-label="喜欢与访客">
+        <button type="button" data-action="likes-tab" data-ltab="likes" aria-pressed="${!visiting}">喜欢我 <b>${remaining.length}</b></button>
+        <button type="button" data-action="likes-tab" data-ltab="visitors" aria-pressed="${visiting}">访客${demo.visitorOptIn?` <b>${visits.length}</b>`:''}${unread?`<i aria-label="${unread} 位新访客">${unread}</i>`:''}</button></nav>
+      ${visiting?visitorPanel(demo,visits,now):remaining.length?`
+      <h3>新的喜欢</h3><div class="inc-stories">${remaining.slice(0,4).map(id=>renderLike(id,true)).join('')}</div>
+      <h3>全部喜欢</h3><div class="inc-grid">${remaining.map(id=>renderLike(id,false)).join('')}</div>`:'<div class="kin-incoming-empty"><h2>这些喜欢都已回应</h2><button type="button" class="kin-btn kin-primary" data-page="3">查看配对与聊天</button></div>'}
       <dialog class="kin-like-confirm" aria-label="解锁一位喜欢你的人">
-        <h3>查看这一位喜欢你的人？</h3><p>还有 ${remaining.filter(id=>!demo.revealedLikes.has(id)).length} 位待解锁。查看此人需 ${likeUnlockPrice} 积分，之后可免费回看。</p>
+        <h3>查看这一位喜欢你的人？</h3><p>还有 ${remaining.filter(id=>id!=='ethan'&&!demo.revealedLikes.has(id)).length} 位待解锁。仅需 ${likeUnlockPrice} 积分，之后可免费回看此人。</p>
         <p class="kin-muted">当前余额 ${demo.balance} 积分</p><div><button type="button" class="kin-btn" data-action="cancel-unlock">取消</button><button type="button" class="kin-btn kin-primary" data-action="confirm-unlock" ${demo.balance<likeUnlockPrice?'disabled':''}>${demo.balance<likeUnlockPrice?'余额不足':'确认 · '+likeUnlockPrice+' 积分'}</button></div>
       </dialog>
-    </section>`;
+      <dialog class="kin-like-confirm inc-preview" aria-label="喜欢我的人资料"></dialog>
+      </section>`;
   }
   function matchScreen(person,celebrate){
     return `<section class="kin-match-screen" aria-label="匹配成功"><div class="kin-match-center">
@@ -966,17 +1057,13 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
   }
   function inbox(demo){
     const recent=[...demo.chats].reverse();
-    const matches=[...recent].sort((a,b)=>Number(a[1].entered)-Number(b[1].entered));
-    const friends=matches.map(([id,chat])=>({id,unopened:!chat.entered}));
-    if(!demo.chats.has('ethan'))friends.push({id:'ethan',unopened:false});
+    const online=recent.map(([id])=>id).filter(id=>samplePresence[id]?.online&&samplePresence[id].visible);
     return `<div class="kin-inbox">
-      <section class="kin-matches" aria-label="喜欢你的人">
-        <div class="kin-match-list">
-          <button class="kin-liked-you" type="button" data-page="2" aria-label="查看喜欢你的人">${I('heart')}<span>喜欢你</span></button>
-          ${friends.map(({id,unopened})=>{
-          const person=people[id];
-          return `<button type="button" class="kin-match-contact" data-action="friend-profile" data-source="rail" data-person="${id}"${unopened?' data-unopened':''} aria-label="查看 ${person.name} 的资料${unopened?'，还未进入聊天':''}">${contactAvatar(person,id)}</button>`;
-        }).join('')}</div>
+      <section class="kin-online" aria-label="在线好友">
+        <h2>在线好友</h2>
+        ${online.length?`<div class="kin-online-list">${online.map(id=>
+          `<button type="button" class="kin-online-contact" data-action="friend-profile" data-source="rail" data-person="${id}" aria-label="查看在线好友 ${people[id].name} 的资料">${contactAvatar(people[id],id)}</button>`
+        ).join('')}</div>`:'<p class="kin-muted">暂时没有在线好友。</p>'}
       </section>
       <section class="kin-recent" aria-label="最近聊天">
         <h2>最近聊天</h2>
@@ -1480,7 +1567,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       demo.friendProfile=null;
       renderPage(app,k);
       main.scrollTop=scroll;
-      const rail=main.querySelector('.kin-match-list');
+      const rail=main.querySelector('.kin-online-list');
       if(rail)rail.scrollLeft=railScroll;
       main.querySelector(`[data-source="${source}"][data-person="${id}"]`)?.focus({preventScroll:true});
     }
@@ -1578,6 +1665,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
         stopVoice();
         demo.voiceCall=null;demo.eventView=null;
         state.pages[k]=Number(b.dataset.page);
+        if(state.pages[k]===2)demo.likesTab='likes';
         demo.composePost=false;
         demo.friendProfile=null;
         if(state.pages[k]===3)demo.activeChat=null;
@@ -1658,7 +1746,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       if(a==='friend-profile'){
         demo.friendProfile={
           id:b.dataset.person,source:b.dataset.source,scroll:main.scrollTop,
-          railScroll:main.querySelector('.kin-match-list')?.scrollLeft||0
+          railScroll:main.querySelector('.kin-online-list')?.scrollLeft||0
         };
         renderPage(app,k);
         main.querySelector('[data-action="friend-back"]').focus({preventScroll:true});
@@ -1747,6 +1835,35 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
         app.querySelector('textarea').focus({preventScroll:true});
         toast('演示消息已发送 · 扣除 1 积分');
       }
+      else if(a==='likes-tab'){
+        demo.likesTab=b.dataset.ltab==='visitors'?'visitors':'likes';
+        renderPage(app,k);
+        main.querySelector('[data-ltab="'+demo.likesTab+'"]')?.focus({preventScroll:true});
+      }
+      else if(a==='visitor-enable'||a==='visitor-disable'){
+        setVisitorOptIn(demo,a==='visitor-enable');
+        renderPage(app,k);
+        main.querySelector('[data-action="'+(demo.visitorOptIn?'visitor-disable':'visitor-enable')+'"]')?.focus({preventScroll:true});
+        if(demo.visitorOptIn){
+          // Surface the final simulated visit when it arrives, including while the likes tab is open.
+          const started=demo.visitorDemoAt;
+          setTimeout(()=>{if(demo.visitorOptIn&&demo.visitorDemoAt===started&&state.pages[k]===2&&!demo.pending&&!main.querySelector('dialog[open]')){
+            const scroll=main.scrollTop;renderPage(app,k);main.scrollTop=scroll;
+          }},10100);
+        }
+      }
+      else if(a==='like-preview'){
+        const id=b.dataset.person;
+        if(!id||demo.chats.has(id)||(id!=='ethan'&&!demo.revealedLikes.has(id)))return;
+        const person=people[id], dialog=main.querySelector('.inc-preview');
+        const rect=app.getBoundingClientRect();
+        dialog.style.setProperty('--like-center',(rect.left+rect.width/2)+'px');
+        dialog.innerHTML=`<div class="inc-preview-photo">${contactAvatar(person,id)}</div><h3>${person.name}, ${person.age}</h3><p>${person.area} · ${person.tags.join('、')}</p>
+          ${id==='ethan'?'<p class="inc-preview-note">“你也喜欢逛书店？最近在看什么？”</p>':''}
+          <div><button type="button" class="kin-btn" data-action="cancel-unlock">返回</button><button type="button" class="kin-btn kin-primary" ${id==='ethan'?'data-person="ethan" data-action="match"':'data-action="incoming-match" data-slot="'+incomingLikes.indexOf(id)+'"'}>我也喜欢</button></div>`;
+        if(globalThis.lucide)lucide.createIcons({attrs:{width:16,height:16}});
+        dialog.showModal();
+      }
       else if(a==='unlock'){
         const dialog=main.querySelector('.kin-like-confirm');
         const rect=app.getBoundingClientRect();
@@ -1764,7 +1881,9 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
         const scroll=main.scrollTop;
         renderPage(app,k);
         main.scrollTop=scroll;
-        main.querySelector('[data-action="incoming-match"][data-slot="'+incomingLikes.indexOf(id)+'"]')?.focus({preventScroll:true});
+        const revealed=main.querySelector('.inc-tile[data-action="like-preview"][data-person="'+id+'"]');
+        revealed?.focus({preventScroll:true});
+        revealed?.click();
         toast('已解锁 '+people[id].name+'，扣除 '+likeUnlockPrice+' 积分。');
       }
       else if(a==='incoming-match'){
@@ -1780,8 +1899,8 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
         demo.activeChat=null;
         renderPage(app,k);
         const recentButton=app.querySelector(`.kin-thread-row[data-person="${id}"]`);
-        const matchButton=app.querySelector(`.kin-match-contact[data-person="${id}"]`);
-        (recentButton||matchButton)?.focus({preventScroll:true});
+        const onlineButton=app.querySelector(`.kin-online-contact[data-person="${id}"]`);
+        (recentButton||onlineButton||app.querySelector('.kin-nav [aria-current="page"]'))?.focus({preventScroll:true});
       }
       else if(a==='matchmaker'){
         const box=app.querySelector('.kin-matchmaker');

@@ -31,8 +31,34 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 .go{color:#965267;font-size:23px}
 :focus-visible{outline:3px solid #9a5268;outline-offset:3px}
 @media(max-width:460px){body{padding-inline:14px;font-size:15px}header{gap:8px}nav{gap:2px 9px}}
-</style></head><body><header><a class="brand" href="index.html" aria-label="Kin 项目总览">Kin.</a><nav aria-label="项目资料"><a href="index.html">总览</a><a href="prototype.html">原型</a><a href="prd.html">PRD</a><a href="updates.html" aria-current="page">更新记录</a></nav></header><main><article><h1>Kin 项目更新记录</h1><details><summary>章节目录</summary><ol><li><a href="#section-1">2026-11-19　建立评审记录</a></li><li><a href="#section-2">2026-11-18　PRD V1.7</a></li><li><a href="#section-3">2026-11-18　PRD V1.6</a></li><li><a href="#section-4">此前的需求演进</a></li></ol></details>
-<h2 id="section-1">2026-11-19　建立评审记录</h2>
+</style></head><body><header><a class="brand" href="index.html" aria-label="Kin 项目总览">Kin.</a><nav aria-label="项目资料"><a href="index.html">总览</a><a href="prototype.html">原型</a><a href="prd.html">PRD</a><a href="updates.html" aria-current="page">更新记录</a></nav></header><main><article><h1>Kin 项目更新记录</h1><details><summary>章节目录</summary><ol><li><a href="#section-1">2026-11-19　PRD V1.8：喜欢、访客与在线好友</a></li><li><a href="#section-2">2026-11-19　建立评审记录</a></li><li><a href="#section-3">2026-11-18　PRD V1.7</a></li><li><a href="#section-4">2026-11-18　PRD V1.6</a></li><li><a href="#section-5">此前的需求演进</a></li></ol></details>
+<h2 id="section-1">2026-11-19　PRD V1.8：喜欢、访客与在线好友</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>本次调整</th>
+<th>评审要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>喜欢</td>
+<td>可先看有效喜欢人数，顶部横滑看新喜欢，下方用双列大图卡查看全部喜欢。两处指向同一人，只计一次。普通喜欢仍为每人 20 积分，特别喜欢免费查看。</td>
+</tr>
+<tr>
+<td>访客</td>
+<td>与喜欢并列的独立免费页签，默认关闭。双方开启后才记录最近七天的公开资料访问，同一访客合并。关闭会移除记录；进入访客列表清空相应未读。浏览不触发配对或开聊。</td>
+</tr>
+<tr>
+<td>信息</td>
+<td>顶部改为在线好友，下方保留最近聊天。点头像看资料，点聊天摘要进入会话。</td>
+</tr>
+<tr>
+<td>既有决定对齐</td>
+<td>文档已统一语音速配入口为“社区 → 语音活动”。循环滑卡用于反复演示，正式产品仍按每日十位推荐。</td>
+</tr>
+</tbody></table></div>
+<p>原型用于评审交互。正式产品的在线状态、访客授权、时间与未读、订单去重以服务端记录为准。</p>
+<h2 id="section-2">2026-11-19　建立评审记录</h2>
 <p>本次汇总以 PRD V1.7 和当前 Kin 交互原型为基准。以下日期对应文档修订或整理时间。原型中的人物、通话、扣分和领取用于演示；本记录没有将这些流程计作线上业务。</p>
 <h3>当前可体验的原型</h3>
 <div class="table-scroll"><table>
@@ -74,16 +100,16 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 <td>浏览五个底部页面，观察滑卡和导航反馈</td>
 </tr>
 </tbody></table></div>
-<p><strong>待同步的文档差异</strong>　最新原型按已确认的调整，仅在「社区 → 语音活动」提供语音速配。V1.7 文本仍列有发现页入口。循环滑卡用于评审演示，正式产品每日十位免费推荐的需求仍见 V1.7。</p>
-<h2 id="section-2">2026-11-18　PRD V1.7</h2>
+<p>此处保留 V1.7 建立评审记录时的界面描述。语音入口及喜欢、访客、信息页的后续调整见上方 V1.8 记录。</p>
+<h2 id="section-3">2026-11-18　PRD V1.7</h2>
 <ul>
 <li>补充社区活动卡、报名和个人邀请函。发布、报名和确认均免费。文档明确谁能看到集合点，以及改期、退出、取消和名额释放时怎样更新邀请。</li>
 <li>补充随机语音页面的计时、续聊确认和满两分钟后的喜欢操作；加入双头像配对反馈、共同破冰题与 AI 开场白。</li>
 <li>明确社区 For You、Right Now 和兴趣筛选的展示范围，细化信息页头像跳转、主副图资料预览及日夜配色。</li>
 </ul>
-<h2 id="section-3">2026-11-18　PRD V1.6</h2>
+<h2 id="section-4">2026-11-18　PRD V1.6</h2>
 <p>美国首发积分方案第一版定稿。购分基准为 1 美元约 100 分，设置五档充值，并定义签到、邀请奖励和小额赠分。各档实际售价、赠送数量与奖励资格以 PRD 第 10 章为准。</p>
-<h2 id="section-4">此前的需求演进</h2>
+<h2 id="section-5">此前的需求演进</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
