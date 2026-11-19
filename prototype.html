@@ -590,7 +590,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
 #kin-designs .kin-main:has(> .kin-discover){overflow:hidden;padding:0 12px calc(81px + env(safe-area-inset-bottom,0px))}
 #kin-designs .kin-discover{min-height:0}
 #kin-designs .kin-card-stack{flex:1 1 0;min-height:0;max-height:none;margin:0 0 6px}
-#kin-designs .kin-app:has(.kin-discover) .kin-page-heading .kin-symbol{display:none}
+
 #kin-designs .kin-app:has(.kin-discover) .kin-top{padding:12px 18px 10px}
 #kin-designs .kin-card-stack .person-card{
   display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden;border:0;border-radius:24px;
@@ -631,7 +631,33 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
   #kin-designs .kin-photo-name h3{font-size:32px}
 }
 
-#kin-designs .kin-profile-audio{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px;margin-top:10px;border-top:1px solid var(--kin-line);padding-top:9px;font-size:13px}#kin-designs .kin-profile-audio audio{width:100%;min-width:0;height:36px}</style>
+#kin-designs .kin-profile-audio{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px;margin-top:10px;border-top:1px solid var(--kin-line);padding-top:9px;font-size:13px}#kin-designs .kin-profile-audio audio{width:100%;min-width:0;height:36px}#kin-designs .vis-summary{background:linear-gradient(135deg,var(--kin-soft),var(--kin-panel));padding:18px;border-radius:20px;margin:12px 0}
+#kin-designs .vis-summary header,.vis-counts{display:flex;gap:8px;align-items:center}.vis-summary header small{margin-left:auto}.vis-counts{margin-top:14px}
+#kin-designs .vis-counts button{flex:1;border:0;border-radius:14px;background:transparent;padding:8px 2px;color:var(--kin-muted);font-size:12px}.vis-counts strong{display:block;font:600 25px Georgia;margin-bottom:3px}
+#kin-designs .vis-counts button[aria-pressed=true]{background:var(--kin-panel);color:var(--kin-accent)}
+#kin-designs .vis-list li{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:12px 4px}.vis-list li p,.vis-list li small{margin:2px 0;color:var(--kin-muted);font-size:12px}.vis-list li b{color:var(--kin-accent)}
+#kin-designs .thread-swipe{--reveal:0px;display:flex;overflow:hidden;overflow:clip;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+#kin-designs .thread-swipe .kin-thread{flex:0 0 100%;min-width:0;grid-template-columns:46px minmax(0,1fr) 26px}
+#kin-designs .thread-actions{display:flex;flex:none}
+#kin-designs .thread-swipe>*{transform:translateX(var(--reveal));transition:transform 160ms ease-out}
+#kin-designs .thread-swipe.dragging>*,#kin-designs .thread-swipe.snap-closed>*{transition:none}
+@media(prefers-reduced-motion:reduce){#kin-designs .thread-swipe>*{transition:none}}
+#kin-designs .thread-more,#kin-designs .thread-actions button{border:0}.thread-more{background:transparent}.thread-actions button{width:76px;background:var(--kin-soft);color:var(--kin-ink)}#kin-designs .thread-actions button:last-child{background:#87364c;color:white}
+#kin-designs .note-field{display:grid;gap:6px}.note-field input{display:block;width:100%;padding:9px;border:1px solid var(--kin-line);border-radius:10px;background:var(--kin-panel);color:inherit}
+#kin-designs .mine-stats{display:grid;grid-template-columns:repeat(3,1fr);padding:10px 0;text-align:center}
+#kin-designs .mine-stats>*{display:grid;gap:2px;align-content:center;color:var(--kin-muted);font-size:12px;border:0;background:none}
+#kin-designs .mine-stats>*+*{border-left:1px solid var(--kin-line)}
+#kin-designs .mine-stats strong{font-size:21px;color:var(--kin-ink);font-variant-numeric:tabular-nums}
+#kin-designs .mine-topup{display:flex;width:100%;align-items:center;justify-content:space-between;margin:10px 0;padding:13px 15px;border:1px solid var(--kin-line);border-radius:17px;background:linear-gradient(115deg,var(--kin-panel),var(--kin-soft));color:var(--kin-ink)}
+#kin-designs .mine-topup span{display:flex;align-items:center;gap:8px;font-weight:650}
+#kin-designs .mine-topup small{color:var(--kin-accent)}
+#kin-designs .topup-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;text-align:right}
+#kin-designs .topup-table caption{text-align:left;font-size:17px;font-weight:600;margin:12px 0}
+#kin-designs .topup-table :is(td,th){padding:9px 2px;border-bottom:1px solid var(--kin-line)}
+#kin-designs .topup-table :first-child:is(td,th){text-align:left}
+#kin-designs .kin-profile-form .residence-visibility{display:flex;align-items:center;gap:8px}
+#kin-designs .residence-visibility input[type=checkbox]{width:18px;height:18px;accent-color:var(--kin-accent)}
+</style>
 <script>
 (() => {
   const root = document.getElementById('kin-designs');
@@ -659,6 +685,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
   if(extraAvatarSheet)root.style.setProperty('--kin-extra-avatars',`url("${extraAvatarSheet}")`);
   const photos = ['今日人像','街角咖啡','周末徒步','傍晚跑步'];
   const voiceText = '嗨，我是 Jamie。周末我喜欢跑步，再找一家没去过的咖啡店。你呢？';
+  function savedResidence(){
+    try{
+      const data=JSON.parse(localStorage.getItem('kin.profile.residence')||'{}');
+      return {city:typeof data.city==='string'?data.city:'Brooklyn, NY',cityPublic:data.cityPublic!==false};
+    }catch{return {city:'Brooklyn, NY',cityPublic:true};}
+  }
   const baseProfile = {
     name:'Jamie',age:29,city:'Brooklyn, NY',height:'178 cm',main:0,
     interests:'跑步、徒步、独立电影、手冲咖啡',
@@ -729,17 +761,19 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
   ];
   const discovery = ['alex','noah','ethan'];
   const visitorStore='kin.prototype.visitors.v1';
+  function loadContacts(){try{return JSON.parse(localStorage.getItem('kin.contacts.v1'))||{}}catch{return {}}}
   const demos = Object.fromEntries(Object.keys(defs).map(k=>[k,{
     rewards:loadRewards(),rewardsView:false,creditedRewards:0,
     card:0, pending:null, activeChat:null, balance:280,
-    profile:{...baseProfile},profileView:null,photoViewed:baseProfile.main,
-    friendProfile:null,feedScope:'all',topic:'',composePost:false,nextPost:1,
+    profile:{...baseProfile,...savedResidence()},profileView:null,photoViewed:baseProfile.main,
+    contacts:loadContacts(),visitorFilter:'all',friendProfile:null,feedScope:'all',topic:'',composePost:false,nextPost:1,
     revealedLikes:new Set(['alex']),likesTab:'likes',...loadVisitors(),
     voiceCall:null,voiceScenario:'self',voiceSeen:new Set(),
     eventView:null,eventId:'coffee',events:[{id:'coffee',title:'周末约咖啡',area:'Brooklyn · Park Slope',place:'社区咖啡馆 · 一楼入口',time:Date.now()+3*86400000,capacity:4,owner:'Leo',status:'open'}],
     posts:seedPosts.map(post=>({...post})),
     chats:new Map(starterChats.map(([id,time,items,unread=0])=>[id,{time,items:items.slice(),unread,entered:items.length>0,draft:'',showSuggestions:false}]))
   }]));
+  for(const demo of Object.values(demos))for(const id of demo.chats.keys())if(demo.contacts[id]?.removed)demo.chats.delete(id);
   const actionRules = {
 
     post:['动态互动',['免费点赞、评论和收藏。也可以选择积分赞或礼物支持作者。']],
@@ -1027,23 +1061,31 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     if(!demo.visitorOptIn)return [];
     // Fixture ages are relative to activation of the demo, independent of likes.
     const examples=[['caleb',-1/360,true],['noah',0,true],['rafael',23,true],['owen',70,true],['noah',80,true],['miles',196,true],['sam',8,false]];
-    const seen=new Set();
-    return examples.map(([id,hours,allowed])=>({id,allowed,at:demo.visitorDemoAt-hours*3600000}))
+    const grouped=new Map();
+    const visits=examples.map(([id,hours,allowed])=>({id,allowed,at:demo.visitorDemoAt-hours*3600000}))
       .filter(v=>v.allowed&&v.at<=now&&v.at>now-7*visitorDay)
-      .sort((a,b)=>b.at-a.at)
-      .filter(v=>{if(seen.has(v.id))return false;seen.add(v.id);return true;});
+      .sort((a,b)=>b.at-a.at);
+    for(const v of visits){
+      if(grouped.has(v.id))grouped.get(v.id).count++;
+      else grouped.set(v.id,{...v,count:1});
+    }
+    return [...grouped.values()];
   }
   function visitorPanel(demo,entries,now){
-    if(!demo.visitorOptIn)return `<section class="vis-intro"><i aria-hidden="true">${I('footprints')}</i><h3>谁来过你的资料页？</h3><p>开启后，你和同样开启的用户可以看到彼此最近 7 天的访问记录。访客功能免费。</p><button type="button" class="kin-btn kin-primary" data-action="visitor-enable">开启访客记录</button></section>`;
-    const today=new Date(now).setHours(0,0,0,0);
-    return `<div class="vis-head"><strong>最近 7 天</strong><button type="button" data-action="visitor-disable">关闭记录</button></div>
-      <p class="vis-note">以下为演示访客。实际访问从开启后开始记录。</p>
-      <ul class="vis-list">${entries.map(({id,at})=>`<li>${contactAvatar(people[id],id)}<strong>${people[id].name}</strong><small>${at>=today?'今天':at>=today-visitorDay?'昨天':'近 7 天'}</small></li>`).join('')}</ul>
-      ${entries.length?'':'<p class="kin-muted">最近 7 天暂无访客。</p>'}`;
+    const active=demo.visitorOptIn;
+    const groups=[['all','全部访客',entries],['repeat','反复来看',entries.filter(v=>v.count>1)],['friends','好友到访',entries.filter(v=>demo.chats.has(v.id))]];
+    const selected=groups.find(g=>g[0]===demo.visitorFilter)||groups[0];
+    const rows=selected[2].map(({id,at,count})=>{
+      const hours=Math.floor((now-at)/3600000);
+      const time=hours>=24?Math.floor(hours/24)+' 天前':hours?hours+' 小时前':'刚刚';
+      return `<li>${contactAvatar(people[id],id)}<div><strong>${people[id].name}</strong>${demo.chats.has(id)?'<small> · 好友</small>':''}<p>${people[id].area} · ${time}访问</p></div><b>${count} 次</b></li>`;
+    }).join('');
+    return `<section class="vis-summary"><header>${I('footprints')}<strong>访客足迹</strong><small>最近 7 天</small></header><div class="vis-counts">${groups.map(([key,label,list])=>`<button data-action="vis-filter" data-key="${key}" aria-pressed="${selected[0]===key}" ${active?'':'disabled'}><strong>${active?list.length:'—'}</strong>${label}</button>`).join('')}</div></section>
+      ${active?`<div class="vis-head"><strong>${selected[1]}</strong><button data-action="visitor-disable">关闭记录</button></div><p class="vis-note">演示记录 · 同一访客的次数合并展示</p><ul class="vis-list">${rows}</ul>${rows?'':'<p>最近 7 天暂无此类访问。</p>'}`:`<section class="vis-intro"><h3>开启访客记录</h3><p>免费查看同样开启记录的访客。开启后，对方也能看到你的访问。</p><button class="kin-btn kin-primary" data-action="visitor-enable">开启访客记录</button></section>`}`;
   }
   function likes(k){
     const demo=demos[k], now=Date.now();
-    const remaining=['ethan',...incomingLikes].filter(id=>!demo.chats.has(id));
+    const remaining=['ethan',...incomingLikes].filter(id=>!demo.chats.has(id)&&!demo.contacts[id]?.removed);
     const visits=recentVisitors(demo,now),visiting=demo.likesTab==='visitors';
     if(visiting&&demo.visitorOptIn&&visits.some(v=>v.at>demo.visitorSeen)){
       demo.visitorSeen=now;saveVisitors(demo);
@@ -1101,7 +1143,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     return `<button class="kin-avatar-link" type="button" data-action="friend-profile" data-person="${id}" data-source="${source}" aria-label="查看 ${person.name} 的资料">${contactAvatar(person,id)}</button>`;
   }
   function inbox(demo){
-    const recent=[...demo.chats].reverse();
+    const recent=[...demo.chats].reverse().sort(([a],[b])=>Number(!!demo.contacts[b]?.pinned)-Number(!!demo.contacts[a]?.pinned));
     const online=recent.map(([id])=>id).filter(id=>samplePresence[id]?.online&&samplePresence[id].visible);
     return `<div class="kin-inbox">
       <section class="kin-online" aria-label="在线好友">
@@ -1116,10 +1158,10 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
           const person=people[id];
           const last=chat.items.at(-1);
           const preview=(last.self?'你：':'')+last.text;
-          return `<div class="kin-thread">${avatarButton(id,'recent')}<button type="button" class="kin-thread-row" data-action="open-chat" data-person="${id}"${chat.unread?' data-unread':''}>
-            <span class="kin-thread-preview"><span class="kin-thread-name">${person.name}</span><span class="kin-muted">${escape(preview)}</span></span>
+          return `<div class="thread-swipe"><div class="kin-thread">${avatarButton(id,'recent')}<button type="button" class="kin-thread-row" data-action="open-chat" data-person="${id}"${chat.unread?' data-unread':''}>
+            <span class="kin-thread-preview"><span class="kin-thread-name">${escape(demo.contacts[id]?.note||person.name)}${demo.contacts[id]?.pinned?' · 置顶':''}</span><span class="kin-muted">${escape(preview)}</span></span>
             <span class="kin-thread-meta"><span>${chat.time}</span>${chat.unread?`<span class="kin-unread" aria-label="${chat.unread} 条未读">${chat.unread}</span>`:''}</span>
-          </button></div>`;
+          </button><button class="thread-more" data-action="row-more" aria-label="会话操作" aria-expanded="false">⋯</button></div><div class="thread-actions" inert><button data-action="row-pin" data-person="${id}">${demo.contacts[id]?.pinned?'取消置顶':'置顶'}</button><button data-action="row-remove" data-person="${id}">解除喜欢</button></div></div>`;
         }).join('')}
       </section>
     </div>`;
@@ -1136,6 +1178,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       </section>
       <section class="kin-profile-section"><h3>兴趣爱好</h3><div class="kin-tags">${person.tags.map(tag=>`<span class="kin-tag">${tag}</span>`).join('')}</div></section>
       ${profileAudio(person)}
+      ${chat?`<section class="kin-profile-section note-field"><label>好友备注 · 仅自己可见<input maxlength="30" placeholder="输入备注名" value="${escape(demo.contacts[id]?.note||'')}"></label><button class="kin-btn" data-action="save-note" data-person="${id}">保存备注</button></section>`:''}
       <button type="button" class="kin-btn kin-primary kin-friend-action" data-action="${chat?'open-chat':'match'}" data-person="${id}">${chat?(chat.entered?'进入聊天':'打个招呼'):'我也喜欢'}</button>
     </div>`;
   }
@@ -1150,7 +1193,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     const suggestionsId=`kin-suggestions-${k}`;
     return `<section class="kin-thread-screen"><header class="kin-peer-bar kin-row"><div class="kin-row">
       <button class="kin-icon-btn" type="button" data-action="inbox" aria-label="返回信息列表">${I('chevron-left')}</button>
-      ${avatarButton(demo.activeChat,'chat')}<div><h3>${person.name}</h3><p class="kin-muted">已互相喜欢</p></div>
+      ${avatarButton(demo.activeChat,'chat')}<div><h3>${escape(demo.contacts[demo.activeChat]?.note||person.name)}</h3><p class="kin-muted">已互相喜欢</p></div>
     </div><button class="kin-icon-btn" type="button" data-action="gift" aria-label="赠送积分">${I('gift')}</button></header>
     <div class="kin-chat" role="log" aria-label="聊天记录">${isOpening?
       `<div class="kin-chat-empty"><div class="kin-voice-topic"><h3 class="kin-voice-question-label">共同破冰题</h3><p>${escape(chat.question||icebreakers(person,demo)[0])}</p></div></div>`:
@@ -1177,6 +1220,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
         <label>身高<input name="height" maxlength="20" value="${escape(profile.height)}"></label>
       </div>
       <label>居住地<input name="city" maxlength="40" value="${escape(profile.city)}"></label>
+      <label class="residence-visibility"><input type="checkbox" name="cityPublic" ${profile.cityPublic?'checked':''}> 在公开资料中显示居住地</label>
       <label>个人语音<input type="file" name="voiceFile" accept="audio/*"></label>
       <label>兴趣爱好<input name="interests" maxlength="100" placeholder="以顿号分隔" value="${escape(profile.interests)}"></label>
       <label>喜欢什么样的人<textarea name="preference" maxlength="180" rows="3">${escape(profile.preference)}</textarea></label>
@@ -1199,7 +1243,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       <section class="kin-profile-section" aria-label="个人资料">
         <div class="kin-profile-name"><h2>${escape(profile.name)}，${profile.age}</h2><p class="kin-muted">照片已验证</p></div>
         <dl class="kin-profile-facts">
-          ${profile.city?`<div><dt class="kin-muted">居住地</dt><dd>${escape(profile.city)}</dd></div>`:''}
+          ${profile.cityPublic&&profile.city?`<div><dt class="kin-muted">居住地</dt><dd>${escape(profile.city)}</dd></div>`:''}
           ${profile.height?`<div><dt class="kin-muted">身高</dt><dd>${escape(profile.height)}</dd></div>`:''}
         </dl>
       </section>
@@ -1299,8 +1343,21 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     syncRewardBalance(demo);storeRewards(demo);
     return selected.reduce((n,t)=>n+t.amount,0);
   }
+  const topupTiers=[
+    {usd:'1.99',base:200,bonus:0},{usd:'4.99',base:500,bonus:10},
+    {usd:'9.99',base:1000,bonus:50},{usd:'19.99',base:2000,bonus:200},
+    {usd:'49.99',base:5000,bonus:1000}
+  ];
+  function topupPage(demo){
+    return `<div class="kin-profile"><button type="button" class="kin-btn kin-small" data-action="topup-back">返回我的</button>
+      <section class="kin-profile-section"><small>可用积分</small><h2>${demo.balance.toLocaleString()}</h2></section>
+      <table class="topup-table"><caption>选择充值档位</caption><thead><tr><th>美元</th><th>基础分</th><th>赠送</th><th>到账</th></tr></thead>
+      <tbody>${topupTiers.map(({usd,base,bonus},i)=>`<tr><td><button type="button" class="kin-btn kin-small" data-action="topup-select" data-index="${i}" aria-label="选择 ${usd} 美元，到账 ${base+bonus} 积分">$${usd}</button></td><td>${base.toLocaleString()}</td><td>+${bonus.toLocaleString()}</td><td><strong>${(base+bonus).toLocaleString()}</strong></td></tr>`).join('')}</tbody></table>
+      <p class="kin-muted">原型演示，仅调整本次体验的积分余额。</p></div>`;
+  }
   function mine(k){
     const demo=demos[k],profile=demo.profile;
+    if(demo.topupOpen)return topupPage(demo);
     if(demo.rewardsView)return rewardScreen(demo);
     if(demo.profileView){
       const editing=demo.profileView==='edit';
@@ -1317,7 +1374,8 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       <div class="kin-profile-photo" data-photo="${profile.main}" aria-hidden="true" style="width:58px;border-radius:50%"></div>
       <div><h2>${escape(profile.name)}</h2><p class="kin-muted">照片已验证</p></div>
     </div><button class="kin-btn kin-small" type="button" data-action="profile-open">我的资料</button></div>
-    <div class="kin-row kin-info"><span>12 动态</span><span>86 关注</span><span>128 粉丝</span></div>
+    <div class="kin-info mine-stats"><div><strong>86</strong>关注</div><div><strong>128</strong>粉丝</div><button type="button" data-action="mine-visitors" aria-label="看过我，${demo.visitorOptIn?'最近七天 '+recentVisitors(demo,Date.now()).length+' 人':'访客记录未开启'}"><strong>${demo.visitorOptIn?recentVisitors(demo,Date.now()).length:'—'}</strong>看过我</button></div>
+    <button type="button" class="mine-topup" data-action="topup-open"><span>${I('coins')} 积分充值</span><small>余额 ${demo.balance} 积分　›</small></button>
     ${rewardTeaser(demo)}
     <div class="kin-matchmaker"><span class="kin-chip" style="justify-self:start">AI 红娘</span><h3>把你的期待，聊清楚。</h3><p class="kin-muted">择偶偏好 · 开场准备 · 约会计划</p><button type="button" class="kin-btn kin-primary kin-full" data-action="matchmaker">和红娘聊聊 ${I('arrow-up-right')}</button></div>
     <div class="kin-menu">${[['images','我的动态'],['wallet','积分钱包'],['hand-heart','收益中心'],['ticket','邀请有奖'],['bookmark','我的收藏'],['shield-check','隐私安全']].map(([ic,n])=>`<button class="kin-btn" type="button" data-action="menu" data-menu="${n}">${I(ic)}${n}</button>`).join('')}</div>`;
@@ -1344,7 +1402,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     app.classList.toggle('in-thread',thread);
     app.querySelector('.kin-nav').hidden=thread||!!demo.pending||['queue','trial','extended'].includes(voicePhase);
     app.querySelectorAll('.kin-nav button').forEach((b,i)=>{b.setAttribute('aria-current',i===n?'page':'false');});
-    app.querySelector('.kin-top-title').textContent=demo.pending?'新配对':voicePhase?'语音速配':n===4&&demo.profileView?'我的资料':n===3&&demo.friendProfile?'好友资料':pages[n];
+    app.querySelector('.kin-top-title').textContent=demo.pending?'新配对':voicePhase?'语音速配':n===4&&demo.topupOpen?'积分充值':n===4&&demo.profileView?'我的资料':n===3&&demo.friendProfile?'好友资料':pages[n];
     app.querySelector('.kin-publish').hidden=n!==1||demo.composePost||!!voicePhase||!!demo.eventView;
     if(n===4&&demo.rewardsView&&!demo.pending&&!voicePhase)app.querySelector('.kin-top-title').textContent='任务中心';
     app.querySelector('.kin-balance').textContent=demo.balance-(demo.voiceCall?.held||0);
@@ -1395,6 +1453,54 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     const syncViewport=()=>app.style.setProperty('--kin-view-height',(window.visualViewport?.height||window.innerHeight)+'px');
     syncViewport();
     window.visualViewport?.addEventListener('resize',syncViewport);
+    let rowGesture=null,swipedRow=null;
+    function setRowOpen(row,open,instant=false){
+      row.classList.toggle('snap-closed',instant);
+      row.classList.toggle('expanded',open);
+      row.classList.remove('dragging');
+      const actions=row.querySelector('.thread-actions');
+      row.style.setProperty('--reveal',open?-actions.offsetWidth+'px':'0px');
+      actions.inert=!open;
+      row.querySelector('.thread-more').setAttribute('aria-expanded',String(open));
+    }
+    function closeOtherRows(row){
+      main.querySelectorAll('.thread-swipe.expanded').forEach(other=>{
+        if(other!==row)setRowOpen(other,false,true);
+      });
+    }
+    main.addEventListener('pointerdown',e=>{
+      if(!e.isPrimary||e.button!==0)return;
+      swipedRow=null;
+      const row=e.target.closest('.thread-swipe');
+      closeOtherRows(row);
+      if(!row||e.target.closest('.thread-actions'))return;
+      rowGesture={row,id:e.pointerId,x:e.clientX,y:e.clientY,width:row.querySelector('.thread-actions').offsetWidth,open:row.classList.contains('expanded'),moving:false};
+    });
+    main.addEventListener('pointermove',e=>{
+      const g=rowGesture;if(!g||g.id!==e.pointerId)return;
+      const dx=e.clientX-g.x,dy=e.clientY-g.y;
+      if(!g.moving){
+        if(Math.max(Math.abs(dx),Math.abs(dy))<7)return;
+        if(Math.abs(dx)<=Math.abs(dy)){rowGesture=null;return;}
+        g.moving=true;g.row.classList.remove('snap-closed');g.row.classList.add('dragging');
+        g.row.setPointerCapture(e.pointerId);
+      }
+      const offset=Math.max(-g.width,Math.min(0,(g.open?-g.width:0)+dx));
+      g.row.style.setProperty('--reveal',offset+'px');
+    });
+    function finishRowGesture(e){
+      const g=rowGesture;if(!g||g.id!==e.pointerId)return;
+      if(e.type==='lostpointercapture'&&e.target!==g.row)return;
+      rowGesture=null;
+      if(!g.moving)return;
+      swipedRow=g.row;
+      const dx=e.clientX-g.x;
+      setRowOpen(g.row,e.type==='pointerup'&&Math.abs(dx)>=32?dx<0:g.open);
+    }
+    ['pointerup','pointercancel','lostpointercapture'].forEach(type=>main.addEventListener(type,finishRowGesture));
+    main.addEventListener('click',e=>{
+      if(swipedRow?.contains(e.target)&&e.detail){e.preventDefault();e.stopPropagation();swipedRow=null;}
+    },true);
     let drag=null;
     const reduced=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
     const direction=(x,y)=>y<0&&Math.abs(y)>Math.abs(x)?'super':Math.abs(x)>=Math.abs(y)?(x>0?'like':'pass'):null;
@@ -1591,7 +1697,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
     layer.addEventListener('click',e=>{if(e.target===layer)closeRules();});
     function showMatch(id,mutual=people[id]?.likesYou,replay=false){
       const exists=demo.chats.has(id);
-      if(!mutual||(exists&&!replay))return;
+      if(demo.contacts[id]?.removed||!mutual||(exists&&!replay))return;
       demo.voiceCall=null;
       if(!exists)demo.chats.set(id,{time:'刚刚',unread:0,entered:false,items:[],draft:'',showSuggestions:false});
       demo.friendProfile=null;
@@ -1605,7 +1711,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       const id=discovery[demo.card];
       recordRewardPick(demo,id);
       demo.card=(demo.card+1)%discovery.length;
-      if(action!=='pass'&&people[id].likesYou){
+      if(action!=='pass'&&people[id].likesYou&&!demo.contacts[id]?.removed){
         showMatch(id,true,true);return;
       }
       renderPage(app,k);
@@ -1728,14 +1834,16 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       }
       demo.profile={voiceUrl,
         name,main:Number(fields.get('main')),age:Number(fields.get('age')),
-        city:fields.get('city').trim(),height:fields.get('height').trim(),
+        city:fields.get('city').trim(),cityPublic:fields.has('cityPublic'),height:fields.get('height').trim(),
         interests:fields.get('interests').trim(),preference:fields.get('preference').trim()
       };
+      try{localStorage.setItem('kin.profile.residence',JSON.stringify({city:demo.profile.city,cityPublic:demo.profile.cityPublic}));}catch{}
       showProfile('preview');
     });
     stage.addEventListener('click',e=>{
       const b=e.target.closest('button'); if(!b)return;
       if(b.dataset.page!==undefined){
+        demo.topupOpen=false;
         demo.rewardsView=false;
         stopVoice();
         demo.voiceCall=null;demo.eventView=null;
@@ -1751,6 +1859,44 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
       }
       if(b.dataset.pick){state.picked=d.name;root.querySelectorAll('[data-pick]').forEach(p=>p.textContent=defs[p.dataset.pick].name===state.picked?'已选这个方向':'我偏好这个方向');toast('已记录偏好：'+d.name);save();return;}
       const a=b.dataset.action;
+      if(a==='mine-visitors'){
+        state.pages[k]=2;demo.likesTab='visitors';demo.visitorFilter='all';renderPage(app,k);save();return;
+      }
+      if(a==='topup-open'||a==='topup-back'){
+        demo.topupOpen=a==='topup-open';renderPage(app,k);
+        main.querySelector(demo.topupOpen?'[data-action="topup-back"]':'[data-action="topup-open"]').focus({preventScroll:true});return;
+      }
+      if(a==='topup-select'&&demo.topupOpen){
+        const tier=topupTiers[Number(b.dataset.index)];
+        if(!tier)return;
+        showRules(['确认模拟充值？',[`$${tier.usd} · 基础 ${tier.base} 分，赠送 ${tier.bonus} 分，共到账 ${tier.base+tier.bonus} 分。`]],b);
+        dismiss.textContent='取消';
+        layer.querySelector('.kin-rules-copy').insertAdjacentHTML('beforeend',`<button class="kin-btn kin-primary" data-action="topup-confirm" data-index="${b.dataset.index}">确认模拟充值</button>`);
+        return;
+      }
+      if(a==='topup-confirm'&&demo.topupOpen&&!layer.hidden){
+        const tier=topupTiers[Number(b.dataset.index)];
+        if(!tier)return;
+        closeRules(false);demo.balance+=tier.base+tier.bonus;renderPage(app,k);
+        main.querySelector('[data-action="topup-select"][data-index="'+b.dataset.index+'"]').focus({preventScroll:true});
+        toast('已到账 '+(tier.base+tier.bonus)+' 积分');return;
+      }
+      if(a==='vis-filter'){demo.visitorFilter=b.dataset.key;renderPage(app,k);return;}
+      if(a==='row-more'){const row=b.closest('.thread-swipe');closeOtherRows(row);setRowOpen(row,!row.classList.contains('expanded'));return;}
+      if(['row-pin','row-remove','confirm-remove','save-note'].includes(a)){
+        const id=b.dataset.person;if(!demo.chats.has(id))return;
+        const prefs=demo.contacts[id]??={};
+        if(a==='row-remove'){
+          showRules(['解除与 '+people[id].name+' 的喜欢？',['解除后，双方的配对和私聊入口将关闭。']],b);
+          dismiss.textContent='取消';
+          layer.querySelector('.kin-rules-copy').insertAdjacentHTML('beforeend',`<button class="kin-btn kin-primary" data-action="confirm-remove" data-person="${id}">确认解除</button>`);return;
+        }
+        if(a==='confirm-remove'){closeRules(false);demo.chats.delete(id);demo.contacts[id]={removed:true};}
+        if(a==='row-pin')prefs.pinned=!prefs.pinned;
+        if(a==='save-note')prefs.note=b.parentElement.querySelector('input').value.trim();
+        try{localStorage.setItem('kin.contacts.v1',JSON.stringify(demo.contacts))}catch{}
+        renderPage(app,k);if(a==='save-note')toast('备注已保存');return;
+      }
       if(a==='rewards-open'||a==='rewards-back'){
         demo.rewardsView=a==='rewards-open';
         renderPage(app,k);main.querySelector(demo.rewardsView?'[data-action="rewards-back"]':'[data-action="rewards-open"]').focus({preventScroll:true});return;
