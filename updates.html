@@ -31,16 +31,22 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 .go{color:#965267;font-size:23px}
 :focus-visible{outline:3px solid #9a5268;outline-offset:3px}
 @media(max-width:460px){body{padding-inline:14px;font-size:15px}header{gap:8px}nav{gap:2px 9px}}
-</style></head><body><header><a class="brand" href="index.html" aria-label="Kin 项目总览">Kin.</a><nav aria-label="项目资料"><a href="index.html">总览</a><a href="prototype.html">原型</a><a href="prd.html">PRD</a><a href="updates.html" aria-current="page">更新记录</a></nav></header><main><article><h1>Kin 项目更新记录</h1><details><summary>章节目录</summary><ol><li><a href="#section-1">2026-11-19　评审入口迁移至 GitHub Pages</a></li><li><a href="#section-2">2026-11-19　Vercel 首次发布 · 原型交互更新</a></li><li><a href="#section-3">2026-11-19　PRD V1.8：喜欢、访客与在线好友</a></li><li><a href="#section-4">2026-11-19　建立评审记录</a></li><li><a href="#section-5">2026-11-18　PRD V1.7</a></li><li><a href="#section-6">2026-11-18　PRD V1.6</a></li><li><a href="#section-7">此前的需求演进</a></li></ol></details>
-<h2 id="section-1">2026-11-19　评审入口迁移至 GitHub Pages</h2>
+</style></head><body><header><a class="brand" href="index.html" aria-label="Kin 项目总览">Kin.</a><nav aria-label="项目资料"><a href="index.html">总览</a><a href="prototype.html">原型</a><a href="prd.html">PRD</a><a href="updates.html" aria-current="page">更新记录</a></nav></header><main><article><h1>Kin 项目更新记录</h1><details><summary>章节目录</summary><ol><li><a href="#section-1">2026-11-19　发现整卡滑动与手机适配 · PRD V1.9</a></li><li><a href="#section-2">2026-11-19　评审入口迁移至 GitHub Pages</a></li><li><a href="#section-3">2026-11-19　Vercel 首次发布 · 原型交互更新</a></li><li><a href="#section-4">2026-11-19　PRD V1.8：喜欢、访客与在线好友</a></li><li><a href="#section-5">2026-11-19　建立评审记录</a></li><li><a href="#section-6">2026-11-18　PRD V1.7</a></li><li><a href="#section-7">2026-11-18　PRD V1.6</a></li><li><a href="#section-8">此前的需求演进</a></li></ol></details>
+<h2 id="section-1">2026-11-19　发现整卡滑动与手机适配 · PRD V1.9</h2>
+<ul>
+<li>在发现页，从照片或兴趣区都能滑动整张人物卡。拖动时露出下一位，照片上角显示喜欢或不喜欢，轻拖松手会回弹。</li>
+<li>兴趣标签在卡内展示，并标出共同兴趣。删除卡片下方的独立问答、“喜欢这句”、“已喜欢主图”提示和旁白规则入口。</li>
+<li>手机端使用设备自身的状态栏，铺满浏览器可视区域。横屏时照片与兴趣区并排。PRD 第 4.2 节和验收项 U58 已同步修订。</li>
+</ul>
+<h2 id="section-2">2026-11-19　评审入口迁移至 GitHub Pages</h2>
 <p>固定评审入口为 <a href="https://gjcyyds123.github.io/kin-product-review/">Kin 项目总览</a>，其中包含最新交互原型、PRD V1.8 与本记录。后续原型与文档继续在本地修改，收到明确发布指示后再同步。</p>
-<h2 id="section-2">2026-11-19　Vercel 首次发布 · 原型交互更新</h2>
+<h2 id="section-3">2026-11-19　Vercel 首次发布 · 原型交互更新</h2>
 <ul>
 <li>私聊的输入框与发送按钮固定在底部，消息记录可独立滚动。AI 建议在输入框上方展开，选中后可以编辑再发送。</li>
 <li>发现页在当前照片下预置下一位。右滑在照片左上显示“喜欢”，左滑在右上显示“不喜欢”。轻拖松手回弹，越过阈值后当前照片滑出。</li>
 <li>本次评审配套需求文档为 PRD V1.8。</li>
 </ul>
-<h2 id="section-3">2026-11-19　PRD V1.8：喜欢、访客与在线好友</h2>
+<h2 id="section-4">2026-11-19　PRD V1.8：喜欢、访客与在线好友</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -66,7 +72,7 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 </tr>
 </tbody></table></div>
 <p>原型用于评审交互。正式产品的在线状态、访客授权、时间与未读、订单去重以服务端记录为准。</p>
-<h2 id="section-4">2026-11-19　建立评审记录</h2>
+<h2 id="section-5">2026-11-19　建立评审记录</h2>
 <p>本次汇总以 PRD V1.7 和当前 Kin 交互原型为基准。以下日期对应文档修订或整理时间。原型中的人物、通话、扣分和领取用于演示；本记录没有将这些流程计作线上业务。</p>
 <h3>当前可体验的原型</h3>
 <div class="table-scroll"><table>
@@ -109,15 +115,15 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 </tr>
 </tbody></table></div>
 <p>此处保留 V1.7 建立评审记录时的界面描述。语音入口及喜欢、访客、信息页的后续调整见上方 V1.8 记录。</p>
-<h2 id="section-5">2026-11-18　PRD V1.7</h2>
+<h2 id="section-6">2026-11-18　PRD V1.7</h2>
 <ul>
 <li>补充社区活动卡、报名和个人邀请函。发布、报名和确认均免费。文档明确谁能看到集合点，以及改期、退出、取消和名额释放时怎样更新邀请。</li>
 <li>补充随机语音页面的计时、续聊确认和满两分钟后的喜欢操作；加入双头像配对反馈、共同破冰题与 AI 开场白。</li>
 <li>明确社区 For You、Right Now 和兴趣筛选的展示范围，细化信息页头像跳转、主副图资料预览及日夜配色。</li>
 </ul>
-<h2 id="section-6">2026-11-18　PRD V1.6</h2>
+<h2 id="section-7">2026-11-18　PRD V1.6</h2>
 <p>美国首发积分方案第一版定稿。购分基准为 1 美元约 100 分，设置五档充值，并定义签到、邀请奖励和小额赠分。各档实际售价、赠送数量与奖励资格以 PRD 第 10 章为准。</p>
-<h2 id="section-7">此前的需求演进</h2>
+<h2 id="section-8">此前的需求演进</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
