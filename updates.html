@@ -1,0 +1,107 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>更新记录 · Kin</title><style>
+*{box-sizing:border-box}
+:root{font-family:Inter,system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:#30232b;background:#f6f0e9}
+body{max-width:900px;margin:auto;padding:0 18px 72px;line-height:1.7}
+header{padding:20px 0 14px;border-bottom:1px solid #d9c9c4;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font:italic 700 30px/.95 Georgia,serif;letter-spacing:-2px;color:#73354a}
+nav{display:flex;flex-wrap:wrap;gap:3px 14px;font-size:14px}
+a{color:#80384b;text-decoration-thickness:1px;text-underline-offset:3px}
+nav a,header>a,.cards a{text-decoration:none}
+nav a[aria-current=page]{font-weight:750;color:#331b27;border-bottom:2px solid #9c5363}
+nav a{display:inline-flex;align-items:center;min-height:38px}
+h1,h2,h3{line-height:1.35;text-wrap:pretty}
+h1{font:650 clamp(26px,5vw,40px)/1.35 Georgia,"Songti SC",SimSun,serif;margin:28px 0 16px}
+article h2{font-size:1.43rem;margin:1.6em 0 .7em;padding-top:.7em;border-top:1px solid #decec7}
+article h3{font-size:1.13rem;margin-top:1.6em}
+article{overflow-wrap:anywhere}
+p{margin:.7em 0}
+li+li{margin-top:.26em}
+ul,ol{padding-left:1.45em}
+.table-scroll{overflow:auto;max-width:100%;margin:1em 0;background:#fffaf5;border:1px solid #d7c8be;border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.55}
+td,th{min-width:8.7em;max-width:37em;padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #e1d5cf}
+th{color:#5b3244;background:#f2e4db}
+tr:last-child td{border-bottom:0}
+details{background:#fff9f3;border:1px solid #dfcdc3;border-radius:15px;margin:20px 0;padding:10px 15px}
+summary{min-height:28px;cursor:pointer;font-weight:650}
+.cards{display:grid;gap:10px}
+.cards a{display:grid;grid-template-columns:1fr auto;align-items:center;background:#fffaf5;color:inherit;border:1px solid #dfcec3;padding:17px 18px;border-radius:16px}
+.cards strong{font-size:18px}
+.cards small{display:block;margin-top:3px;color:#715f62;line-height:1.5}
+.go{color:#965267;font-size:23px}
+:focus-visible{outline:3px solid #9a5268;outline-offset:3px}
+@media(max-width:460px){body{padding-inline:14px;font-size:15px}header{gap:8px}nav{gap:2px 9px}}
+</style></head><body><header><a class="brand" href="index.html" aria-label="Kin 项目总览">Kin.</a><nav aria-label="项目资料"><a href="index.html">总览</a><a href="prototype.html">原型</a><a href="prd.html">PRD</a><a href="updates.html" aria-current="page">更新记录</a></nav></header><main><article><h1>Kin 项目更新记录</h1><details><summary>章节目录</summary><ol><li><a href="#section-1">2026-11-19　建立评审记录</a></li><li><a href="#section-2">2026-11-18　PRD V1.7</a></li><li><a href="#section-3">2026-11-18　PRD V1.6</a></li><li><a href="#section-4">此前的需求演进</a></li></ol></details>
+<h2 id="section-1">2026-11-19　建立评审记录</h2>
+<p>本次汇总以 PRD V1.7 和当前 Kin 交互原型为基准。以下日期对应文档修订或整理时间。原型中的人物、通话、扣分和领取用于演示；本记录没有将这些流程计作线上业务。</p>
+<h3>当前可体验的原型</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>主要变化</th>
+<th>建议查看路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发现与配对</td>
+<td>使用竖幅人物照，把共同兴趣放到照片内。左右滑可循环演示，也可对一条具体回答表达喜欢。再次遇到已配对的人，可重播动画并回到同一个聊天。</td>
+<td>发现 → 滑动人物卡，或点「喜欢这句」</td>
+</tr>
+<tr>
+<td>喜欢与信息</td>
+<td>特别喜欢展示照片、留言和回应按钮。普通喜欢以信封保护身份，确认消耗 20 积分后揭晓，同一人再次查看免费。信息页的头像打开资料，聊天摘要打开会话。</td>
+<td>喜欢 → 查看普通喜欢；信息 → 点头像或聊天摘要</td>
+</tr>
+<tr>
+<td>任务与积分</td>
+<td>「我的」显示待领标记。任务卡可直接一键领取，也可进入详情按项领取。演示覆盖任务进度、余额更新与刷新后防重复领取。</td>
+<td>我的 → 任务中心</td>
+</tr>
+<tr>
+<td>社区活动</td>
+<td>推荐流和活动目录均可打开活动卡。申请人报名，发起人接受后，申请人通过个人邀请函查看集合点并确认参加。</td>
+<td>社区 → 约会活动 → 周末约咖啡</td>
+</tr>
+<tr>
+<td>随机语音</td>
+<td>从社区进入 30 秒体验。先申请续聊的人支付 20 积分，另一方免费确认。累计通话满两分钟后可选择喜欢，双方互相喜欢才能私聊。</td>
+<td>社区 → 语音活动</td>
+</tr>
+<tr>
+<td>视觉与导航</td>
+<td>上线前评审的视觉方案包含 Kin 标志、五枚导航图标、随手机时间切换的日夜配色，以及黑樱桃、暖杏与珊瑚渐变。</td>
+<td>浏览五个底部页面，观察滑卡和导航反馈</td>
+</tr>
+</tbody></table></div>
+<p><strong>待同步的文档差异</strong>　最新原型按已确认的调整，仅在「社区 → 语音活动」提供语音速配。V1.7 文本仍列有发现页入口。循环滑卡用于评审演示，正式产品每日十位免费推荐的需求仍见 V1.7。</p>
+<h2 id="section-2">2026-11-18　PRD V1.7</h2>
+<ul>
+<li>补充社区活动卡、报名和个人邀请函。发布、报名和确认均免费。文档明确谁能看到集合点，以及改期、退出、取消和名额释放时怎样更新邀请。</li>
+<li>补充随机语音页面的计时、续聊确认和满两分钟后的喜欢操作；加入双头像配对反馈、共同破冰题与 AI 开场白。</li>
+<li>明确社区 For You、Right Now 和兴趣筛选的展示范围，细化信息页头像跳转、主副图资料预览及日夜配色。</li>
+</ul>
+<h2 id="section-3">2026-11-18　PRD V1.6</h2>
+<p>美国首发积分方案第一版定稿。购分基准为 1 美元约 100 分，设置五档充值，并定义签到、邀请奖励和小额赠分。各档实际售价、赠送数量与奖励资格以 PRD 第 10 章为准。</p>
+<h2 id="section-4">此前的需求演进</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>形成的产品决定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V1.2–V1.5</td>
+<td>增加择偶标签、兴趣语音活动、周末约会邀请和私聊约会提案，迭代签到与邀请等积分激励。</td>
+</tr>
+<tr>
+<td>V1.0–V1.1</td>
+<td>确立 30 秒语音体验、主动续聊付分、双方 AI 破冰题，以及匿名发帖时送礼申请联系并由作者同意的机制。</td>
+</tr>
+<tr>
+<td>V0.5–V0.9</td>
+<td>完善游戏匹配与局后送花、按次积分消费、帖子收益分成、聊天赠分和 AI 回复助手。</td>
+</tr>
+</tbody></table></div>
+</article></main></body></html>
