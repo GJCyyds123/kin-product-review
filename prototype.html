@@ -44,6 +44,24 @@ body.solid .glass,body.solid .bottom-nav{background:#fff;backdrop-filter:none;-w
  .bottom-nav:before{border-radius:36px;box-shadow:inset 0 2px 2px white,inset 0 -1px 4px #b783a333,0 2px 9px #59415215}
  .person-card{height:clamp(310px,calc(100svh - 345px - env(safe-area-inset-top) - env(safe-area-inset-bottom)),620px);min-height:310px}
 }
+.compact-discover-title { display: none; }
+@media (max-width: 700px) {
+  .workspace[data-view="discover"] .topbar {
+    height: 52px;
+    margin-bottom: 6px;
+  }
+  .workspace[data-view="discover"] .intro,
+  .workspace[data-view="discover"] .city-pill,
+  .wide-discover-title { display: none; }
+  .compact-discover-title { display: inline; }
+  .workspace[data-view="discover"] .top-actions button {
+    width: 44px;
+    height: 44px;
+  }
+  .workspace[data-view="discover"] .person-card {
+    height: clamp(310px, calc(100svh - 250px - env(safe-area-inset-top) - env(safe-area-inset-bottom)), 720px);
+  }
+}
 
 .secondary{max-width:780px;margin:0 auto;padding:8px 0 30px;color:var(--ink,#24242b)}
 .new-like-placeholder{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 25% 20%,#fff 0,#f2dce8 48%,#d2dce9 100%);color:#ad869e}.new-like-placeholder .icon{width:20px;height:20px}.incoming-placeholder{width:100%;height:100%;background:radial-gradient(ellipse at 20% 25%,#ffffffb8 0,transparent 45%),radial-gradient(ellipse at 85% 15%,#d5e1ef 0,transparent 50%),radial-gradient(ellipse at 35% 70%,#e6c6d8 0,transparent 65%),#efdee8}.incoming-placeholder:after{content:'';position:absolute;width:60%;aspect-ratio:1;top:10%;left:20%;border:1px solid #ffffff70;border-radius:50%;box-shadow:0 0 40px #ffffff40,inset 0 0 30px #ffffff40}.topic-filters{overflow-x:auto;scrollbar-width:none}.topic-filters>button{flex-shrink:0}.visitor-list+.quiet-empty{padding-top:30px}
@@ -58,6 +76,14 @@ body.solid .glass,body.solid .bottom-nav{background:#fff;backdrop-filter:none;-w
 @media(max-width:360px){.feed-tabs{gap:15px}.community-portals>button{gap:5px;padding:12px 6px}.portal-icon{width:25px}.community-portals b{font-size:11px}.profile-identity .eyebrow{display:none}.incoming-card{min-height:250px}.new-likes{gap:12px}.incoming-card .btn{font-size:9px}.post-author{flex-wrap:wrap;gap:4px 7px}}
 @media(prefers-reduced-transparency:reduce){.incoming-accept,.incoming-unlock{background:#fff}.special-tag{background:#67515e}.post-photo>span{background:#45493e}.secondary .glass{background:#fff}}
 @media(prefers-contrast:more){.secondary .muted,.post-author>.muted,.post-topic,.post-actions button,.likes-note,.profile-menu small,.conversation-preview,.conversation-note{color:#514852}.secondary button{border-color:#c2b7c3}.secondary .eyebrow{color:#645468}}
+.account-overview{display:grid;gap:12px;color:var(--ink)}
+.account-identity,.account-wallet,.account-settings{display:flex;align-items:center;gap:12px}
+.account-identity .avatar{width:54px;height:54px}.account-identity div{min-width:0;overflow-wrap:anywhere}.account-identity h2{font-size:23px;line-height:1.25}.account-identity small,.account-identity span,.account-bio{font-size:14px;color:#686672}.account-bio{margin:0;overflow-wrap:anywhere}
+.account-edit{margin-left:auto;min-width:44px;height:44px}.account-stats,.account-tools{display:grid;gap:1px;background:#eae7ed;border:1px solid #eae7ed;border-radius:16px;overflow:hidden}.account-stats{grid-template-columns:repeat(3,1fr)}.account-stats button,.account-tools button{background:white;min-height:46px;font-size:14px}.account-stats b{margin-right:4px}
+.account-wallet{background:#fcf4f8;border:1px solid #f0e3ea;border-radius:16px;padding:12px 14px}.account-wallet div{margin-right:auto}.account-wallet small,.account-wallet strong{display:block}.account-wallet strong{font-size:24px;line-height:1.2}.account-wallet button{min-width:50px;min-height:44px;font-size:14px}.account-wallet .recharge{background:#322832;color:white;border-radius:14px;padding:0 15px}
+.account-overview h3{font-size:16px;margin:4px 0 0}.account-tools{grid-template-columns:1fr 1fr}.account-tools button,.account-settings{display:flex;align-items:center;gap:10px;padding:12px 15px;text-align:left}.account-tools .icon,.account-settings .icon{color:#98687e;width:20px}.account-settings{border:1px solid var(--line);border-radius:16px;background:white;font-size:14px}.account-settings .icon:last-child{margin-left:auto}
+.workspace[data-view="profile"] .city-pill{display:none}
+@media(max-width:700px){.workspace[data-view="profile"] .topbar{height:52px;margin-bottom:8px}.workspace[data-view="profile"] .top-actions .icon-button{width:44px;height:44px}}
 
 </style>
 </head>
@@ -151,19 +177,26 @@ function renderSecondary(page, ctx) {
 
   if (page === 'profile') {
     const p = s.profile;
-    return `<div class="secondary profile-view"><div class="profile-hero"><div class="profile-identity"><span class="profile-portrait">${avatar({ name: p.name, photo: 'assets/portrait-dev.jpg' })}<i>${I('check')}</i></span><div><span class="eyebrow">YOUR OWN KIND OF WONDERFUL</span><h2>${e(p.name)}<span>28</span></h2><p class="muted">${p.hideCity ? '居住地已隐藏' : e(p.city)}</p></div>${action('edit-profile', undefined, '编辑个人资料', I('edit'), 'quiet-button profile-edit')}</div><p class="profile-bio">${e(p.bio || '认真生活，也期待与一个人认真相遇。')}</p><div class="profile-stats">${action('follow-list', 'following', '查看关注', '<b>2</b><span>关注</span>')}${action('follow-list', 'followers', '查看粉丝', '<b>2</b><span>粉丝</span>')}${action('visitors', undefined, '查看看过我的人', `<b>${s.visitorEnabled ? visitors.length : '—'}</b><span>看过我</span>`)}</div></div>
-      <button type="button" class="matchmaker-card glass" data-action="matchmaker"><span class="matchmaker-orb" aria-hidden="true">${I('sparkles')}</span><span><small>YOUR LITTLE WINGMAN</small><b>和 AI 红娘聊聊</b><span>把你的期待，慢慢说清楚。</span></span>${I('chevron')}</button>
-      <div class="wallet-card"><div><span class="eyebrow">MY BALANCE</span><h3>${s.balance.toLocaleString()} <small>积分</small></h3><p>每一次心动，都由你决定。</p></div>${action('wallet', undefined, '积分充值', '充值', 'btn wallet-button')}<div class="wallet-footer">${I('wallet')} 按需充值，无订阅 ${action('checkin', undefined, s.signedIn ? '今日已签到' : '每日签到', s.signedIn ? `${I('check')} 已签到` : '签到领积分', 'checkin-button')}</div></div>
-      <div class="profile-menu">${[
-        ['my-posts', 'chat', '我的动态', '收藏生活的小片段'],
-        ['my-activities', 'coffee', '我的活动', '给下一次见面留个位置'],
-        ['saved-posts', 'bookmark', '已收藏动态', '留住想再次翻看的生活'],
-        ['settings', 'settings', '设置与隐私', '舒服的边界，由你定义']
-      ].map(([a, i, title, caption]) => action(a, undefined, title, `<span class="menu-icon">${I(i)}</span><span><b>${title}</b><small>${caption}</small></span>${I('chevron')}`)).join('')}</div><p class="profile-signoff">Be yourself. Find your kind.</p></div>`;
+    const entries = [
+      ['my-posts','chat','我的动态'], ['saved-posts','bookmark','我的收藏'],
+      ['my-activities','calendar','我的活动'], ['matchmaker','sparkles','AI 红娘']
+    ];
+    return `<section class="account-overview">
+      <header class="account-identity">${avatar({name:p.name,photo:'assets/portrait-dev.jpg'})}
+        <div><h2>${e(p.name)} <small>28</small></h2>${p.hideCity?'':`<span>${e(p.city)}</span>`}</div>
+        ${action('edit-profile',undefined,'编辑个人资料',I('edit'),'account-edit')}
+      </header>
+      ${p.bio?`<p class="account-bio">${e(p.bio)}</p>`:''}
+      <div class="account-stats">${action('follow-list','following','查看关注','<b>2</b> 关注')}${action('follow-list','followers','查看粉丝','<b>2</b> 粉丝')}${action('visitors',undefined,'查看看过我的人',`<b>${s.visitorEnabled?visitors.length:'—'}</b> 看过我`)}</div>
+      <div class="account-wallet"><div><small>积分余额</small><strong>${s.balance.toLocaleString()}</strong></div>
+        ${action('checkin',undefined,s.signedIn?'今日已签到':'每日签到',s.signedIn?'已签到':'签到')}
+        ${action('wallet',undefined,'积分充值','充值','recharge')}</div>
+      <h3>常用功能</h3><div class="account-tools">${entries.map(([id,i,label])=>action(id,undefined,label,I(i)+'<span>'+label+'</span>')).join('')}</div>
+      ${action('settings',undefined,'设置与隐私',I('settings')+'<span>设置与隐私</span>'+I('chevron'),'account-settings')}
+    </section>`;
   }
   return '';
 }
-
 
 const paths={
 heart:'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z',
@@ -204,7 +237,7 @@ const defaults=()=>({balance:260,likesTab:'likes',visitorEnabled:false,unlocked:
 let state;try{state={...defaults(),...JSON.parse(localStorage.getItem('kin-liquid-v1')||'{}')}}catch{state=defaults()}
 if(state.day!==defaults().day){Object.assign(state,{day:defaults().day,index:0,history:[],superUsed:false,undoUsed:false,signedIn:false})}
 const app=document.querySelector('#app'),sheet=document.querySelector('#sheet');
-const pages=[['discover','发现','discover'],['community','社区','community'],['likes','喜欢','heart'],['messages','信息','chat'],['profile','我的','profile']];
+const pages=[['discover','发现','discover'],['likes','喜欢','heart'],['community','社区','community'],['messages','信息','chat'],['profile','我的','profile']];
 let page=pages.some(p=>p[0]===location.hash.slice(1))?location.hash.slice(1):'discover';
 let audio,toastTimer,modalFocus,swipeBusy=false,activeChat=null;
 const save=()=>{try{localStorage.setItem('kin-liquid-v1',JSON.stringify(state))}catch{toast('当前浏览器无法保存，体验状态将保留到本次关闭前。')}};
@@ -214,7 +247,7 @@ function nav(){return pages.map(([id,label,i])=>`<button data-page="${id}" class
 function incoming(){return [2,3,4,5].filter(id=>!state.matched.includes(id))}
 function render(){
  document.body.classList.toggle('solid',state.solid);document.body.classList.toggle('reduce-motion',state.reduceMotion);
- app.innerHTML=inlineMarkup`<div class="app-shell"><aside class="sidebar"><a href="#discover" class="brand" aria-label="Kin 首页">${logo('side')}<span class="brand-word">Kin.</span></a><nav class="side-nav" aria-label="主导航">${nav()}</nav><div class="side-bottom"><button class="account-button" data-page="profile"><img class="avatar" src="assets/portrait-dev.jpg" alt="我的头像"><div><strong>${escape(state.profile.name)}</strong><p>我的资料</p></div></button><p class="demo-note">KIN · LOCAL PREVIEW<br>虚构演示资料 · 仅本机保存</p></div></aside><div class="workspace"><header class="topbar"><div class="page-lockup">${logo('header')}<h1>${pages.find(p=>p[0]===page)[1]}</h1></div><div class="top-actions"><span class="city-pill">${icon('location')}San Francisco</span><button class="icon-button" aria-label="${page==='discover'?'调整发现偏好':'外观与隐私设置'}" data-action="${page==='discover'?'preferences':'settings'}">${icon(page==='discover'?'filter':'settings')}</button></div></header><div class="content-grid"><main class="main-content page-enter" id="main" tabindex="-1">${page==='discover'?discover():renderSecondary(page,{icon,state,people,escape})}</main>${rail()}</div></div></div><nav class="bottom-nav" aria-label="底部导航" style="--active:${pages.findIndex(p=>p[0]===page)}">${nav()}</nav>`;
+ app.innerHTML=inlineMarkup`<div class="app-shell"><aside class="sidebar"><a href="#discover" class="brand" aria-label="Kin 首页">${logo('side')}<span class="brand-word">Kin.</span></a><nav class="side-nav" aria-label="主导航">${nav()}</nav><div class="side-bottom"><button class="account-button" data-page="profile"><img class="avatar" src="assets/portrait-dev.jpg" alt="我的头像"><div><strong>${escape(state.profile.name)}</strong><p>我的资料</p></div></button><p class="demo-note">KIN · LOCAL PREVIEW<br>虚构演示资料 · 仅本机保存</p></div></aside><div class="workspace" data-view="${page}"><header class="topbar"><div class="page-lockup">${logo('header')}<h1>${page==='discover'?'<span class="wide-discover-title">发现</span><span class="compact-discover-title">今日精选</span>':pages.find(p=>p[0]===page)[1]}</h1></div><div class="top-actions"><span class="city-pill">${icon('location')}San Francisco</span><button class="icon-button" aria-label="${page==='discover'?'调整发现偏好':'外观与隐私设置'}" data-action="${page==='discover'?'preferences':'settings'}">${icon(page==='discover'?'filter':'settings')}</button></div></header><div class="content-grid"><main class="main-content page-enter" id="main" tabindex="-1">${page==='discover'?discover():renderSecondary(page,{icon,state,people,escape})}</main>${rail()}</div></div></div><nav class="bottom-nav" aria-label="底部导航" style="--active:${pages.findIndex(p=>p[0]===page)}">${nav()}</nav>`;
  if(page==='discover')bindSwipe();
 }
 function discover(){const p=people[state.index];return `<div class="intro"><div><span class="eyebrow">DAILY DISCOVERY</span><h2>今日精选</h2><p>今天有 10 位值得认识的人。</p></div><div class="tiny-orbit">${icon('heart')}</div></div>${!p?`<div class="empty-state">${icon('sun')}<h2>今天的相遇，刚刚好。</h2><p>你已看完今日 10 位。明天再来，<br>也可以去社区发现有趣的生活。</p><button class="btn primary" data-page="community">去社区看看</button></div>`:`<div class="discovery-stage"><div class="card-under" aria-hidden="true"><img src="${people[state.index+1]?.photo||p.photo}" alt=""></div><article class="person-card" aria-label="${p.name}，${p.age}岁，推荐资料卡"><img class="person-photo" src="${p.photo}" alt="${p.name} 的演示资料照片" fetchpriority="high" draggable="false"><div class="card-top"><span class="photo-badge">${icon('shield')}照片一致性已验证</span><button class="icon-button" data-action="profile-detail" data-id="${p.id}" aria-label="查看 ${p.name} 的完整资料">${icon('more')}</button></div><div class="swipe-label yes">喜欢</div><div class="swipe-label no">跳过</div><div class="person-info"><span class="connection-note">${icon('sparkles')}你们都喜欢${p.tags[0]}</span><h3>${p.name} <span>${p.age}</span></h3><p class="person-location">${icon('location')}${p.city} <span>·</span> 想认真认识一个人</p><p class="person-bio">${p.bio}</p><div class="person-tags">${p.tags.map(t=>`<span class="pill">${escape(t)}</span>`).join('')}</div><button class="voice-chip" data-action="voice" data-id="${p.id}" aria-label="播放 ${p.name} 的语音示例">${icon('play')}<span class="waveform">${[7,12,8,16,10,6,14,9,16,7,12,5,14,8,11,5].map((h,i)=>`<i style="--h:${h}px;--d:${i*.035}s"></i>`).join('')}</span><span>听听我的理想周末 · 示例</span></button></div></article></div><div class="discovery-footer"><button class="circle-action undo" data-action="undo" aria-label="撤销最近一次跳过" ${state.undoUsed||state.history.at(-1)?.type!=='skip'?'disabled':''}>${icon('undo')}</button><div class="round-actions"><button class="circle-action skip" data-action="skip" aria-label="跳过 ${p.name}">${icon('close')}</button><button class="circle-action super" data-action="super" aria-label="特别喜欢 ${p.name}">${icon('discover')}</button><button class="circle-action like" data-action="like" aria-label="喜欢 ${p.name}">${icon('heart')}</button></div><div class="daily-count"><strong>${String(state.index+1).padStart(2,'0')}</strong> / 10<br>今日精选</div></div><p class="gesture-hint">左滑跳过 · 右滑喜欢 · 上滑特别喜欢</p>`}`}
