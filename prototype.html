@@ -91,6 +91,7 @@ body.solid .glass,body.solid .bottom-nav{background:#fff;backdrop-filter:none;-w
 @media(max-width:700px){.workspace[data-view="profile"] .topbar{height:52px;margin-bottom:8px}.workspace[data-view="profile"] .top-actions .icon-button{width:44px;height:44px}}
 .secondary .section-title{margin:14px 0 10px}.secondary .likes-switch{margin:0 0 4px}.secondary .community-portals{margin-bottom:12px}.secondary .recent-heading{margin-top:18px}.messages-view>.section-title:first-child{margin-top:0}
 .rewards-strip{display:flex;align-items:center;justify-content:space-between;gap:8px;border-radius:16px;background:linear-gradient(115deg,#583044,#804456);color:white;padding:6px 12px}.rewards-strip small,.rewards-strip strong{display:block}.rewards-strip button,.reward-item button{min-height:44px;border-radius:14px;padding:0 14px;background:#fff1f5;color:#713453;font-weight:600}.rewards-strip .reward-entry{background:transparent;color:white;text-align:left;padding:2px 4px;flex:1}.reward-entry small{font-weight:400}.reward-item{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:9px 0}.reward-item p,.reward-item>span{font-size:12px;color:var(--muted)}.reward-item em{font-size:13px;color:#a23965}.sheet-body>.rewards-strip{padding:12px 16px;margin-bottom:12px}
+.visitor-preview>.visitor-offer,.visitor-preview>.visitor-consents{display:flex;align-items:center;gap:12px;margin:14px 0 6px}.visitor-preview>small,.visitor-offer p,.visitor-consents p{font-size:12px;color:var(--muted)}.visitor-offer button,.visitor-consents button{margin-left:auto}.visitor-offer{padding:12px;background:#faf0f5;border-radius:16px}.visitor-offer button,.visitor-consents button{min-height:44px;border-radius:14px;padding:0 14px;font-size:14px}.visitor-offer button{background:#62344d;color:white}.visitor-consents{font-size:14px}.visitor-consents button{background:#f3f2f6}
 
 </style>
 </head>
@@ -156,13 +157,28 @@ function renderSecondary(page, ctx) {
     </div>`;
   }
 
+
+  function visitorPreview() {
+    // The preview contains time labels only. The future membership API owns identity access.
+    const latest = ['14:32', '09:18'];
+    const history = ['昨天', '3 天前', '5 天前'];
+    return `<section class="visitor-preview" aria-label="匿名访客示例">
+      <div class="section-title"><h3>最新访客</h3><span class="muted">今天</span></div>
+      <div class="new-likes">${latest.map(time => `<div class="new-like is-locked" aria-label="匿名访客"><span class="new-like-ring"><span class="new-like-placeholder" aria-hidden="true">${I('lock')}</span></span><span>${time}</span></div>`).join('')}</div>
+      <div class="section-title all-likes-heading"><h3>历史访客</h3><span class="muted">此前 6 天 · ${history.length} 位</span></div>
+      <div class="likes-grid">${history.map(time => `<article class="incoming-card is-locked"><div class="incoming-photo" aria-hidden="true"><div class="incoming-placeholder"></div></div><div class="incoming-info"><span class="lock-disc">${I('lock')}</span><h3>匿名访客</h3><p>${time}来访</p></div></article>`).join('')}</div>
+      <div class="visitor-offer"><div><strong>访客查询会员</strong><p>开通后可查看访客头像与昵称</p></div>${action('visitor-membership', undefined, '充值开通访客查询会员', '充值开通')}</div>
+      <small>以上为示例记录</small>
+      <div class="visitor-consents"><div><b>互惠访问记录</b><p>仅记录双方开启后的访问</p></div>${action('toggle-visitors',undefined,s.visitorEnabled?'关闭访问记录':'开启访问记录',s.visitorEnabled?'关闭':'开启')}</div>
+    </section>`;
+  }
   if (page === 'likes') {
     const incoming = [people[1], people[2], people[3], people[4]].filter(p => !has(s.matched, p.id));
     const special = people[2].id;
     const tab = s.likesTab || 'likes';
     const visible = p => p.id === special || has(s.unlocked, p.id);
     return `<div class="secondary likes-view"><div class="segmented likes-switch" aria-label="喜欢与访客"><button type="button" data-action="likes-tab" data-id="likes" aria-pressed="${tab === 'likes'}">喜欢 <span>${incoming.length}</span></button><button type="button" data-action="likes-tab" data-id="visitors" aria-pressed="${tab === 'visitors'}">访客</button></div>
-      ${tab === 'visitors' ? `<div class="visitor-consent glass"><div class="visitor-symbol">${I('heart')}</div><h3>${s.visitorEnabled ? '访客记录已开启' : '互惠访客'}</h3><p>${s.visitorEnabled ? '你查看对方资料时，对方也能看到你的访问。你可以随时关闭。' : '开启后，你可以查看同样开启此功能的人；你访问他们的资料时，也会留下记录。'}</p>${action('toggle-visitors', undefined, s.visitorEnabled ? '关闭访客记录' : '开启互惠访客', '', `btn ${s.visitorEnabled ? '' : 'primary'}`)}</div>${s.visitorEnabled ? `<div class="section-title"><h3>最近看过我</h3><span class="muted">${visitors.length} 位</span></div>${visitors.length ? `<div class="visitor-list">${visitors.map(v => { const p = person(v.personId); return `<div class="visitor-row">${avatar(p)}<div><b>${e(p.name)}</b><small class="muted">${e(new Date(Number(v.visitedAt)).toLocaleDateString('zh-CN', {month:'numeric',day:'numeric'}))} · 访问了你的资料</small></div>${action('profile-detail', p.id, '查看资料', I('chevron'), 'quiet-button')}</div>`; }).join('')}</div>` : empty('profile', '新的足迹，从此刻开始', '开启前的访问不会补记。最近 7 天还没有双方均开启后的访问记录。')}` : ''}` : `
+      ${tab === 'visitors' ? visitorPreview() : `
       
       ${incoming.length ? `<div class="section-title"><h3>新喜欢</h3></div><div class="new-likes">${incoming.slice(0, 4).map(p => `<button type="button" class="new-like ${visible(p) ? '' : 'is-locked'}" data-action="${visible(p) ? 'profile-detail' : 'unlock-like'}" data-id="${p.id}" aria-label="${visible(p) ? `查看 ${e(p.name)} 的资料` : '解锁一位新喜欢'}"><span class="new-like-ring">${visible(p) ? `<img src="${e(p.photo)}" alt="${e(p.name)}">` : `<span class="new-like-placeholder" aria-hidden="true">${I('lock')}</span>`}${p.id === special ? `<i>${I('sparkles')}</i>` : ''}</span><span>${visible(p) ? e(p.name) : '新喜欢'}</span></button>`).join('')}</div>
       <div class="section-title all-likes-heading"><h3>全部喜欢</h3><span class="muted">${incoming.length} 位</span></div><div class="likes-grid">${incoming.map(p => {
@@ -335,6 +351,7 @@ const actions={
  preferences(){openSheet('你的相遇偏好',`<p>从你真正重视的事开始。偏好只对自己可见。</p><label for="age-min">最低年龄</label><input id="age-min" type="number" min="18" max="80" value="${state.preferences?.min||24}"><label for="age-max">最高年龄</label><input id="age-max" type="number" min="18" max="80" value="${state.preferences?.max||35}"><label for="intent">希望建立的关系</label><select id="intent"><option>认真约会</option><option>长期关系</option><option>先认识再决定</option></select><div class="sheet-note">本版保存偏好供体验；固定演示人物不会重新计算推荐，已解锁的卡片可以继续查看。</div><button class="btn primary" data-action="save-preferences">保存偏好</button>`);if(state.preferences?.intent)document.querySelector('#intent').value=state.preferences.intent},
  'save-preferences'(){const min=Number(document.querySelector('#age-min').value),max=Number(document.querySelector('#age-max').value);if(min<18||max>80||min>max||!min||!max){toast('请输入 18–80 岁之间的有效年龄范围');return}state.preferences={min,max,intent:document.querySelector('#intent').value};save();closeSheet();toast('偏好已保存在本机')},
  'likes-tab'(id){state.likesTab=id;save();render()},visitors(){state.likesTab='visitors';save();navigate('likes')},
+ 'visitor-membership'(){openSheet('访客查询会员','<p>会员可查看最新和历史访客的头像与昵称。</p><div class="sheet-note">会员充值服务待接入，当前无法付款或开通。</div><button class="btn primary" data-action="close">返回访客</button>')},
  'toggle-visitors'(){state.visitorEnabled=!state.visitorEnabled;save();render();toast(state.visitorEnabled?'已开启访客：仅双方开启后的访问才记录':'访客已关闭，不再记录新的访问')},
  'unlock-like'(id){id=Number(id);if(id===3||state.unlocked.includes(id)){detail(id);return}openSheet('看看是谁喜欢你',`<p>消耗 20 积分，解锁这一位的资料。同一个人只收一次，不会自动回以喜欢。</p><div class="sheet-note">当前余额 ${state.balance} 积分 · 本地演示，不产生真实支付</div><button class="btn primary" data-action="confirm-unlock" data-id="${id}">确认解锁 · 20 积分</button>`)},
  'confirm-unlock'(id){id=Number(id);if(!state.unlocked.includes(id)){if(!deduct(20))return;state.unlocked.push(id);save()}render();detail(id)},
