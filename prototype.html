@@ -432,6 +432,263 @@ body.reduce-motion .photo-stack *,body.reduce-motion #kin-match-motion *{animati
 .visit-insights{border:1px solid var(--line);border-radius:16px;padding:10px 14px;margin:10px 0;background:white}.visit-insights p{font-size:13px;margin:4px 0}.visit-insights b{color:#874561}.visit-insights summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px}.visit-insights ul{padding:0;margin:0;list-style:none}.visit-insights li{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:8px 0;font-size:13px}
 .insight-demo header{display:flex;align-items:center;justify-content:space-between}.insight-demo h3,.insight-demo h4{margin:0}.insight-demo ol{list-style:none;margin:6px 0 0;padding:0}.insight-demo ol>li{display:flex;justify-content:flex-start;gap:10px;align-items:flex-start;padding:9px 0}.insight-index{flex:none;background:#f9eaf2;color:#934267;font-weight:700;border-radius:50%;width:24px;height:24px;display:grid;place-items:center}.insight-demo ol small,.insight-demo header small{color:#716876;font-size:12px}.insight-demo h4{font-size:14px}.insight-demo ol p{margin:2px 0 0;font-size:14px;color:#7c3555}
 
+:root {
+  --ice: #f7fafd;
+  --paper: #fff;
+  --ink: #18212f;
+  --muted: #526174;
+  --line: #d5dde5;
+  --lilac: #dad2f6;
+  --plum: #3b3049;
+  --pink: #645579;
+  --soft: #f0edf8;
+  --serif: Georgia, "Songti SC", SimSun, serif;
+  --dock: calc(64px + env(safe-area-inset-bottom));
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+body { background: var(--paper); color: var(--ink); }
+.btn, .icon-button, dialog input, dialog textarea, dialog select {
+  border-radius: 10px; border: 1px solid var(--line); box-shadow: none;
+}
+.btn.primary, .btn.pink-button, .account-wallet .recharge { background: var(--lilac); color: var(--plum); }
+.side-nav button.active, .topic-filters button[aria-pressed=true] { background: var(--soft); color: var(--plum); }
+.nav-count { background: #625374; }
+.rail-card, dialog { background: var(--paper); border: 1px solid var(--line); box-shadow: none; }
+.rail-card { border-radius: 14px; }
+.rail-card .btn, .featured-tools .btn { background: var(--soft); color: var(--plum); }
+.featured-tile { border-radius: 12px; }
+.tile-copy strong { font-family: var(--serif); }
+.account-wallet, .rewards-strip, .community-portals>button, .account-stats, .account-tools {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 10px; color: var(--ink); box-shadow: none;
+}
+.rewards-strip .reward-entry { color: var(--ink); }
+.rewards-strip button { background: var(--soft); color: var(--plum); }
+.account-identity h2 { font-family: var(--serif); }
+.account-tools { display: flex; flex-direction: column; gap: 0; }
+.account-tools button+button { border-top: 1px solid var(--line); }
+.account-tools .icon, .account-settings .icon { color: var(--muted); }
+.incoming-card { border-radius: 10px; border-color: var(--line); }
+.incoming-card .btn, .post-photo { border-radius: 8px; }
+.feed-tabs button[aria-pressed=true]::after { background: var(--plum); }
+.likes-switch { background: transparent; border-radius: 0; gap: 18px; padding: 0; }
+.likes-switch>button { min-height: 44px; min-width: 0; border-radius: 0; padding: 4px 0; border-bottom: 2px solid transparent; }
+.likes-switch>button[aria-pressed=true] { background: transparent; box-shadow: none; border-color: var(--plum); }
+.likes-switch>button>span, .repeat-count, .repeat-notice, .portal-icon.rose, .new-like-placeholder { background: var(--soft); color: var(--plum); }
+.new-like-ring { border-color: var(--line); }
+.new-like-ring>i, .unread-dot { background: #776586; }
+.incoming-placeholder { background: #e5e1ec; }
+.incoming-placeholder::after, .incoming-card.is-locked:has(.incoming-placeholder)::after { display: none; }
+.repeat-notice, .topic-filters button[aria-pressed=true] { border-color: var(--line); }
+.repeat-notice small, .repeat-icon, .conversation-preview { color: var(--muted); }
+.voice-post { border-color: var(--line); background: var(--soft); color: var(--plum)!important; }
+.voice-wave i { background: #9485ad; }
+.section-title h3, .section-title h2, .account-overview h3 { letter-spacing: 0; }
+button:focus-visible, summary:focus-visible, .portrait-reader:focus-visible {
+  outline: 3px solid #8071a2; outline-offset: -3px;
+}
+.workspace[data-view=discover]:has(.discovery-page) .topbar { display: none; }
+.workspace:has(.discovery-page) .context-panel { padding-top: 0; }
+.discovery-page {
+  --sheet: var(--paper); --text: #201f20; --rule: #e3dfdc;
+  position: relative; display: flex; flex-direction: column; min-width: 0;
+  height: clamp(420px, calc(100dvh - 60px), 880px); overflow: hidden; color: var(--text);
+  background: white; border: 1px solid var(--rule); border-radius: 16px;
+}
+.discovery-head { display: flex; flex: none; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 18px; border-bottom: 1px solid var(--rule); }
+.discovery-switch { display: flex; gap: 18px; align-items: center; }
+.discovery-switch button { min-height: 44px; position: relative; padding: 0; font-weight: 550; color: #6a6469; }
+.discovery-switch button[aria-pressed=true] { color: #201f20; font-weight: 720; }
+.discovery-switch button[aria-pressed=true]::after { content:""; position:absolute; left:0; bottom:3px; width:22px; height:2px; background:currentColor; }
+.filter-action, .more-action, .undo-action, .deck-arrows button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; }
+.more-action .icon { stroke-width: 3.5; }
+.reader-intro { padding: 0 18px 14px; background: white; }
+.filter-strip { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 10px 0; }
+.filter-strip button { white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; min-height: 44px; padding: 0 13px; border: 1px solid var(--rule); border-radius: 24px; font-size: 13px; }
+.filter-strip button:first-child { color: white; background: #262425; border-color: #262425; }
+.filter-strip .icon { width: 13px; height: 13px; transform: rotate(90deg); }
+.name-line { display: flex; align-items: center; padding-top: 5px; }
+.name-line>div { margin-right: auto; }
+.name-line h2 { font-size: clamp(28px, 4vw, 36px); line-height: 1.15; letter-spacing: -.04em; }
+.name-line h2 span { font-weight: 450; }
+.name-line p { margin-top: 4px; color: #625e60; font-size: 13px; }
+.portrait-stage { position: relative; isolation: isolate; flex: 1; min-height: 0; overflow: hidden; background: var(--sheet); }
+.portrait-reader { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: none; touch-action: pan-y pinch-zoom; background: var(--sheet); transition: transform .2s ease-out; }
+.portrait-reader.dragging { user-select: none; transition: none; }
+.story-sequence { display: grid; gap: 14px; padding: 0 18px 78px; background: var(--paper); }
+.story-sequence figure { margin: 0; }
+.feed-image { position: relative; overflow: hidden; border-radius: 10px; }
+.feed-image img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; object-position: center 32%; }
+.photo-heart, .skip-bubble {
+  display: grid; place-items: center; width: 46px; height: 46px; padding: 0; border-radius: 50%; transition: transform .14s ease;
+}
+.photo-heart { position: absolute; right: 12px; bottom: 12px; color: white; background: #212021; }
+.photo-heart .icon { width: 25px; height: 25px; stroke-width: 2; }
+.skip-bubble { position: absolute; z-index: 2; bottom: 14px; left: 18px; color: #211f20; background: #fff; border: 1px solid #c9c4c5; box-shadow: 0 2px 6px #271c2312; }
+.skip-bubble .icon { width: 26px; height: 26px; stroke-width: 2.2; }
+.photo-heart:active, .skip-bubble:active { transform: scale(.94); }
+.answer-panel, .profile-block, .life-entry { background: white; border: 1px solid var(--rule); border-radius: 10px; }
+.answer-panel { padding: 28px 22px; }
+.answer-panel h3, .profile-block h3, .prompt-detail small { font-size: 14px; line-height: 1.5; font-weight: 650; letter-spacing: 0; }
+.answer-panel p, .prompt-detail strong { font-family: var(--serif); font-weight: 500; letter-spacing: -.025em; text-wrap: pretty; }
+.answer-panel p { margin-top: 12px; font-size: clamp(23px,4vw,31px); line-height: 1.45; }
+.profile-block, .life-entry figcaption { padding: 20px; }
+.profile-block>p, .life-entry figcaption p { margin-top: 8px; font-size: 15px; line-height: 1.65; }
+.profile-interests { display: flex; flex-wrap: wrap; gap: 5px 12px; margin: 12px 0; color: var(--muted); font-size: 13px; }
+.profile-shared { display: flex; align-items: center; gap: 6px; color: var(--plum); }
+.profile-shared .icon { width: 16px; }
+.portrait-voice { min-height: 44px; background: var(--soft); color: var(--plum); border: 1px solid var(--line); border-radius: 9px; font-size: 14px; }
+.profile-table { margin: 18px 0 0; font-size: 14px; }
+.profile-table div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid var(--rule); }
+.profile-table dt { color: var(--muted); } .profile-table dd { margin: 0; }
+.life-entry .feed-image { border-radius: 9px 9px 0 0; }
+.portrait-stamp:not(:empty) { position: absolute; z-index: 2; top: 22%; padding: 5px 15px; border-radius: 5px; border: 2px solid currentColor; color: var(--plum); background: white; font-size: 22px; font-weight: 700; pointer-events: none; }
+.portrait-stamp[data-side=like] { left: 24px; transform: rotate(-6deg); }
+.portrait-stamp[data-side=skip] { right: 24px; transform: rotate(6deg); }
+.heart-wallet { display: inline-flex; align-items: center; gap: 7px; padding: 0 14px; min-height: 44px; border-radius: 24px; color: #372638; background: #e4d5e5; font-weight: 650; }
+.heart-wallet .icon { width: 20px; }
+.picks-page .featured-track { position: relative; margin: 0; display: flex; flex: 1; min-height: 0; align-items: stretch; gap: 12px; padding: 14px 18px 0; scroll-padding-inline: 18px; }
+.featured-track .featured-tile { flex: 0 0 90%; height: auto; border-radius: 12px; background: #322f30; }
+.featured-tile .featured-portrait { position: absolute; inset: 0; width: 100%; text-align: left; padding: 0; }
+.featured-portrait::after { content:""; position:absolute; inset:0; background:linear-gradient(#201c224d, transparent 24% 52%, #171519b3); }
+.featured-portrait img { object-position: center 28%; }
+.featured-name { position: absolute; z-index: 1; top: 18px; left: 18px; color: white; font-size: clamp(24px,4vw,32px); font-weight: 650; letter-spacing: -.03em; }
+.featured-name small { font-size: .65em; margin-left: 7px; }
+.preference-card { position: absolute; bottom: 14px; left: 14px; right: 14px; padding: 17px 18px 62px; background: white; color: var(--text); border-radius: 10px; }
+.prompt-detail { display: grid; width: 100%; gap: 8px; padding: 0; text-align: left; }
+.prompt-detail strong { font-size: clamp(22px,4vw,31px); line-height: 1.28; }
+.picks-footer { display: flex; align-items: center; justify-content: flex-end; gap: 8px; position: relative; flex: none; min-height: 68px; padding: 5px 18px 5px 78px; }
+.picks-footer .skip-bubble { bottom: 11px; }
+.deck-arrows { display: flex; }
+.deck-arrows .icon { width: 17px; }
+.refresh-picks { min-height: 44px; color: #605961; font-size: 13px; }
+.picks-empty { display: grid; align-content: center; gap: 12px; justify-items: center; flex: 1; text-align: center; }
+.liked-origin { font-size: 14px; color: var(--muted); margin-block: 8px; }
+.album-cover, .album-moment { position: relative; }
+.profile-moments article:has(.album-moment) { display: grid; }
+.profile-moments .album-moment img { width: 100%; height: auto; aspect-ratio: 4/3; }
+.pick-actions { display: flex; align-items: center; gap: 4px; }
+:root {
+  --text-caption: 12px;
+  --text-control: 14px;
+  --text-body: 15px;
+  --text-section: 18px;
+}
+.btn, .discovery-switch button, .likes-switch>button, .feed-tabs button,
+.account-tools button, .account-settings, .portrait-voice {
+  font-size: var(--text-control); line-height: 1.4; font-weight: 600;
+}
+.secondary .section-title h3, .account-overview h3 { font-size: var(--text-section); line-height: 1.35; }
+.name-line p, .post-status, .conversation-preview, .profile-interests, .topic-filters button,
+.account-wallet small, .community-portals small { font-size: var(--text-caption); line-height: 1.45; }
+.post-copy, .profile-block>p, .life-entry figcaption p { font-size: var(--text-body); line-height: 1.65; }
+.answer-panel p, .prompt-detail strong { font-size: clamp(22px, 3.5vw, 28px); line-height: 1.4; }
+.btn:active:not(:disabled), .filter-row:active, .quick-filter:active span { filter: brightness(.95); }
+.filter-strip { align-items: center; overflow: visible; gap: 4px; padding: 3px 0; }
+.quick-fields { display: flex; align-items: center; min-width: 0; gap: 5px; overflow-x: auto; scrollbar-width: none; }
+.quick-fields::-webkit-scrollbar { display: none; }
+.filter-strip button, .filter-strip button:first-child {
+  flex: none; padding: 0; min-height: 44px; border: 0; border-radius: 0;
+  background: transparent; color: var(--ink); font-size: var(--text-caption); font-weight: 550;
+}
+.quick-filter span {
+  display: inline-flex; align-items: center; gap: 4px; padding: 0 9px;
+  min-height: 29px; border: 1px solid #cbc8cb; border-radius: 18px; background: white;
+}
+.quick-filter.chosen span { border-color: #282529; background: #282529; color: white; }
+.filter-strip .all-filters { margin-left: auto; padding-inline: 5px 0; min-width: 44px; justify-content: flex-end; }
+.filter-strip .all-filters .icon { transform: none; }
+.filter-strip .icon { width: 11px; height: 11px; }
+dialog.filter-sheet { background: white; border: 1px solid var(--line); box-shadow: none; }
+.filter-sheet::backdrop { background: #17141b70; backdrop-filter: none; }
+.filter-sheet .sheet-head { display: grid; grid-template-columns: 44px minmax(0,1fr) 44px; align-items: center; padding: 12px 16px 4px; background: white; }
+.filter-sheet .sheet-head h2 { grid-column: 2; grid-row: 1; font-size: 20px; line-height: 1.35; text-align: center; letter-spacing: 0; }
+.filter-sheet .sheet-head button { min-height: 44px; width: 44px; background: transparent; }
+.filter-sheet .sheet-head button[data-action=close] { grid-column: 3; grid-row: 1; }
+.filter-sheet .sheet-head button .icon { width: 18px; height: 18px; }
+.filter-sheet .sheet-body { padding: 8px 20px 20px; }
+.filter-directory { display: grid; }
+.filter-row { display: flex; align-items: center; text-align: left; width: 100%; min-height: 49px; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: var(--text-control); }
+.filter-row:last-child { border: 0; }
+.filter-row span { margin-left: auto; color: var(--muted); }
+.filter-row .icon { width: 14px; }
+.filter-options { margin: 0; border: 0; padding: 0; }
+.filter-options label { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 6px 0; margin: 0; cursor: pointer; font-size: var(--text-body); font-weight: 450; }
+.filter-options input { appearance: auto; accent-color: #342d39; width: 18px; height: 18px; margin: 0; }
+.filter-options input:checked+span { font-weight: 650; }
+.filter-sheet .filter-apply { min-height: 44px; border: 0; background: #282529; color: white; border-radius: 12px; font-size: var(--text-control); }
+.age-values, .age-scale { display: flex; align-items: center; justify-content: space-between; font-size: var(--text-caption); color: var(--muted); }
+.age-values { margin: 9px 0; }
+.age-values label { margin: 0; font-size: inherit; }
+.age-values output { display: block; font-size: 26px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.age-values label:last-child { text-align: right; }
+.age-slider { position: relative; height: 44px; margin-inline: 1px; }
+.age-rail { position: absolute; inset: 20px 12px; border-radius: 4px; background: linear-gradient(to right,#dcd9dc var(--lo),#342d39 var(--lo) var(--hi),#dcd9dc var(--hi)); }
+.age-slider input[type=range] { position: absolute; inset: 0; width: 100%; height: 44px; margin: 0; padding: 0; border: 0; background: transparent; appearance: none; pointer-events: none; }
+.age-slider input::-webkit-slider-thumb { appearance: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid #342d39; background: white; pointer-events: auto; touch-action: none; cursor: grab; }
+.age-slider input::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #342d39; background: white; pointer-events: auto; }
+.age-slider input:focus-visible { outline: none; }
+.age-slider input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px #c8bed9; }
+.age-slider input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px #c8bed9; }
+@media (max-width:700px) {
+  .bottom-nav { bottom: 0; left: 0; right: 0; max-width: none; height: var(--dock); padding: 3px max(6px,env(safe-area-inset-right)) env(safe-area-inset-bottom) max(6px,env(safe-area-inset-left)); background: var(--paper); border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; backdrop-filter: none; }
+  .bottom-nav::before { display: none; }
+  .bottom-nav button { min-height: 44px; gap: 1px; color: var(--muted); }
+  .bottom-nav button .icon { width: 38px; height: 24px; padding: 2px 9px; border-radius: 9px; }
+  .bottom-nav button { margin: 2px; padding: 3px 0; font-size: 11px; line-height: 1.35; border-radius: 13px; transition: background-color .14s; }
+  .bottom-nav button.active, .bottom-nav button:active { background: var(--soft); color: var(--plum); }
+  .bottom-nav button.active .icon { background: transparent; }
+  .workspace[data-view=community] .topbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .workspace[data-view=community] { padding-top: max(12px,env(safe-area-inset-top)); }
+  dialog.filter-sheet { margin: auto 0 0; width: 100%; max-width: 100%; max-height: calc(100dvh - 20px - env(safe-area-inset-top)); border-radius: 18px 18px 0 0; }
+  .filter-sheet .sheet-head { padding-top: 17px; }
+  .filter-sheet .sheet-head::before { content: ""; position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34px; height: 4px; border-radius: 4px; background: #b6b1b6; }
+  .workspace:not([data-view=discover]) .page-lockup { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .workspace:not([data-view=discover]) .topbar { height: 44px; margin: 0; justify-content: flex-end; }
+}
+@media (max-height:480px) and (orientation:landscape) {
+  .discovery-page { height: calc(100dvh - 32px); min-height: 260px; }
+  .workspace:has(.discovery-page) { padding-block: 16px; }
+  .preference-card { padding: 8px 62px 8px 12px; } .prompt-detail strong { font-size: 18px; }
+  .paired-heart { bottom: 5px; right: 6px; }
+}
+@media (max-width:700px) {
+  .workspace[data-view=discover]:has(.discovery-page) { padding: env(safe-area-inset-top) 0 0; }
+  .workspace:has(.discovery-page) .content-grid { max-width: none; margin: 0; }
+  .discovery-page { height: calc(100dvh - var(--dock) - env(safe-area-inset-top)); border: 0; border-radius: 0; }
+}
+
+/* The five destinations share the discovery canvas and its 18px reading inset. */
+:root { --page-inset: 18px; --section-gap: 18px; --rule-neutral: #e3dfdc; }
+.workspace:not([data-view=discover]) .topbar { display: none; }
+.workspace:not([data-view=discover]) .main-content {
+  background: white; color: #201f20; border: 1px solid var(--rule-neutral); border-radius: 16px;
+}
+.workspace:not([data-view=discover]) .context-panel { padding-top: 0; }
+.secondary, .account-overview { padding: 0 var(--page-inset) 24px; margin: 0; }
+.section-bar, .account-identity {
+  min-height: 57px; display: flex; align-items: center; gap: 8px;
+  margin-inline: calc(-1 * var(--page-inset)); padding: 6px var(--page-inset);
+  border-bottom: 1px solid var(--rule-neutral); box-sizing: border-box;
+}
+.section-bar h2 { font: 650 16px/1.4 inherit; font-family: inherit; font-size: 16px; font-weight: 650; letter-spacing: 0; margin: 0; }
+.section-bar .row-setting { margin-left: auto; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: transparent; }
+.row-setting .icon { width: 20px; height: 20px; }
+.bar-count { color: var(--muted); font-size: var(--text-caption); }
+.secondary .section-bar .likes-switch { margin: 0; }
+.secondary .section-title, .secondary .recent-heading, .secondary .all-likes-heading { margin: var(--section-gap) 0 10px !important; }
+.community-portals, .online-friends { margin-top: var(--section-gap); }
+.secondary .online-friends, .secondary .new-likes { padding-bottom: 4px; }
+.feed-post, .conversation-row, .community-portals>button, .account-tools, .account-wallet { border-color: var(--rule-neutral); }
+.portal-icon.rose, .portal-icon.ice, .portal-icon.sand { background: #f5f3f1; color: #514b51; }
+.new-like-placeholder, .incoming-placeholder { background: #eae7e8; }
+.account-identity { padding-block: 12px; }
+@media (max-width:700px) {
+  body, .workspace:not([data-view=discover]) { background: white; }
+  .workspace:not([data-view=discover]) { padding: env(safe-area-inset-top) 0 calc(var(--dock) + 12px); }
+  .workspace:not([data-view=discover]) .content-grid { max-width: none; margin: 0; }
+  .workspace:not([data-view=discover]) .main-content { border: 0; border-radius: 0; }
+}
+
 </style>
 </head>
 <body>
@@ -458,6 +715,7 @@ function renderSecondary(page, ctx) {
   const avatar = (p, extra = '') => `<img class="avatar ${extra}" src="${e(p.photo)}" alt="${e(p.name)}" loading="lazy">`;
   const action = (name, id, label, content, cls = '') => `<button type="button" class="${cls}" data-action="${name}"${id !== undefined ? ` data-id="${e(String(id))}"` : ''} aria-label="${e(label)}">${content || e(label)}</button>`;
   const intro = (eyebrow, title, copy = '') => `<div class="view-intro"><span class="eyebrow">${eyebrow}</span><h2>${title}</h2>${copy ? `<p class="muted">${copy}</p>` : ''}</div>`;
+  const settingsButton = () => action('settings', undefined, '外观与隐私设置', I('settings'), 'row-setting');
   const empty = (symbol, title, copy) => `<div class="quiet-empty"><div class="empty-symbol">${I(symbol)}</div><h3>${title}</h3><p class="muted">${copy}</p></div>`;
   const visitors = s.visitorEnabled && Array.isArray(s.visitors) ? s.visitors.filter(v => v.mutual === true && Number(v.visitedAt) <= Date.now() && Number(v.visitedAt) > Date.now() - 7 * 86400000 && people.some(p => String(p.id) === String(v.personId))) : [];
 
@@ -473,7 +731,7 @@ function renderSecondary(page, ctx) {
     const posts = allPosts.filter(p => (filter === 'Right Now' ? p.now && Number(p.expiresAt) > Date.now() : !p.now && (filter === '关注' ? p.followed : filter === 'For You' ? has(s.matched, p.authorId) : true)) && (topic === '全部' || p.topic === topic));
     return `<div class="secondary community-view">
       
-      <div class="community-portals">
+      <header class="section-bar"><h2>精选派对</h2></header><div class="community-portals">
         ${action('activity', 'voice', '语音活动', `<span class="portal-icon rose">${I('mic')}</span><span><b>听见彼此</b><small>语音活动</small></span>${I('chevron')}`)}
         ${action('activity', 'coffee', '一起出门', `<span class="portal-icon sand">${I('coffee')}</span><span><b>一起出门</b><small>周末小约</small></span>${I('chevron')}`)}
         ${action('activity', 'game', '玩一局', `<span class="portal-icon ice">${I('game')}</span><span><b>玩一局</b><small>轻松破冰</small></span>${I('chevron')}`)}
@@ -507,36 +765,21 @@ function renderSecondary(page, ctx) {
   }
   const exampleEvents = [[1,0,8],[2,0,9],[1,0,14],[1,1,10],[1,3,15],[3,1,11],[4,3,9],[5,5,16]];
   const source = sample ? exampleEvents.map(([personId,d,h])=>({personId,visitedAt:sampleTime(d,h),openingId:[personId,d,h].join('-')})) : visitors;
-  const ownTags = sample ? ['咖啡','音乐'] : (s.profile.publicInterests||[]);
-  const broadTags = ['咖啡','音乐','徒步','摄影','阅读','电影','运动'];
   const seen = new Set(), grouped = new Map();
   for(const event of source){
     const stamp=Number(event.visitedAt), id=String(event.personId), key=id+'|'+(event.openingId??stamp);
     if(!Number.isFinite(stamp)||stamp<+start||stamp>Date.now()||seen.has(key))continue;
     seen.add(key);
-    const row=grouped.get(id)||{id,times:[],days:new Set()};
-    row.times.push(stamp);row.days.add(new Date(stamp).toLocaleDateString('en-CA'));grouped.set(id,row);
+    const row=grouped.get(id)||{id,times:[]};
+    row.times.push(stamp);grouped.set(id,row);
   }
   const all=[...grouped.values()].map(row=>{
     row.times.sort((a,b)=>b-a);
     const date=new Date(row.times[0]);
-    const theirTags=sample?(row.id==='1'?['咖啡']:[]):(person(row.id).publicInterests||[]);
-    return {...row,time:date.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}),date:date.toLocaleDateString('zh-CN',{month:'numeric',day:'numeric'}),count:row.times.filter(t=>new Date(t).toLocaleDateString('en-CA')===today).length,tag:broadTags.find(t=>ownTags.includes(t)&&theirTags.includes(t))};
+    return {...row,time:date.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}),date:date.toLocaleDateString('zh-CN',{month:'numeric',day:'numeric'}),count:row.times.filter(t=>new Date(t).toLocaleDateString('en-CA')===today).length};
   }).sort((a,b)=>b.times[0]-a.times[0]);
   const latest=all.filter(v=>v.count),history=all.filter(v=>!v.count);
   const repeatCount=latest.filter(v=>v.count>=2).length;
-  function insights(){
-    const returning=all.filter(v=>v.times.length>=2), cross=returning.filter(v=>v.days.size>=3), common=returning.find(v=>v.tag);
-    const rows=all.map((row,i)=>`<li><details><summary>匿名访客 ${i+1} · ${row.days.size} 天 · ${row.times.length} 次</summary>${row.times.map(t=>`<p>${new Date(t).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})} 来访</p>`).join('')}</details></li>`).join('');
-    const items = [
-      ['跨天回访', '近 7 天内，同一人至少在 3 天来访', cross.length ? `${cross.length} 位访客达标 · 其中一位在 ${cross[0].days.size} 天里来了 ${cross[0].times.length} 次` : '暂无达标访客'],
-      ['回访者共同兴趣', '至少来访 2 次，且双方公开了相同兴趣', common ? `一位回访者也喜欢「${e(common.tag)}」` : '暂无可展示的共同兴趣'],
-      ['近 7 天访客小结', '至少 3 位访客时，按人去重统计', all.length >= 3 ? `${all.length} 位访客，其中 ${returning.length} 位来过不止一次` : '访客人数尚未达到小结门槛']
-    ];
-    return `<section class="visit-insights insight-demo"><header><h3>访客洞察</h3><small>${sample?'示例记录':'近 7 天'}</small></header><ol>${items.map(([title,rule,result],i)=>`<li><span class="insight-index">${i+1}</span><div><h4>${title}</h4><small>${rule}</small><p>${result}</p></div></li>`).join('')}</ol>
-      <details><summary>查看访问明细</summary><ul>${rows||'<li>暂无符合条件的访问记录</li>'}</ul></details></section>`;
-
-  }
   function repeatNotice(link) {
     if (!repeatCount || (link && s.demoRepeatRead === today)) return '';
     const content = `<span class="repeat-icon">${I('undo')}</span><span><small>今日回访${sample?' · 示例':''}</small><strong>今天有 ${repeatCount} 位访客再次看了你的主页</strong></span>`;
@@ -547,7 +790,7 @@ function renderSecondary(page, ctx) {
 
 
     return `<section class="visitor-preview" aria-label="匿名访客示例">
-      ${insights()}${repeatNotice(false)}<div class="section-title"><h3>最新访客</h3><span class="muted">今天</span></div>
+      ${repeatNotice(false)}<div class="section-title"><h3>最新访客</h3><span class="muted">今天</span></div>
       <div class="new-likes">${latest.map(({time,count}) => `<div class="new-like is-locked" aria-label="匿名访客"><span class="new-like-ring"><span class="new-like-placeholder" aria-hidden="true">${I('lock')}</span></span><span>${time}</span>${count>=2?`<small class="repeat-count">今日到访 ${count} 次</small>`:''}</div>`).join('')}</div>
       <div class="section-title all-likes-heading"><h3>历史访客</h3><span class="muted">此前 6 天 · ${history.length} 位</span></div>
       <div class="likes-grid">${history.map(row => `<article class="incoming-card is-locked"><div class="incoming-photo" aria-hidden="true"><div class="incoming-placeholder"></div></div><div class="incoming-info"><span class="lock-disc">${I('lock')}</span><h3>匿名访客</h3><p>${row.date}来访 · 共 ${row.times.length} 次</p></div></article>`).join('')}</div>
@@ -561,7 +804,7 @@ function renderSecondary(page, ctx) {
     const special = people[2].id;
     const tab = s.likesTab || 'likes';
     const visible = p => p.id === special || has(s.unlocked, p.id);
-    return `<div class="secondary likes-view"><div class="segmented likes-switch" aria-label="喜欢与访客"><button type="button" data-action="likes-tab" data-id="likes" aria-pressed="${tab === 'likes'}">喜欢 <span>${incoming.length}</span></button><button type="button" data-action="likes-tab" data-id="visitors" aria-pressed="${tab === 'visitors'}">访客</button></div>
+    return `<div class="secondary likes-view"><header class="section-bar"><div class="segmented likes-switch" aria-label="喜欢与访客"><button type="button" data-action="likes-tab" data-id="likes" aria-pressed="${tab === 'likes'}">喜欢 <span>${incoming.length}</span></button><button type="button" data-action="likes-tab" data-id="visitors" aria-pressed="${tab === 'visitors'}">访客</button></div>${settingsButton()}</header>
       ${tab === 'visitors' ? visitorPreview() : `${repeatNotice(true)}
       
       ${incoming.length ? `<div class="section-title"><h3>新喜欢</h3></div><div class="new-likes">${incoming.slice(0, 4).map(p => `<button type="button" class="new-like ${visible(p) ? '' : 'is-locked'}" data-action="${visible(p) ? 'profile-detail' : 'unlock-like'}" data-id="${p.id}" aria-label="${visible(p) ? `查看 ${e(p.name)} 的资料` : '解锁一位新喜欢'}"><span class="new-like-ring">${visible(p) ? `<img src="${e(p.photo)}" alt="${e(p.name)}">` : `<span class="new-like-placeholder" aria-hidden="true">${I('lock')}</span>`}${p.id === special ? `<i>${I('sparkles')}</i>` : ''}</span><span>${visible(p) ? e(p.name) : '新喜欢'}</span></button>`).join('')}</div>
@@ -574,7 +817,7 @@ function renderSecondary(page, ctx) {
 
   if (page === 'messages') {
     const friends = people.filter(p => has(s.matched, p.id));
-    return `<div class="secondary messages-view"><div class="section-title"><h3>在线好友</h3><span class="muted">${friends.length} 位</span></div><div class="online-friends">${friends.map(p => `<button type="button" data-action="profile-detail" data-id="${p.id}" aria-label="查看 ${e(p.name)} 的资料"><span class="online-avatar">${avatar(p)}<i aria-label="在线"></i></span><span>${e(p.name)}</span></button>`).join('')}</div><div class="section-title recent-heading"><h3>最近聊天</h3></div><div class="conversation-list">${friends.length ? friends.map((p, i) => {
+    return `<div class="secondary messages-view"><header class="section-bar"><h2>在线好友</h2><span class="bar-count">${friends.length} 位</span>${settingsButton()}</header><div class="online-friends">${friends.map(p => `<button type="button" data-action="profile-detail" data-id="${p.id}" aria-label="查看 ${e(p.name)} 的资料"><span class="online-avatar">${avatar(p)}<i aria-label="在线"></i></span><span>${e(p.name)}</span></button>`).join('')}</div><div class="section-title recent-heading"><h3>最近聊天</h3></div><div class="conversation-list">${friends.length ? friends.map((p, i) => {
       const messages = s.messages?.[p.id] || [];
       const last = messages[messages.length - 1];
       const preview = typeof last === 'string' ? last : last?.text;
@@ -604,7 +847,9 @@ function renderSecondary(page, ctx) {
   return '';
 }
 
+
 const paths={
+paired:'M3.2 12.5a4 4 0 0 1 6-5l1 .9 1-.9a4 4 0 0 1 5.7 5.5l-6.7 6.5Zm12.2-6.8a3.8 3.8 0 0 1 6 4.4l-3.8 4',
 heart:'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z',
 discover:'m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z',
 community:'M19.5 6.5a8 8 0 1 1-13-1.8M3 8c-4 3 14 14 18 10 3-3-4-8-8-10M9 4a8 8 0 0 1 10.5 2.5',
@@ -644,14 +889,105 @@ let state;try{state={...defaults(),...JSON.parse(localStorage.getItem('kin-liqui
 for(const entry of state.history) if(entry.id==null && Number.isInteger(entry.index)) entry.id=people[entry.index%people.length].id;
 let mode='free';
 const intents=['认真约会','长期关系','先认识再决定'], rhythms=['先聊熟再见面','愿意尽快见面'], traits=['安静慢热','主动健谈','喜欢户外'];
+const filterFields={
+ age:{label:'年龄'},
+ intent:{label:'约会意图',options:intents},
+ ethnicity:{label:'族裔背景',options:['亚裔','黑人或非裔','西语裔或拉丁裔','中东或北非裔','原住民','太平洋岛民','白人','多族裔','其他背景']},
+ faith:{label:'宗教信仰',options:['无宗教信仰','基督教','佛教','伊斯兰教','犹太教','印度教','灵性信仰','其他信仰']},
+ relationship:{label:'关系形式',options:['单偶关系','双方知情的非单偶关系','仍在探索']},
+ rhythm:{label:'相处节奏',options:rhythms},
+ trait:{label:'性格偏好',options:traits}
+};
+const quickFields=['age','intent','ethnicity','faith'];
+// Explicit fictional profile answers for this local demo. Empty fields mean undisclosed.
+const demoAnswers=[
+ ['多族裔','无宗教信仰','单偶关系'],['黑人或非裔','基督教','仍在探索'],
+ ['亚裔','佛教','单偶关系'],['白人','犹太教','双方知情的非单偶关系'],
+ ['西语裔或拉丁裔','基督教','单偶关系'],['','','仍在探索'],
+ ['多族裔','灵性信仰','单偶关系'],['白人','无宗教信仰','单偶关系'],
+ ['中东或北非裔','伊斯兰教','仍在探索'],['亚裔','无宗教信仰','双方知情的非单偶关系']
+];
 const demoSelf={age:28,traits:['安静慢热','喜欢户外'],tags:['摄影','电影','周末徒步','做饭']};
 people.forEach((p,i)=>{
+ [p.ethnicity,p.faith,p.relationship]=demoAnswers[i];
  p.intent=intents[i%3]; p.rhythm=rhythms[Math.floor(i/2)%2]; p.trait=traits[i%3]; p.wanted=traits[(i+1)%3];
  p.minAge=i===9?30:23; p.maxAge=38; p.tags.push(['烘焙','骑行','现场音乐'][i%3]);
 });
-function eligible(p){
+function matchesAnswers(p){
  const prefs=state.preferences||{};
- return p.age>=(prefs.min||24)&&p.age<=(prefs.max||35)&&demoSelf.age>=p.minAge&&demoSelf.age<=p.maxAge&&!state.matched.includes(p.id)&&!state.history.some(h=>h.id===p.id);
+ return Object.keys(filterFields).every(k=>k==='age'||!prefs[k]||p[k]===prefs[k]);
+}
+function matchesAge(p){
+ const {min=24,max=35}=state.preferences||{};
+ return p.age>=min&&p.age<=max;
+}
+function filterValue(key){
+ const prefs=state.preferences||{};
+ return key==='age'?`${prefs.min||24}–${prefs.max||35} 岁`:prefs[key]||'不限';
+}
+function quickFilters(){
+ const buttons=quickFields.map(key=>{
+  const value=filterValue(key),active=key==='age'||value!=='不限';
+  const title=filterFields[key].label;
+  const label=key==='age'?value:key==='ethnicity'?'族裔':key==='faith'?'信仰':title;
+  return `<button data-action="filter-field" data-id="${key}" class="quick-filter ${active?'chosen':''}" aria-label="${title}，${escape(value)}"><span>${label}${icon('chevron')}</span></button>`;
+ }).join('');
+ return `<div class="filter-strip"><div class="quick-fields">${buttons}</div><button class="all-filters" data-action="preferences">更多${icon('chevron')}</button></div>`;
+}
+function filterDirectory(){
+ const rows=Object.entries(filterFields).map(([key,field])=>`<button class="filter-row" data-action="filter-from-list" data-id="${key}"><strong>${field.label}</strong><span>${escape(filterValue(key))}</span>${icon('chevron')}</button>`).join('');
+ openSheet('更多筛选',`<div class="filter-directory">${rows}</div>`,'filter-sheet');
+}
+function filterEditor(key,fromList=false){
+ const field=filterFields[key];if(!field)return;
+ let controls;
+ if(key==='age'){
+  const {min=24,max=35}=state.preferences||{};
+  controls=`<div class="age-values"><label for="age-min">最低年龄 <output id="min-value">${min}</output></label><label for="age-max">最高年龄 <output id="max-value">${max}</output></label></div>
+   <div class="age-slider"><div class="age-rail"></div><input type="range" min="18" max="80" id="age-min" value="${min}" aria-label="最低年龄"><input type="range" min="18" max="80" id="age-max" value="${max}" aria-label="最高年龄"></div><div class="age-scale"><span>18 岁</span><span>80 岁</span></div>`;
+ }else{
+  controls=`<fieldset class="filter-options" aria-label="${field.label}">${['',...field.options].map(option=>`<label><input type="radio" name="filter-choice" value="${option}" ${option===(state.preferences?.[key]||'')?'checked':''}><span>${option||'不限'}</span></label>`).join('')}</fieldset>`;
+ }
+ openSheet(field.label,`<div class="filter-editor" data-field="${key}" data-list="${fromList}">${controls}</div><button class="btn primary filter-apply" data-action="apply-filter">应用筛选</button>`,'filter-sheet');
+ if(fromList){
+  const head=sheet.querySelector('.sheet-head'),back=document.createElement('button');
+  back.setAttribute('aria-label','返回更多筛选');back.dataset.action='preferences';back.innerHTML=icon('arrow');head.prepend(back);
+ }
+ if(key==='age'){
+  const lower=sheet.querySelector('#age-min'),upper=sheet.querySelector('#age-max');
+  function sync(e){
+   if(+lower.value>+upper.value){if(e?.target===lower)lower.value=upper.value;else upper.value=lower.value}
+   const slider=lower.parentElement,percent=v=>(v-18)/62*100+'%';
+   slider.style.setProperty('--lo',percent(+lower.value));slider.style.setProperty('--hi',percent(+upper.value));
+   lower.style.zIndex=+upper.value===80&&lower.value===upper.value?'2':'';
+   sheet.querySelector('#min-value').value=lower.value;sheet.querySelector('#max-value').value=upper.value;
+  }
+  lower.addEventListener('input',sync);upper.addEventListener('input',sync);sync();
+  lower.parentElement.addEventListener('pointerdown',e=>{
+   if(e.target===lower||e.target===upper)return;
+   const rail=lower.parentElement.querySelector('.age-rail').getBoundingClientRect();
+   const value=Math.round(18+62*Math.max(0,Math.min(1,(e.clientX-rail.left)/rail.width)));
+   const handle=Math.abs(value-lower.value)<=Math.abs(value-upper.value)?lower:upper;
+   handle.value=value;handle.focus();sync({target:handle});
+  });
+ }
+}
+function applyFilter(){
+ const editor=sheet.querySelector('.filter-editor');if(!editor)return;
+ const key=editor.dataset.field,prefs={...state.preferences};
+ if(key==='age'){
+  prefs.min=Number(editor.querySelector('#age-min').value);prefs.max=Number(editor.querySelector('#age-max').value);
+ }else{
+  const value=editor.querySelector('input:checked').value;
+  if(value)prefs[key]=value;else delete prefs[key];
+ }
+ state.preferences=prefs;save();stopAudio();
+ const fromList=editor.dataset.list==='true';if(!fromList)closeSheet();
+ render();if(fromList)filterDirectory();else app.querySelector(`.quick-filter[data-id="${key}"]`)?.focus({preventScroll:true});
+ toast('筛选已应用');
+}
+function eligible(p){
+ return matchesAnswers(p)&&matchesAge(p)&&demoSelf.age>=p.minAge&&demoSelf.age<=p.maxAge&&!state.matched.includes(p.id)&&!state.history.some(h=>h.id===p.id);
 }
 function fit(p){
  const pref=state.preferences||{},shared=p.tags.filter(t=>demoSelf.tags.includes(t)),reasons=[];
@@ -671,7 +1007,8 @@ function extraDemoPerson(excludeId){
  let id=(last?.id||999)+1;
  if(id===excludeId)id++;
  const n=id-1000;
- const samples=mode==='curated'?people.filter(p=>fit(p).reasons.length):people;
+ const samples=people.filter(matchesAnswers);
+ if(!samples.length)return;
  const sample=samples[n%samples.length];
  return {...sample,id,name:['Kai','Luca','Finn','Theo','Max','Eli','Ari','Ben'][n%8],age:min+n%(max-min+1)};
 }
@@ -701,29 +1038,27 @@ function incoming(){return [2,3,4,5].filter(id=>!state.matched.includes(id))}
 function render(){
  swipeBusy=false;
  document.body.classList.toggle('solid',state.solid);document.body.classList.toggle('reduce-motion',state.reduceMotion);
- app.innerHTML=inlineMarkup`<div class="app-shell"><aside class="sidebar"><a href="#discover" class="brand" aria-label="Kin 首页">${logo('side')}<span class="brand-word">Kin.</span></a><nav class="side-nav" aria-label="主导航">${nav()}</nav><div class="side-bottom"><button class="account-button" data-page="profile"><img class="avatar" src="assets/portrait-dev.jpg" alt="我的头像"><div><strong>${escape(state.profile.name)}</strong><p>我的资料</p></div></button><p class="demo-note">KIN · LOCAL PREVIEW<br>虚构演示资料 · 仅本机保存</p></div></aside><div class="workspace" data-view="${page}"><header class="topbar"><div class="page-lockup">${logo('header')}<h1>${pages.find(p=>p[0]===page)[1]}</h1></div><div class="top-actions"><span class="city-pill">${icon('location')}San Francisco</span><button class="icon-button" aria-label="${page==='discover'?'调整发现偏好':'外观与隐私设置'}" data-action="${page==='discover'?'preferences':'settings'}">${icon(page==='discover'?'filter':'settings')}</button></div></header><div class="content-grid"><main class="main-content page-enter" id="main" tabindex="-1">${page==='discover'?discover():renderSecondary(page,{icon,state,people:people.concat(Object.values(state.demoMatches||{})),escape,rewardTotal:rewardModel().total})}</main>${rail()}</div></div></div><nav class="bottom-nav" aria-label="底部导航" style="--active:${pages.findIndex(p=>p[0]===page)}">${nav()}</nav>`;
+ app.innerHTML=inlineMarkup`<div class="app-shell"><aside class="sidebar"><a href="#discover" class="brand" aria-label="Kin 首页">${logo('side')}<span class="brand-word">Kin.</span></a><nav class="side-nav" aria-label="主导航">${nav()}</nav><div class="side-bottom"><button class="account-button" data-page="profile"><img class="avatar" src="assets/portrait-dev.jpg" alt="我的头像"><div><strong>${escape(state.profile.name)}</strong><p>我的资料</p></div></button><p class="demo-note">KIN · LOCAL PREVIEW<br>虚构演示资料 · 仅本机保存</p></div></aside><div class="workspace" data-view="${page}"><header class="topbar"><div class="page-lockup">${logo('header')}<h1>${pages.find(p=>p[0]===page)[1]}</h1></div><div class="top-actions"><span class="city-pill">${icon('location')}San Francisco</span>${page==='community'?'':`<button class="icon-button" aria-label="${page==='discover'?'调整发现偏好':'外观与隐私设置'}" data-action="${page==='discover'?'preferences':'settings'}">${icon(page==='discover'?'filter':'settings')}</button>`}</div></header><div class="content-grid"><main class="main-content page-enter" id="main" tabindex="-1">${page==='discover'?discover():renderSecondary(page,{icon,state,people:people.concat(Object.values(state.demoMatches||{})),escape,rewardTotal:rewardModel().total})}</main>${rail()}</div></div></div><nav class="bottom-nav" aria-label="底部导航" style="--active:${pages.findIndex(p=>p[0]===page)}">${nav()}</nav>`;
  if(page==='discover'&&mode==='curated')bindFeaturedDrag(app.querySelector('.featured-track'));
- if(page==='discover'&&mode==='free'){
-  bindSwipe();
-  const picker=app.querySelector('.reading-picker');
-  if(picker){
-   let start;
-   picker.addEventListener('pointerdown',e=>{if(e.button===0&&e.isPrimary){start=[e.clientX,e.clientY];e.target.setPointerCapture(e.pointerId)}});
-   picker.addEventListener('pointercancel',()=>{start=null});
-   picker.addEventListener('pointerup',e=>{
-    if(!start)return;
-    const dx=e.clientX-start[0],dy=e.clientY-start[1];start=null;
-    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))actions['reading-mode'](dx<0?'swipe':'story');
-   });
-  }
- }
+ if(page==='discover'&&mode==='free')bindPortrait();
 }
 function bindFeaturedDrag(track){
+ if(!track)return;
+ const restored=track.querySelector(`[data-person="${Number(featuredFocusId)}"]`);
+ if(restored)track.scrollLeft=restored.offsetLeft-track.firstElementChild.offsetLeft;
+ const remember=()=>{
+  if(!track.isConnected)return;
+  const tile=currentTile(track);featuredFocusId=Number(tile.dataset.person);
+  const next=app.querySelector('.refresh-picks[data-action="confirm-batch"]');
+  if(next)next.hidden=tile!==track.lastElementChild;
+ };
+ remember();
+ track.addEventListener('scroll',remember,{passive:true});
  let drag=null, suppressClick=false;
  track.addEventListener('dragstart',e=>e.preventDefault());
  track.addEventListener('pointerdown',e=>{
   suppressClick=false;
-  if(e.pointerType==='touch'||!e.isPrimary||e.button!==0)return;
+  if(track.children.length<2||e.pointerType==='touch'||!e.isPrimary||e.button!==0)return;
   drag={id:e.pointerId,x:e.clientX,left:track.scrollLeft};
  });
  track.addEventListener('pointermove',e=>{
@@ -750,52 +1085,93 @@ function bindFeaturedDrag(track){
  track.addEventListener('pointerleave',()=>{if(!suppressClick)drag=null});
  track.addEventListener('click',e=>{if(suppressClick&&e.detail){e.preventDefault();e.stopPropagation();suppressClick=false}},true);
 }
-const rosePrice=10, batchPrice=20;
+let featuredFocusId=null;
+const heartPrice=10, batchPrice=20;
+function currentTile(track){
+ const first=track.firstElementChild.offsetLeft;
+ return [...track.children].reduce((nearest,tile)=>Math.abs(tile.offsetLeft-first-track.scrollLeft)<Math.abs(nearest.offsetLeft-first-track.scrollLeft)?tile:nearest);
+}
 function makeFeaturedBatch(round){
  const ranked=people.filter(eligible).sort((a,b)=>fit(b).score-fit(a).score);
  const batch=round===0?ranked.slice(0,5):[];
+ const samples=people.filter(matchesAnswers);
+ if(!samples.length)return batch;
  const min=state.preferences?.min||24,max=state.preferences?.max||35;
  while(batch.length<5){
   const n=round*5+batch.length;
-  const sample=people[(n+3)%people.length];
+  const sample=samples[(n+3)%samples.length];
   batch.push({...sample,id:10000000+n,age:min+n%(max-min+1),name:['Luca','Theo','Ari','Max','Finn','Kai','Ezra','Ben','Sam','Eli'][n%10]});
  }
  return batch;
 }
-function featuredDeck(){
- if(!state.featuredBatch){state.featuredRound=0;state.featuredBatch=makeFeaturedBatch(0);save()}
- const cards=state.featuredBatch.map(p=>`<button class="featured-tile" data-action="curated-detail" data-id="${p.id}" aria-label="查看 ${p.name} 的资料"><img src="${p.photo}" alt=""><span class="tile-copy"><small>${p.city}</small><strong>${p.name}，${p.age}</strong><span>${p.bio}</span></span></button>`).join('');
- return `<div class="featured-tools rose-tools"><button class="btn" data-action="rose-shop">🌹 我的玫瑰 · ${state.roses||0}</button></div><div class="featured-track" tabindex="0" aria-label="横向浏览精选人物">${cards}</div><div class="featured-tools"><button class="btn" data-action="batch-refresh">换一组 · ${batchPrice} 积分</button><div><button class="btn" data-action="deck-step" data-id="-1" aria-label="上一张">‹</button> <button class="btn" data-action="deck-step" data-id="1" aria-label="下一张">›</button></div></div>`;
+function photoButton(p,index,title){
+ return `<button class="photo-heart" data-action="like-photo" data-id="${p.id}:${index}" aria-label="喜欢 ${p.name} 的${escape(title)}">${icon('heart')}</button>`;
+}
+function featuredHeart(p,index){
+ const connected=state.matched.includes(p.id);
+ const key=index===undefined?p.id:`${p.id}:${index}`;
+ const label=index===undefined?'喜好卡':'照片';
+ return `<button class="photo-heart paired-heart" data-action="${connected?'chat':'send-heart'}" data-id="${connected?p.id:key}" aria-label="${connected?'和 '+p.name+' 聊天':'向 '+p.name+' 的'+label+'比心'}">${icon(connected?'chat':'paired')}</button>`;
+}
+function featuredTarget(key){
+ const [id,index]=String(key).split(':').map(Number);
+ const p=state.featuredBatch?.find(p=>p.id===id);
+ if(!p)return;
+ const item=index===undefined?{title:'喜好卡'}:[{title:'肖像',photo:p.photo},...profileMoments(p)][index];
+ if(item)return {p,item};
+}
+function featuredDeck(tabs){
+ if(!state.featuredBatch?.length){
+  const firstBatch=makeFeaturedBatch(0);
+  if(firstBatch.length){state.featuredRound=0;state.featuredBatch=firstBatch;save()}
+ }
+ const available=(state.featuredBatch||[]).filter(p=>!state.featuredSkipped?.includes(p.id)&&matchesAnswers(p)&&matchesAge(p));
+ const cards=available.map(p=>{
+  return `<article class="featured-tile" data-person="${p.id}">
+   <button class="featured-portrait" data-action="curated-detail" data-id="${p.id}" aria-label="查看 ${p.name} 的完整资料">
+    <img src="${p.photo}" alt="${p.name} 的肖像" draggable="false"><span class="featured-name">${p.name}<small>${p.age}</small></span>
+   </button>
+   <div class="preference-card"><button class="prompt-detail" data-action="curated-detail" data-id="${p.id}"><small>我喜欢的日常</small><strong>${escape(p.bio)}</strong></button>
+    ${featuredHeart(p)}</div>
+  </article>`;
+ }).join('');
+ return `<section class="discovery-page picks-page">
+ <div class="discovery-head">${tabs}<div class="pick-actions"><button class="filter-action" data-action="preferences" aria-label="调整发现偏好">${icon('filter')}</button><button class="heart-wallet" data-action="heart-shop" aria-label="我的比心，剩余 ${state.roses||0} 个">${icon('paired')} ${state.roses||0}</button></div></div>
+ ${cards?`<div class="featured-track" aria-label="横向浏览精准匹配" tabindex="0">${cards}</div>`:`<section class="picks-empty"><h2>本组暂无可看的人</h2><p>可以调整筛选，或回推荐继续浏览。</p><button class="btn" data-action="mode" data-id="free">回到推荐</button></section>`}
+ <div class="picks-footer">${cards?`<button class="skip-bubble" data-action="skip-pick" aria-label="跳过当前精准匹配">${icon('close')}</button>`:''}
+ ${people.some(matchesAnswers)?`<button class="refresh-picks" data-action="confirm-batch" data-id="${state.featuredRound}" ${cards?'hidden':' '}>再看五位 · ${batchPrice} 积分</button>`:'<button class="refresh-picks" data-action="preferences">调整筛选</button>'}
+ ${available.length>1?`<div class="deck-arrows"><button data-action="deck-step" data-id="-1" aria-label="上一位">${icon('arrow')}</button><button data-action="deck-step" data-id="1" aria-label="下一位">${icon('chevron')}</button></div>`:''}</div></section>`;
 }
 function discover(){
- const curated=mode==='curated',p=curated?null:currentPerson();
- const tabs=`<div class="discovery-tabs"><div class="reading-tab" data-active="${!curated}"><button data-action="mode" data-id="free" aria-pressed="${!curated}">推荐</button><button class="reading-switch" data-action="reading-picker" aria-label="切换推荐浏览方式" title="切换推荐浏览方式">↔</button></div><button data-action="mode" data-id="curated" aria-pressed="${curated}">精选匹配</button></div>`;
- const heading=`<div class="intro regular-intro"><div><span class="eyebrow">${curated?'IN SYNC':'DAILY DISCOVERY'}</span><h2>${curated?'遇见同频的人':'今日精选'}</h2><p>${curated?'从恋爱期待到相处节奏，看看你们哪里合拍。':'今天也来认识新的人 · 免费浏览'}</p></div>${curated?`<div class="tiny-orbit" aria-hidden="true">${icon('heart')}</div>`:''}</div>`;
- if(curated)return tabs+heading+featuredDeck();
- if(!state.readingMode)return tabs+heading+`<section class="reading-picker"><span aria-hidden="true">↔</span><h3>你想怎样认识新的人？</h3><div><button class="btn" data-action="reading-mode" data-id="swipe">← 左滑选滑卡</button><button class="btn" data-action="reading-mode" data-id="story">右滑选下读 →</button></div><p>滑卡快速选择，向下读可以看资料和生活动态。</p></section>`;
- if(!p){
-  const missing=curated&&!state.preferences?.trait;
-  return tabs+heading+`<section class="soul-gate"><h2>${missing?'想怎样认识对方？':curated?'今天暂无更多精选':'暂时没有更多推荐'}</h2><button class="btn primary" data-action="preferences">${missing?'完善精选偏好':'调整偏好'}</button>${curated?'<button class="btn" data-action="mode" data-id="free">去看推荐</button>':''}${!state.undoUsed&&state.history.at(-1)?.type==='skip'?'<button class="btn" data-action="undo">撤销上次跳过</button>':''}</section>`;
- }
- const tags=list=>list.map(t=>`<span class="pill">${escape(t)}</span>`).join('');
- const controls=`<div class="discovery-footer"><button class="circle-action undo" data-action="undo" aria-label="撤销最近一次跳过" ${state.undoUsed||state.history.at(-1)?.type!=='skip'?'disabled':''}>${icon('undo')}</button><div class="round-actions"><button class="circle-action skip" data-action="skip" aria-label="跳过 ${p.name}">${icon('close')}</button><button class="circle-action super" data-action="super" aria-label="特别喜欢 ${p.name}">${icon('discover')}</button><button class="circle-action like" data-action="like" aria-label="喜欢 ${p.name}">${icon('heart')}</button></div><span></span></div>`;
- if(state.readingMode==='swipe'){
- const next=currentPerson(p.id),info=fit(p);
- const under=next?`<div class="deck-preview person-card" aria-hidden="true"><img src="${next.photo}" alt=""></div>`:'';
- const regularTop=`<div class="card-top"><span class="photo-badge">${icon('shield')}照片一致性已验证</span></div><div class="swipe-label yes">喜欢</div><div class="swipe-label no">跳过</div>`;
- const cardInfo=`${info.shared.length?`<span class="connection-note">${icon('sparkles')}你们都喜欢${info.shared[0]}</span>`:''}<h3>${p.name} <span>${p.age}</span></h3><p class="person-location">${icon('location')}男 · ${p.city} · ${p.intent}</p><p class="person-bio">${p.bio}</p><div class="person-tags">${tags(p.tags.slice(0,3))}</div><button class="voice-chip" data-action="voice" data-id="${p.id}" aria-label="播放语音示例">${icon('play')}<span class="waveform" aria-hidden="true">${[8,12,6,15,10,7,14,9,5,12].map(h=>`<i style="--h:${h}px"></i>`).join('')}</span>听听我的理想周末 · 示例</button>`;
- return tabs+heading+`<div class="discovery-stage "><div class="photo-stack"><article class="swipe-card" aria-label="${p.name}的资料卡">${under}<div class="person-card"><img class="person-photo" src="${p.photo}" draggable="false" alt="${p.name}的演示照片">${regularTop}<div class="swipe-wave" aria-hidden="true"><span></span></div><div class="swipe-direction" aria-hidden="true"></div><div class="person-info">${cardInfo}</div></div>${controls}<p class="gesture-hint">左滑跳过 · 右滑喜欢 · 上滑特别喜欢</p></article></div></div>`}
- {
-  const moments=profileMoments(p);
-  const answers=['找一家陌生的咖啡店，各自挑一本书，坐到午后。','约在小影院门口，看完电影沿路交换最喜欢的镜头。','一起逛菜市场，每人挑一样食材，回家拼一道菜。','挑一条轻松的步道，带上野餐垫，累了就停下来。'];
-  return tabs+heading+`<article class="regular-story" aria-label="${p.name}的推荐资料">
-   <div class="story-portrait"><img src="${p.photo}" alt="${p.name}的演示照片"><div><span>${icon('shield')}照片已验证</span><h3>${p.name} <small>${p.age}</small></h3><p>男 · ${p.city}</p></div></div>
-   <section class="story-note"><h3>关于我</h3><p>${p.bio}</p><div class="sheet-tags">${tags(p.tags)}</div><button class="btn voice-chip story-voice" data-action="voice" data-id="${p.id}">${icon('play')}听听我的理想周末</button></section>
-   <dl class="story-facts">${[['约会期待',p.intent],['相处节奏',p.rhythm],['我的性格',p.trait]].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
-   <section class="story-answer"><h3>如果周末一起出门，我会提议…</h3><p>${answers[(p.id-1)%answers.length]}</p></section>
-   <section class="story-moments"><h3>${p.name} 的生活动态</h3>${moments.map(item=>`<figure><img loading="lazy" src="${item.photo}" alt="${item.title}"><figcaption><strong>${item.title}</strong><p>${item.text}</p></figcaption></figure>`).join('')}</section>
-   ${controls}</article>`;
- }
+ const featured=mode==='curated';
+ const tabs=`<div class="discovery-switch" role="group" aria-label="发现内容"><button data-action="mode" data-id="free" aria-pressed="${!featured}">推荐</button><button data-action="mode" data-id="curated" aria-pressed="${featured}">精准匹配</button></div>`;
+ if(featured)return featuredDeck(tabs);
+ const p=currentPerson();
+ if(!p)return `<section class="discovery-page"><div class="discovery-head">${tabs}</div><div class="reader-intro">${quickFilters()}</div><div class="picks-empty"><h2>暂无符合条件的人</h2><button class="btn" data-action="preferences">调整筛选</button></div></section>`;
+ const answers=['找一家陌生的咖啡店，各自挑一本书，坐到午后。','约在小影院门口，看完电影沿路交换最喜欢的镜头。','一起逛菜市场，每人挑一样食材，回家拼一道菜。','挑一条轻松的步道，带上野餐垫，累了就停下来。'];
+ const shared=fit(p).shared[0],moments=profileMoments(p);
+ const canUndo=!state.undoUsed&&state.history.at(-1)?.type==='skip';
+ return `<section class="discovery-page">
+  <div class="discovery-head">${tabs}<button class="filter-action" data-action="preferences" aria-label="调整发现偏好">${icon('filter')}</button></div>
+  <article class="portrait-stage" aria-label="${p.name} 的推荐资料">
+   <div class="portrait-reader" tabindex="0" aria-label="上下阅读资料，左右滑动选择人物">
+    <div class="reader-intro">
+     ${quickFilters()}
+     <div class="name-line"><div><h2>${p.name}<span>, ${p.age}</span></h2><p>${p.city} · ${p.intent}</p></div>
+      <button class="undo-action" data-action="undo" aria-label="撤销上次跳过" ${canUndo?'':'disabled'}>${icon('undo')}</button>
+      <button class="more-action" data-action="profile-options" aria-label="更多推荐操作">${icon('more')}</button></div>
+    </div>
+    <div class="story-sequence">
+     <figure class="feed-image"><img src="${p.photo}" alt="${p.name} 的肖像" draggable="false">${photoButton(p,0,'肖像')}</figure>
+     <section class="answer-panel"><h3>我的理想周末</h3><p>${answers[(p.id-1)%answers.length]}</p></section>
+     <section class="profile-block"><h3>关于我</h3><p>${p.bio}</p><div class="profile-interests">${p.tags.map(t=>`<span>${escape(t)}</span>`).join('')}</div>${shared?`<p class="profile-shared">${icon('sparkles')}你们都喜欢${escape(shared)}</p>`:''}
+     <button class="voice-chip portrait-voice" data-action="voice" data-id="${p.id}">${icon('play')}听听我的理想周末</button>
+     <dl class="profile-table">${[['约会期待',p.intent],['相处节奏',p.rhythm],['我的性格',p.trait],['照片验证','一致性已验证 · 演示']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></section>
+     ${moments.map((m,i)=>`<figure class="life-entry"><div class="feed-image"><img src="${m.photo}" loading="lazy" alt="${m.title}" draggable="false">${photoButton(p,i+1,m.title)}</div><figcaption><strong>${m.title}</strong><p>${m.text}</p></figcaption></figure>`).join('')}
+    </div>
+   </div><span class="portrait-stamp" aria-hidden="true"></span>
+   <button class="skip-bubble" data-action="skip" aria-label="跳过 ${p.name}">${icon('close')}</button>
+  </article></section>`;
 }
 function rail(){return `<aside class="context-panel" aria-label="相遇灵感"><section class="rail-card"><div class="prism-art" aria-hidden="true"><span class="prism-ring"></span><span class="prism-ring"></span>${icon('heart')}</div><h3>你的相遇偏好</h3><p>和红娘一起梳理期待，找到适合自己的开场白。</p><button class="btn" data-action="matchmaker">${icon('sparkles')}和 AI 红娘聊聊</button></section><section class="rail-card"><div class="row" style="justify-content:space-between"><span class="eyebrow">COMMUNITY</span>${icon('community')}</div><h3>社区活动</h3><p>周末线下见，或在语音房先打个招呼。</p><div class="mini-people">${people.slice(1,5).map(p=>`<img class="avatar" src="${p.photo}" alt="">`).join('')}</div><button class="rail-event" data-action="activity" data-id="coffee"><span class="event-icon">${icon('coffee')}</span><div style="text-align:left"><strong>周末咖啡漫步</strong><span>周六 14:00 · Hayes Valley</span></div></button><button class="rail-event" data-action="activity" data-id="voice"><span class="event-icon">${icon('mic')}</span><div style="text-align:left"><strong>今晚，聊聊理想周末</strong><span>兴趣语音 · 免费预约</span></div></button></section></aside>`}
 function navigate(next){if(!pages.some(p=>p[0]===next))return;stopAudio();page=next;history.replaceState(null,'',`#${page}`);render();window.scrollTo({top:0,behavior:'instant'})}
@@ -837,23 +1213,18 @@ function curatedBurst(type){
  }
  document.body.append(layer);setTimeout(()=>layer.remove(),1100);
 }
-function completeSwipe(type){
+function completeSwipe(type,photo){
  if(swipeBusy)return;
- const p=currentPerson(),source=mode,card=source==='free'&&state.readingMode==='story'?document.querySelector('.regular-story'):swipeTarget();
+ const p=currentPerson(),source=mode,card=app.querySelector('.portrait-reader');
  if(!p||!card)return;
  stopAudio();swipeBusy=true;
- recordDiscovery(p.id);state.history.push({id:p.id,type,mode:source});
+ recordDiscovery(p.id);state.history.push({id:p.id,type,mode:source,...(photo?{photo:photo.photo,photoTitle:photo.title}:{})});
  const matched=type==='like';
  if(matched)demoMatch(p);
  save();
- if(source==='free'&&state.readingMode==='story'){
-  render();window.scrollTo({top:0,behavior:'instant'});
-  if(matched)match(p,false);else toast('已跳过');
-  return;
- }
- if(source==='curated')curatedBurst(type);
  const reduced=state.reduceMotion||matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(card){card.dataset.direction=type;const wave=card.querySelector('.swipe-wave');wave.dataset.direction=type;wave.classList.add('is-releasing');wave.querySelector('span').textContent=type==='like'?'♥':'';card.parentElement.classList.add('revealing');card.style.setProperty('--swipe-amount','1')}
+ const stamp=card.parentElement.querySelector('.portrait-stamp');
+ stamp.dataset.side=type;stamp.textContent=type==='like'?'喜欢':'跳过';
  if(!reduced){
   card.style.transition='transform .28s ease, opacity .28s';
   card.style.transform=`translateX(${type==='skip'?'-120%':'120%'}) rotate(${type==='skip'?-12:12}deg)`;
@@ -862,12 +1233,12 @@ function completeSwipe(type){
  setTimeout(()=>{
   if(!card.isConnected)return;
   render();
-  if(matched)match(p,source==='curated');
+  if(matched)match(p,source==='curated',photo?.title);
   else toast(type==='skip'?'已跳过':'喜欢已送达');
  },reduced?0:280);
 }
-function match(p,featured=false){
- const title=featured?'精选匹配成功':'是双向的心动';
+function match(p,featured=false,photoTitle){
+ const title=featured?'精准匹配成功':'是双向的心动';
  openSheet(title,`<div id="kin-match-motion"><section class="kin-sheet is-playing" data-match="${featured?'featured':'regular'}"><div class="kin-aurora" aria-hidden="true"></div>
       <div class="kin-brand" aria-label="Kin">Kin</div>
       <div class="kin-scene" aria-hidden="true">
@@ -886,7 +1257,7 @@ function match(p,featured=false){
           <span class="kin-star">✦</span>
         </div>
         <div class="kin-particles"></div>
-      </div><h2>你和 ${p.name} 互相喜欢</h2></section></div><button class="btn primary" data-action="chat" data-id="${p.id}">打个招呼</button><button class="btn" data-action="close">再逛一会儿</button>`);
+      </div><h2>你和 ${p.name} 互相喜欢</h2>${photoTitle?`<p class="liked-origin">${featured?'你向他送出了比心':'你喜欢了他的照片'} · ${escape(photoTitle)}</p>`:''}</section></div><button class="btn primary" data-action="chat" data-id="${p.id}">打个招呼</button><button class="btn" data-action="close">再逛一会儿</button>`);
  const count = featured ? 26 : 4;
       sheet.querySelector(".kin-particles").replaceChildren(...Array.from({ length: count }, (_, index) => {
         const angle = (index / count) * 2 * Math.PI;
@@ -905,53 +1276,44 @@ function match(p,featured=false){
         return particle;
       }));
 }
-function swipeTarget(){
- return document.querySelector(mode==='curated'?'.swipe-card':'.swipe-card .person-card:not(.deck-preview)');
-}
-function bindSwipe(){
- const card=swipeTarget();
- if(!card)return;
- const stack=card.parentElement,wave=card.querySelector('.swipe-wave'),label=card.querySelector('.swipe-direction');
- let start=null;
+function bindPortrait(){
+ const reader=app.querySelector('.portrait-reader');
+ if(!reader)return;
+ const stage=reader.parentElement,stamp=stage.querySelector('.portrait-stamp');
+ let drag=null;
  function reset(){
-  stack.classList.remove('revealing');
-  card.style.transition='transform .25s ease-out';
-  card.style.transform='';card.style.setProperty('--swipe-amount','0');label.textContent='';
+  drag=null;reader.classList.remove('dragging');reader.style.removeProperty('transform');stamp.textContent='';
  }
- function move(e){
-  if(!start||e.pointerId!==start.id)return;
-  const dx=e.clientX-start.x,dy=e.clientY-start.y;
-  const horizontal=Math.abs(dx)>=Math.abs(dy);
-  const distance=horizontal?Math.abs(dx):Math.max(0,-dy);
-  const threshold=horizontal?card.offsetWidth/2:90;
-  const amount=Math.min(1,distance/threshold);
-  const direction=horizontal?(dx>0?'like':'skip'):'special';
-  stack.classList.toggle('revealing',horizontal&&distance>3);
-  card.style.setProperty('--swipe-amount',String(amount));
-  card.style.setProperty('--swipe-wave-size',String(.5+amount));
-  wave.dataset.direction=direction;
-  card.dataset.direction=direction;
-  label.textContent=!horizontal&&dy< -6?'特别喜欢':'';
-  if(!state.reduceMotion&&!matchMedia('(prefers-reduced-motion: reduce)').matches)
-   card.style.transform=horizontal?`translateX(${dx}px) rotate(${dx/30}deg)`:`translateY(${Math.min(0,dy)*.35}px)`;
-  if(mode==='curated'&&horizontal&&distance>=threshold){start=null;completeSwipe(dx>0?'like':'skip')}
+ reader.addEventListener('pointerdown',e=>{
+  if(!e.isPrimary||e.button!==0||swipeBusy||e.target.closest('button,a,summary,input,textarea'))return;
+  drag={id:e.pointerId,x:e.clientX,y:e.clientY,axis:null};
+ });
+ function track(e){
+  if(!drag||drag.id!==e.pointerId)return;
+  const dx=e.clientX-drag.x,dy=e.clientY-drag.y,ax=Math.abs(dx),ay=Math.abs(dy);
+  if(!drag.axis&&Math.max(ax,ay)>10){
+   drag.axis=ax>ay*1.45?'x':'y';
+   if(drag.axis==='x'){reader.setPointerCapture(e.pointerId);reader.classList.add('dragging')}
+  }
+  if(drag.axis!=='x')return;
+  reader.style.transform=`translateX(${dx}px)`;
+  stamp.textContent=ax>24?(dx>0?'喜欢':'跳过'):'';
+  stamp.dataset.side=dx>0?'like':'skip';
+  return dx;
  }
- card.addEventListener('pointerdown',e=>{
-  if(!e.isPrimary||e.button!==0||e.target.closest("button")||swipeBusy)return;
-  start={id:e.pointerId,x:e.clientX,y:e.clientY};card.setPointerCapture(e.pointerId);card.style.transition='none';
+ reader.addEventListener('pointermove',track);
+ reader.addEventListener('pointerup',e=>{
+  if(!drag||e.pointerId!==drag.id)return;
+  const dx=track(e);reset();
+  if(Math.abs(dx)>90)completeSwipe(dx>0?'like':'skip');
  });
- card.addEventListener('pointermove',move);
- card.addEventListener('pointerup',e=>{
-  if(!start||e.pointerId!==start.id)return;
-  move(e);if(!start)return;
-  const dy=e.clientY-start.y,dx=e.clientX-start.x;
-  start=null;reset();
-  if(mode==='free'&&Math.abs(dx)>90&&Math.abs(dx)>Math.abs(dy))completeSwipe(dx>0?'like':'skip');
-  else if(dy<=-90&&-dy>Math.abs(dx))actions.super();
+ reader.addEventListener('pointerleave',()=>{if(drag?.axis!=='x')reset()});
+ reader.addEventListener('pointercancel',reset);
+ reader.addEventListener('lostpointercapture',e=>{if(e.target===reader)reset()});
+ reader.addEventListener('keydown',e=>{
+  if(e.target!==reader||e.repeat||!['ArrowLeft','ArrowRight'].includes(e.key))return;
+  e.preventDefault();completeSwipe(e.key==='ArrowRight'?'like':'skip');
  });
- card.addEventListener('lostpointercapture',()=>{if(start){start=null;reset()}});
- card.addEventListener('keydown',e=>{if(e.target!==card)return;if(e.key==='ArrowLeft')completeSwipe('skip');if(e.key==='ArrowRight')completeSwipe('like')});
- card.tabIndex=0;
 }
 function stopAudio(){if(audio){audio.pause();audio.currentTime=0}document.querySelectorAll('.voice-chip').forEach(b=>b.classList.remove('playing'))}
 function chat(id){const p=person(id);if(!p||!state.matched.includes(p.id)){toast('互相喜欢后才能开始私聊');return}activeChat=p.id;openSheet(`${p.name} <small class="muted">· 已互相喜欢</small>`,`<div class="chat-log" id="chat-log"><p class="chat-system">同一道破冰题，让聊天自然开始</p><div class="sheet-note">如果周末只能做一件喜欢的事，你会选什么？</div><div class="bubble">嗨，很开心在这里遇见你。你平时也喜欢${p.tags[0]}吗？</div>${(state.messages[p.id]||[]).map(m=>`<div class="bubble mine">${escape(m)}</div>`).join('')}</div><button class="ai-chip" data-action="ai-reply">${icon('sparkles')}帮我想一句自然的开场白</button><form id="chat-form" class="chat-compose"><input id="chat-input" aria-label="聊天消息" placeholder="说点什么…" maxlength="500" autocomplete="off"><button aria-label="发送消息，消耗1积分">${icon('send')}</button></form><div class="chat-system">发送 1 积分 / 条 · 余额 <span id="chat-balance">${state.balance}</span> · 本地演示</div>`,'chat-dialog');document.querySelector('#chat-log').scrollTop=99999;activeChat=p.id;document.querySelector('#chat-form').addEventListener('submit',e=>{e.preventDefault();const input=document.querySelector('#chat-input'),value=input.value.trim();if(!value)return;if(!deduct(1))return;(state.messages[p.id]??=[]).push(value);recordChat(p.id,value);save();const bubble=document.createElement('div');bubble.className='bubble mine';bubble.textContent=value;document.querySelector('#chat-log').append(bubble);input.value='';document.querySelector('#chat-balance').textContent=state.balance;document.querySelector('#chat-log').scrollTop=99999;render()})}
@@ -1004,8 +1366,14 @@ function recordDiscovery(id){const m=rewardModel(),list=m.book.seen[m.day]??=[];
 function recordChat(id,value){if(!/[\p{L}\p{N}]/u.test(value))return;const m=rewardModel(),chats=m.book.sent[m.day]??={},items=chats[id]??=[];if(!items.includes(value))items.push(value)}
 
 const actions={
- 'reading-picker'(){stopAudio();mode='free';state.readingMode=null;save();render()},
- 'reading-mode'(id){if(!['story','swipe'].includes(id))return;state.readingMode=id;save();render();window.scrollTo({top:0,behavior:'instant'})},
+ 'like-photo'(key){
+  const [id,index]=key.split(':').map(Number),p=currentPerson();
+  if(mode!=='free'||p?.id!==id)return;
+  const photo=[{photo:p.photo,title:'肖像'},...profileMoments(p)][index];
+  if(photo)completeSwipe('like',photo);
+ },
+ 'profile-options'(){openSheet('推荐操作','<button class="btn" data-action="super">特别喜欢</button>')},
+ 'filter-field':key=>filterEditor(key),'filter-from-list':key=>filterEditor(key,true),'apply-filter':applyFilter,
  'task-center':rewardCenter,'claim-task':claimTasks,'claim-all':()=>claimTasks(), 'task-go'(page){closeSheet();navigate(page)},'invite-rule'(){openSheet('邀请奖励规则','<p>新用户完成邀请验证并通过审核后，邀请人得 100 分，新用户得 50 分。每月最多奖励 3 位。演示版不发送真实邀请。</p><button class="btn primary" data-action="task-center">返回任务中心</button>')},
  mode(id){
   const next=id==='curated'?'curated':'free',entering=mode!==next&&next==='curated';
@@ -1013,26 +1381,45 @@ const actions={
   stopAudio();mode=next;render();
   if(entering)playCuratedEntrance();
  },
+ 'skip-pick'(){
+  const track=app.querySelector('.featured-track');if(!track)return;
+  const tile=currentTile(track);
+  featuredFocusId=Number((tile.nextElementSibling||tile.previousElementSibling)?.dataset.person)||null;
+  (state.featuredSkipped??=[]).push(Number(tile.dataset.person));save();render();
+ },
  'deck-step'(dir){const track=document.querySelector('.featured-track');track.scrollBy({left:Number(dir)*(track.firstElementChild.offsetWidth+12),behavior:state.reduceMotion?'instant':'smooth'})},
- 'batch-refresh'(){openSheet('更换本组精选',`<p>使用 ${batchPrice} 积分查看下一组 5 人。当前余额 ${state.balance} 积分。</p><button class="btn primary" data-action="confirm-batch" data-id="${state.featuredRound}">确认换组 · ${batchPrice} 积分</button>`)},
- 'confirm-batch'(round){if(Number(round)!==state.featuredRound||!deduct(batchPrice))return;state.featuredRound++;state.featuredBatch=makeFeaturedBatch(state.featuredRound);save();closeSheet();render()},
- 'rose-shop'(id){openSheet('积分兑换玫瑰',`<p>每朵 ${rosePrice} 积分 · 已有 ${state.roses||0} 朵</p><p>当前余额 ${state.balance} 积分</p><button class="btn primary" data-action="buy-rose" data-id="${Number(id)||0}">兑换 1 朵 · ${rosePrice} 积分</button>`)},
- 'buy-rose'(id){if(!deduct(rosePrice))return;state.roses=(state.roses||0)+1;save();closeSheet();render();if(Number(id))actions['curated-detail'](id);toast('已兑换一朵玫瑰')},
- 'send-rose'(id){
-  const p=state.featuredBatch?.find(p=>p.id===Number(id));
-  if(!p||state.matched.includes(p.id))return;
-  if(!state.roses){actions['rose-shop'](id);return}
-  state.roses--;demoMatch(p);save();closeSheet();render();match(p,true);
+ 'confirm-batch'(round){if(Number(round)!==state.featuredRound)return;if(!people.some(matchesAnswers)){toast('暂无符合条件的人，试试调整筛选');return}if(!deduct(batchPrice))return;state.featuredRound++;state.featuredSkipped=[];featuredFocusId=null;state.featuredBatch=makeFeaturedBatch(state.featuredRound);save();render()},
+ 'heart-shop'(key){
+  const target=featuredTarget(key);
+  openSheet('积分兑换比心',`<p>每个比心 ${heartPrice} 积分 · 已有 ${state.roses||0} 个</p><p>当前余额 ${state.balance} 积分</p><button class="btn primary" data-action="buy-heart" data-id="${target?escape(key):''}">兑换 1 个比心 · ${heartPrice} 积分</button>`);
+ },
+ 'buy-heart'(key){
+  if(!deduct(heartPrice))return;
+  state.roses=(state.roses||0)+1;save();closeSheet();render();
+  const target=featuredTarget(key);
+  if(target)openSheet('送出比心',`<p>${target.p.name} · ${escape(target.item.title)}</p><button class="btn primary" data-action="send-heart" data-id="${escape(key)}">送出 1 个比心</button>`);
+  toast('已兑换一个比心');
+ },
+ 'send-heart'(key){
+  const target=featuredTarget(key);
+  if(mode!=='curated'||!target||state.matched.includes(target.p.id))return;
+  const {p,item}=target;featuredFocusId=p.id;
+  if(!state.roses){actions['heart-shop'](key);return}
+  state.roses--;(state.featuredHearts??={})[p.id]=item;demoMatch(p);save();
+  if(sheet.open)closeSheet();
+  render();match(p,true,item.title);
  },
  'curated-detail'(id){if(page!=='discover'||mode!=='curated')return;const p=state.featuredBatch?.find(p=>p.id===Number(id));if(!p)return;
  const moments=profileMoments(p);
  const album=[{photo:p.photo,title:p.name+' 的头像'},...moments];
- const gallery=`<div class="profile-album"><img class="sheet-profile-img" src="${p.photo}" alt="${p.name} 的头像"><div class="album-thumbs">${album.map((item,i)=>`<button data-action="album-photo" data-id="${i}" aria-pressed="${i===0}" aria-label="查看${item.title}"><img src="${item.photo}" alt="${item.title}"></button>`).join('')}</div></div>`;
- openSheet('认识 '+p.name,`${gallery}<h2>${p.name}，${p.age}</h2><p>男 · ${p.city}</p><button class="btn pink-button" data-action="${state.matched.includes(p.id)?'chat':'send-rose'}" data-id="${p.id}">${state.matched.includes(p.id)?'继续聊天':state.roses?'送出 1 朵玫瑰':'兑换玫瑰以联系'}</button><p>${p.intent} · ${p.rhythm}</p><p>${p.trait} · ${p.bio}</p><div class="sheet-tags">${p.tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div><button class="btn" data-action="voice" data-id="${p.id}">播放语音名片</button><section class="profile-moments"><h3>最近动态</h3>${moments.map(item=>`<article><img src="${item.photo}" alt="${item.title}"><div><strong>${item.title}</strong><p>${item.text}</p></div></article>`).join('')}</section>`)},
+ const gallery=`<div class="profile-album"><div class="album-cover"><img class="sheet-profile-img" src="${p.photo}" alt="${p.name} 的头像">${featuredHeart(p,0)}</div><div class="album-thumbs">${album.map((item,i)=>`<button data-action="album-photo" data-id="${i}" aria-pressed="${i===0}" aria-label="查看${item.title}"><img src="${item.photo}" alt="${item.title}"></button>`).join('')}</div></div>`;
+ openSheet('认识 '+p.name,`${gallery}<h2>${p.name}，${p.age}</h2><p>男 · ${p.city}</p><button class="btn pink-button" data-action="${state.matched.includes(p.id)?'chat':'send-heart'}" data-id="${p.id}">${state.matched.includes(p.id)?'继续聊天':state.roses?'送出 1 个比心':'兑换比心以联系'}</button><p>${p.intent} · ${p.rhythm}</p><p>${p.trait} · ${p.bio}</p><div class="sheet-tags">${p.tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div><button class="btn" data-action="voice" data-id="${p.id}">播放语音名片</button><section class="profile-moments"><h3>最近动态</h3>${moments.map((item,i)=>`<article><div class="album-moment"><img src="${item.photo}" alt="${item.title}">${featuredHeart(p,i+1)}</div><div><strong>${item.title}</strong><p>${item.text}</p></div></article>`).join('')}</section>`)},
  'album-photo'(id){
   const buttons=Array.from(sheet.querySelectorAll('.album-thumbs button')),thumb=buttons[Number(id)]?.querySelector('img');
   if(!thumb)return;
-  const cover=sheet.querySelector('.profile-album > img');cover.src=thumb.src;cover.alt=thumb.alt;
+  const cover=sheet.querySelector('.album-cover img');cover.src=thumb.src;cover.alt=thumb.alt;
+  const heart=sheet.querySelector('.album-cover [data-action="send-heart"]');
+  if(heart)heart.dataset.id=heart.dataset.id.split(':')[0]+':'+id;
   buttons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===Number(id))));
  },
  'community-topic'(id){state.communityTopic=id;save();render()},
@@ -1041,7 +1428,7 @@ const actions={
  'saved-posts'(){const seeds={'post-1':'把周末留给山野。','post-2':'最近在循环的一首歌','post-3':'此刻想喝一杯慢慢做的手冲。'};openSheet('已收藏动态',state.savedPosts.length?state.savedPosts.map(id=>`<div class="sheet-note">${escape(state.posts.find(p=>p.id===id)?.text||seeds[id]||'社区动态')}</div>`).join(''):'<p>在社区点击书签，就能在这里再次找到这条动态。</p>')},
  close:closeSheet,'profile-detail':detail,skip:()=>completeSwipe('skip'),like:()=>completeSwipe('like'),
  undo(){const last=state.history.at(-1);if(state.undoUsed||last?.type!=='skip'){toast('只能撤销最近一次跳过，每天一次');return}mode=last.mode||'free';state.history.pop();state.undoUsed=true;save();render();toast('已找回上一位，今日免费撤销已使用')},
- super(){const p=currentPerson();if(!p||swipeBusy)return;openSheet('让这份喜欢，更特别。',`<p>给 ${p.name} 送一枚玫瑰，让他免费看到你的资料和留言。对方回以喜欢后才能聊天。</p><label for="super-note">附上一句真诚的话</label><textarea id="super-note" maxlength="140" placeholder="比如：你的理想周末，听起来也很像我的。"></textarea><div class="sheet-note">本地测试将模拟对方回以喜欢。</div><button class="btn primary" data-action="confirm-super" data-id="${p.id}">确认特别喜欢</button>`)},
+ super(){app.querySelector('.portrait-more')?.removeAttribute('open');const p=currentPerson();if(!p||swipeBusy)return;openSheet('让这份喜欢，更特别。',`<p>向 ${p.name} 发送特别喜欢，让他免费看到你的资料和留言。对方回以喜欢后才能聊天。</p><label for="super-note">附上一句真诚的话</label><textarea id="super-note" maxlength="140" placeholder="比如：你的理想周末，听起来也很像我的。"></textarea><div class="sheet-note">本地测试将模拟对方回以喜欢。</div><button class="btn primary" data-action="confirm-super" data-id="${p.id}">确认特别喜欢</button>`)},
  'confirm-super'(id){
   const p=currentPerson();if(p?.id!==Number(id))return;
   if(mode==='curated')curatedBurst('super');
@@ -1049,8 +1436,7 @@ const actions={
   demoMatch(p);save();closeSheet();render();if(mode==='free')window.scrollTo({top:0,behavior:'instant'});match(p,mode==='curated');
  },
  voice(id){const b=document.querySelector(`[data-action="voice"][data-id="${id}"]`);if(audio&&!audio.paused){stopAudio();return}audio=new Audio(offlineMedia['assets/voice-demo.wav']);audio.addEventListener('ended',()=>b?.classList.remove('playing'));audio.play().then(()=>b?.classList.add('playing')).catch(()=>toast('此浏览器暂不能播放语音示例'));},
- preferences(){openSheet('你的相遇偏好',`<p>从你真正重视的事开始。偏好只对自己可见。</p><label for="age-min">最低年龄</label><input id="age-min" type="number" min="18" max="80" value="${state.preferences?.min||24}"><label for="age-max">最高年龄</label><input id="age-max" type="number" min="18" max="80" value="${state.preferences?.max||35}"><label for="intent">希望建立的关系</label><select id="intent">${intents.map(v=>`<option>${v}</option>`).join('')}</select><label for="rhythm">喜欢怎样相处</label><select id="rhythm">${rhythms.map(v=>`<option>${v}</option>`).join('')}</select><label for="trait">希望认识怎样的人</label><select id="trait">${traits.map(v=>`<option>${v}</option>`).join('')}</select><button class="btn primary" data-action="save-preferences">保存偏好</button>`);for(const key of ['intent','rhythm','trait'])if(state.preferences?.[key])document.getElementById(key).value=state.preferences[key]},
- 'save-preferences'(){const min=Number(document.querySelector('#age-min').value),max=Number(document.querySelector('#age-max').value);if(min<18||max>80||min>max||!min||!max){toast('请输入 18–80 岁之间的有效年龄范围');return}state.preferences={min,max,rhythm:document.querySelector('#rhythm').value,trait:document.querySelector('#trait').value,intent:document.querySelector('#intent').value};save();closeSheet();render();toast('偏好已保存在本机')},
+ preferences:filterDirectory,
  'likes-tab'(id){state.likesTab=id;if(id==='visitors')state.demoRepeatRead=new Date().toLocaleDateString('en-CA');save();render()},visitors(){state.likesTab='visitors';state.demoRepeatRead=new Date().toLocaleDateString('en-CA');save();navigate('likes')},
  'visitor-membership'(){openSheet('访客查询会员','<p>会员可查看最新和历史访客的头像与昵称。</p><div class="sheet-note">会员充值服务待接入，当前无法付款或开通。</div><button class="btn primary" data-action="close">返回访客</button>')},
  'toggle-visitors'(){state.visitorEnabled=!state.visitorEnabled;save();render();toast(state.visitorEnabled?'已开启访客：仅双方开启后的访问才记录':'访客已关闭，不再记录新的访问')},
