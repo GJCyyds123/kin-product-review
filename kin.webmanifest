@@ -1,0 +1,17 @@
+{
+  "id": "./prototype.html",
+  "name": "Kin",
+  "short_name": "Kin",
+  "start_url": "./prototype.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#fbfbfd",
+  "icons": [
+    {
+      "src": "./kin-ink-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
