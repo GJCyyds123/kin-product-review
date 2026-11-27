@@ -31,20 +31,25 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 .go{color:#965267;font-size:23px}
 :focus-visible{outline:3px solid #9a5268;outline-offset:3px}
 @media(max-width:460px){body{padding-inline:14px;font-size:15px}header{gap:8px}nav{gap:2px 9px}}
-</style></head><body><header><a class="brand" href="index.html" aria-label="Kin 项目总览">Kin.</a><nav aria-label="项目资料"><a href="index.html">总览</a><a href="prototype.html">原型</a><a href="prd.html">PRD</a><a href="updates.html" aria-current="page">更新记录</a></nav></header><main><article><h1>Kin 项目更新记录</h1><details><summary>章节目录</summary><ol><li><a href="#section-1">2026-11-26</a></li><li><a href="#section-2">2026-11-25</a></li><li><a href="#section-3">2026-11-24</a></li><li><a href="#section-4">2026-11-23</a></li><li><a href="#section-5">2026-11-22</a></li><li><a href="#section-6">2026-11-20</a></li><li><a href="#section-7">2026-11-19</a></li><li><a href="#section-8">2026-11-18</a></li><li><a href="#section-9">此前的需求演进</a></li></ol></details>
-<h2 id="section-1">2026-11-26</h2>
+</style></head><body><header><a class="brand" href="index.html" aria-label="Kin 项目总览">Kin.</a><nav aria-label="项目资料"><a href="index.html">总览</a><a href="prototype.html">原型</a><a href="prd.html">PRD</a><a href="updates.html" aria-current="page">更新记录</a></nav></header><main><article><h1>Kin 项目更新记录</h1><details><summary>章节目录</summary><ol><li><a href="#section-1">2026-11-27</a></li><li><a href="#section-2">2026-11-26</a></li><li><a href="#section-3">2026-11-25</a></li><li><a href="#section-4">2026-11-24</a></li><li><a href="#section-5">2026-11-23</a></li><li><a href="#section-6">2026-11-22</a></li><li><a href="#section-7">2026-11-20</a></li><li><a href="#section-8">2026-11-19</a></li><li><a href="#section-9">2026-11-18</a></li><li><a href="#section-10">此前的需求演进</a></li></ol></details>
+<h2 id="section-1">2026-11-27</h2>
+<ol>
+<li><strong>iPhone 顶栏。</strong> 从主屏幕图标进入 Kin 并竖屏使用时，顶栏在系统安全区下方额外留出 24 像素，避让状态栏边缘模糊。</li>
+<li><strong>手写墨迹 K 加载过渡。</strong> 启动等待时在暖纸色背景上写出三笔墨迹 K。发现页首张肖像加载较慢时，内容区显示 K，首屏就绪后退场。启用「减少动态效果」时显示静态 K。</li>
+</ol>
+<h2 id="section-2">2026-11-26</h2>
 <ol>
 <li><strong>个人资料、相册与心动积分。</strong> 从「我的」点头像查看公开资料，点编辑笔修改昵称、简介、城市可见性和公开兴趣。生活照可看大图、排序、移除或恢复，新选照片以本人可见的待复核草稿保存。默认的「心动积分」页用浅色双人照片作卡面，左侧可查看余额、进入模拟充值，下方列出解锁喜欢、再看五位和兑换比心三种用途。</li>
 <li><strong>发现与精准匹配。</strong> 推荐、精准匹配和补卡均按双方年龄及必选条件筛选，共同兴趣取自本人公开选择。空组隐藏付费入口。精准匹配首组五位免费，滑到最后一位可用 20 演示积分换组。比心可选 1、3、10 个，每个 10 积分，购买后另行送出；中途充值可返回原对象和档位。</li>
 <li><strong>手机导航与私聊。</strong> 五页使用文字页头和暖白悬浮底栏，切换栏目时保留页头与底栏。底部弹窗的长内容可单独滚动。「信息」里的聊天摘要打开全屏会话，点 AI 建议用 1 演示积分生成三条，重看同组免费，选中后可编辑，发送另计 1 积分。iPhone 可在 Safari 打开交互原型，通过「分享 → 添加到主屏幕」保存 Kin。主屏幕使用墨迹 K 图标，轻点进入测试原型。本轮也在独立本地环境完成成年注册、管理员登录与只读用户统计验收，公开评审使用演示数据。</li>
 </ol>
-<h2 id="section-2">2026-11-25</h2>
+<h2 id="section-3">2026-11-25</h2>
 <h3>1. 五人精准匹配与统一白底</h3>
 <p>五个主页面统一纯白背景与页头间距。推荐支持逐图喜欢和独立筛选弹窗；社区新增精选派对。精准匹配首组五人免费，浏览到最后一位才显示「再看五位 · 20 积分」，点击后扣除演示积分并从下一组第一人开始。余额不足保留当前组。</p>
-<h2 id="section-3">2026-11-24</h2>
+<h2 id="section-4">2026-11-24</h2>
 <h3>1. 推荐浏览方式与精选玫瑰卡组</h3>
 <p>首次进入推荐可左选滑卡、右选下读，选择保存在本机。「推荐」页签内的 ↔ 可重新选择。精选每组五人，一屏展示一人，横滑浏览、轻点看资料。首组免费，演示换组价为 20 积分，玫瑰为 10 积分一朵，送出后模拟对方回选。</p>
-<h2 id="section-4">2026-11-23</h2>
+<h2 id="section-5">2026-11-23</h2>
 <h3>1. 发现卡片的资料入口</h3>
 <p>移除推荐和精选卡片右上角的省略号。发现页仅在精选的语音下方提供「查看更多资料」，可进入相册与动态。</p>
 <h3>2. 发现页手机布局与匹配动效</h3>
@@ -52,7 +57,7 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 <p>本次公开评审采用连续轮播的演示卡组。每次喜欢都模拟对方回选，方便体验普通与精选的匹配成功动效。</p>
 <h3>3. 免费推荐与精选匹配 · PRD V2.1</h3>
 <p>发现页默认免费浏览基础资料。精选按双方关系意向、相处节奏、对象偏好和共同兴趣排序，当前免费试用，每天最多三位。两个入口共用喜欢、跳过与匹配记录。公开评审版使用本机演示资料。</p>
-<h2 id="section-5">2026-11-22</h2>
+<h2 id="section-6">2026-11-22</h2>
 <h3>1. 访客页与喜欢页布局统一</h3>
 <p>最新访客使用横排圆形占位，历史访客使用双列卡片。匿名示例显示访问时间，卡片下方提供专属访客查询会员充值入口。支付与身份查询接口待接入。</p>
 <h3>2. 灵魂匹配与积分任务中心 · PRD V2.0</h3>
@@ -60,7 +65,7 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 <li>首张匹配卡免费，之后每张明确确认消耗 1 积分，每日无张数上限。修正撤销按钮，精简喜欢、社区及信息页说明。</li>
 <li>我的页恢复任务中心，显示可领取积分并支持一键领取；详情展示验证、签到、发现、双向聊天、周回访和邀请的奖励及进度。</li>
 </ul>
-<h2 id="section-6">2026-11-20</h2>
+<h2 id="section-7">2026-11-20</h2>
 <h3>1. 社区居中与个人页精简</h3>
 <ul>
 <li>导航顺序调整为发现、喜欢、社区、信息、我的。手机发现页收为单行标题与筛选。</li>
@@ -72,7 +77,7 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 <li>可以滑动人物卡、试听语音、查看喜欢、体验双向配对与聊天，也可以发布社区动态和编辑资料。聊天、积分和活动报名使用本机演示数据。</li>
 <li>页面支持安全区、减少动态效果及降低透明度。图片和语音随页面打包。</li>
 </ul>
-<h2 id="section-7">2026-11-19</h2>
+<h2 id="section-8">2026-11-19</h2>
 <h3>1. 访客、最近聊天与个人中心</h3>
 <ul>
 <li>最近聊天支持手指左滑和鼠标拖动，每次仅展开一行。可以置顶、取消置顶或确认解除喜欢。好友资料支持设置本人可见的备注。</li>
@@ -165,7 +170,7 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 </tr>
 </tbody></table></div>
 <p>此处保留 V1.7 建立评审记录时的界面描述。语音入口及喜欢、访客、信息页的后续调整见上方 V1.8 记录。</p>
-<h2 id="section-8">2026-11-18</h2>
+<h2 id="section-9">2026-11-18</h2>
 <h3>1. PRD V1.7</h3>
 <ul>
 <li>补充社区活动卡、报名和个人邀请函。发布、报名和确认均免费。文档明确谁能看到集合点，以及改期、退出、取消和名额释放时怎样更新邀请。</li>
@@ -174,7 +179,7 @@ summary{min-height:28px;cursor:pointer;font-weight:650}
 </ul>
 <h3>2. PRD V1.6</h3>
 <p>美国首发积分方案第一版定稿。购分基准为 1 美元约 100 分，设置五档充值，并定义签到、邀请奖励和小额赠分。各档实际售价、赠送数量与奖励资格以 PRD 第 10 章为准。</p>
-<h2 id="section-9">此前的需求演进</h2>
+<h2 id="section-10">此前的需求演进</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
